@@ -1,4 +1,5 @@
-{ stdenv, buildPythonPackage, fetchPypi, jinja2, werkzeug, flask, requests, pytz, backports_tempfile, cookies
+{ stdenv, buildPythonPackage, fetchPypi, jinja2, werkzeug, flask
+, requests, pytz, backports_tempfile, cookies, jsondiff, botocore, aws-xray-sdk
 , six, boto, httpretty, xmltodict, nose, sure, boto3, freezegun, dateutil, mock, pyaml }:
 
 buildPythonPackage rec {
@@ -11,7 +12,9 @@ buildPythonPackage rec {
   };
 
   propagatedBuildInputs = [
+    aws-xray-sdk
     boto
+    boto3
     dateutil
     flask
     httpretty
@@ -25,7 +28,14 @@ buildPythonPackage rec {
     pyaml
     backports_tempfile
     cookies
+    jsondiff
+    botocore
   ];
+
+  # Let's not depend on docker...
+  postPatch = ''
+    substituteInPlace setup.py --replace "docker>=2.5.1" ""
+  '';
 
   checkInputs = [ boto3 nose sure freezegun ];
 
