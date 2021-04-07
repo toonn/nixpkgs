@@ -1,6 +1,6 @@
 { appleDerivation', lib, stdenv, stdenvNoCC, buildPackages
 , bootstrap_cmds, bison, flex
-, gnum4, unifdef, perl, python3, xnu-10_12
+, gnum4, unifdef, perl, python3
 , headersOnly ? true
 }:
 
@@ -9,7 +9,7 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) ({
 
   nativeBuildInputs = [ bootstrap_cmds bison flex gnum4 unifdef perl python3 ];
 
-  patches = [ ./python3.patch ];
+  patches = [ ../python3.patch ];
 
   postPatch = ''
     substituteInPlace Makefile \
@@ -47,7 +47,7 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) ({
   '';
 
   PLATFORM = "MacOSX";
-  SDKVERSION = "10.13";
+  SDKVERSION = "10.11";
   CC = "${stdenv.cc.targetPrefix or ""}cc";
   CXX = "${stdenv.cc.targetPrefix or ""}c++";
   MIG = "mig";
@@ -73,7 +73,7 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) ({
     cat > sdk/usr/local/libexec/availability.pl <<EOF
       #!$SHELL
       if [ "\$1" == "--macosx" ]; then
-        echo 10.0 10.1 10.2 10.3 10.4 10.5 10.6 10.7 10.8 10.9 10.10 10.11 10.12 10.13
+        echo 10.0 10.1 10.2 10.3 10.4 10.5 10.6 10.7 10.8 10.9 10.10 10.11
       elif [ "\$1" == "--ios" ]; then
         echo 2.0 2.1 2.2 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 5.1 6.0 6.1 7.0 8.0 9.0
       fi
@@ -130,12 +130,6 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) ({
     # so let's not make it visible from here...
     mkdir $out/Library/PrivateFrameworks
     mv $out/Library/Frameworks/IOKit.framework $out/Library/PrivateFrameworks
-    
-    # Include headers Apple removed in 10.13 from 10.12 xnu
-    cp ${xnu-10_12}/include/bsd/machine/spl.h $out/include/bsd/machine/spl.h
-    cp ${xnu-10_12}/include/security/mac.h $out/include/security/mac.h
-    cp ${xnu-10_12}/include/security/mac_policy.h \
-       $out/include/security/mac_policy.h
   '';
 
   appleHeaders = builtins.readFile ./headers.txt;
