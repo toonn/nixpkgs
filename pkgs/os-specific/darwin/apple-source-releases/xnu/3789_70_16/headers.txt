@@ -107,7 +107,6 @@ bsd/sys/_structs.h
 bsd/sys/_types.h
 bsd/sys/_types/_blkcnt_t.h
 bsd/sys/_types/_blksize_t.h
-bsd/sys/_types/_caddr_t.h
 bsd/sys/_types/_clock_t.h
 bsd/sys/_types/_ct_rune_t.h
 bsd/sys/_types/_dev_t.h
@@ -167,28 +166,21 @@ bsd/sys/_types/_timespec.h
 bsd/sys/_types/_timeval.h
 bsd/sys/_types/_timeval32.h
 bsd/sys/_types/_timeval64.h
-bsd/sys/_types/_u_char.h
-bsd/sys/_types/_u_int.h
 bsd/sys/_types/_u_int16_t.h
 bsd/sys/_types/_u_int32_t.h
 bsd/sys/_types/_u_int64_t.h
 bsd/sys/_types/_u_int8_t.h
-bsd/sys/_types/_u_short.h
 bsd/sys/_types/_ucontext.h
 bsd/sys/_types/_ucontext64.h
 bsd/sys/_types/_uid_t.h
 bsd/sys/_types/_uintptr_t.h
 bsd/sys/_types/_useconds_t.h
 bsd/sys/_types/_user32_itimerval.h
-bsd/sys/_types/_user32_ntptimeval.h
 bsd/sys/_types/_user32_timespec.h
 bsd/sys/_types/_user32_timeval.h
-bsd/sys/_types/_user32_timex.h
 bsd/sys/_types/_user64_itimerval.h
-bsd/sys/_types/_user64_ntptimeval.h
 bsd/sys/_types/_user64_timespec.h
 bsd/sys/_types/_user64_timeval.h
-bsd/sys/_types/_user64_timex.h
 bsd/sys/_types/_user_timespec.h
 bsd/sys/_types/_user_timeval.h
 bsd/sys/_types/_uuid_t.h
@@ -201,7 +193,6 @@ bsd/sys/bsdtask_info.h
 bsd/sys/buf.h
 bsd/sys/cdefs.h
 bsd/sys/codesign.h
-bsd/sys/commpage.h
 bsd/sys/conf.h
 bsd/sys/content_protection.h
 bsd/sys/cprotect.h
@@ -218,7 +209,6 @@ bsd/sys/domain.h
 bsd/sys/errno.h
 bsd/sys/ev.h
 bsd/sys/event.h
-bsd/sys/eventhandler.h
 bsd/sys/eventvar.h
 bsd/sys/fbt.h
 bsd/sys/fcntl.h
@@ -259,7 +249,6 @@ bsd/sys/mbuf.h
 bsd/sys/md5.h
 bsd/sys/memory_maintenance.h
 bsd/sys/mman.h
-bsd/sys/monotonic.h
 bsd/sys/mount.h
 bsd/sys/mount_internal.h
 bsd/sys/msg.h
@@ -285,7 +274,6 @@ bsd/sys/queue.h
 bsd/sys/quota.h
 bsd/sys/random.h
 bsd/sys/reason.h
-bsd/sys/reboot.h
 bsd/sys/resource.h
 bsd/sys/resourcevar.h
 bsd/sys/sbuf.h
@@ -314,7 +302,6 @@ bsd/sys/sysproto.h
 bsd/sys/systm.h
 bsd/sys/termios.h
 bsd/sys/time.h
-bsd/sys/timex.h
 bsd/sys/tree.h
 bsd/sys/tty.h
 bsd/sys/ttychars.h
@@ -341,10 +328,8 @@ bsd/sys/vnode.h
 bsd/sys/vnode_if.h
 bsd/sys/vnode_internal.h
 bsd/sys/wait.h
-bsd/sys/work_interval.h
 bsd/sys/xattr.h
 bsd/uuid/uuid.h
-bsd/vfs/vfs_disk_conditioner.h
 bsd/vfs/vfs_support.h
 bsd/vm/vnode_pager.h
 bsm/audit.h
@@ -360,10 +345,8 @@ corecrypto/cc_config.h
 corecrypto/cc_debug.h
 corecrypto/cc_macros.h
 corecrypto/cc_priv.h
-corecrypto/cc_runtime_config.h
 corecrypto/ccaes.h
 corecrypto/ccasn1.h
-corecrypto/ccchacha20poly1305.h
 corecrypto/cccmac.h
 corecrypto/ccder.h
 corecrypto/ccdes.h
@@ -387,7 +370,6 @@ corecrypto/ccrsa.h
 corecrypto/ccsha1.h
 corecrypto/ccsha2.h
 corecrypto/cczp.h
-corecrypto/fipspost_trace.h
 corpses/task_corpse.h
 default_pager/default_pager_types.h
 device/device.defs
@@ -490,7 +472,6 @@ iokit/IOKit/pwr_mgt/RootDomain.h
 iokit/IOKit/rtc/IORTCController.h
 iokit/IOKit/system.h
 iokit/IOKit/system_management/IOWatchDogTimer.h
-kern/exc_guard.h
 kern/exc_resource.h
 kern/kcdata.h
 kern/kern_cdata.h
@@ -540,7 +521,6 @@ libkern/libkern/c++/OSSymbol.h
 libkern/libkern/c++/OSUnserialize.h
 libkern/libkern/crypto/aes.h
 libkern/libkern/crypto/aesxts.h
-libkern/libkern/crypto/chacha20poly1305.h
 libkern/libkern/crypto/crypto_internal.h
 libkern/libkern/crypto/des.h
 libkern/libkern/crypto/md5.h
@@ -573,7 +553,6 @@ libkern/os/log_private.h
 libkern/os/object.h
 libkern/os/object_private.h
 libkern/os/overflow.h
-libkern/os/reason_private.h
 libkern/os/trace.h
 mach/audit_triggers.defs
 mach/boolean.h
@@ -643,7 +622,6 @@ mach/mach_voucher.h
 mach/mach_voucher_attr_control.defs
 mach/mach_voucher_types.h
 mach/machine.h
-mach/machine/_structs.h
 mach/machine/asm.h
 mach/machine/boolean.h
 mach/machine/exception.h
@@ -688,7 +666,6 @@ mach/task.defs
 mach/task.h
 mach/task_access.defs
 mach/task_info.h
-mach/task_inspect.h
 mach/task_policy.h
 mach/task_special_ports.h
 mach/telemetry_notification.defs
@@ -816,7 +793,6 @@ osfmk/atm/atm_notification.defs
 osfmk/atm/atm_types.defs
 osfmk/atm/atm_types.h
 osfmk/bank/bank_types.h
-osfmk/console/serial_protos.h
 osfmk/console/video_console.h
 osfmk/corpses/task_corpse.h
 osfmk/default_pager/default_pager_types.h
@@ -837,7 +813,6 @@ osfmk/i386/cpu_number.h
 osfmk/i386/cpu_topology.h
 osfmk/i386/cpuid.h
 osfmk/i386/eflags.h
-osfmk/i386/fpu.h
 osfmk/i386/io_map_entries.h
 osfmk/i386/lapic.h
 osfmk/i386/lock.h
@@ -868,7 +843,6 @@ osfmk/kdp/kdp_callout.h
 osfmk/kdp/kdp_dyld.h
 osfmk/kdp/kdp_en_debugger.h
 osfmk/kern/affinity.h
-osfmk/kern/arithmetic_128.h
 osfmk/kern/assert.h
 osfmk/kern/audit_sessionport.h
 osfmk/kern/backtrace.h
@@ -879,16 +853,13 @@ osfmk/kern/clock.h
 osfmk/kern/coalition.h
 osfmk/kern/cpu_data.h
 osfmk/kern/cpu_number.h
-osfmk/kern/cs_blobs.h
 osfmk/kern/debug.h
 osfmk/kern/ecc.h
 osfmk/kern/energy_perf.h
-osfmk/kern/exc_guard.h
 osfmk/kern/exc_resource.h
 osfmk/kern/extmod_statistics.h
 osfmk/kern/host.h
 osfmk/kern/hv_support.h
-osfmk/kern/ipc_kobject.h
 osfmk/kern/ipc_mig.h
 osfmk/kern/ipc_misc.h
 osfmk/kern/kalloc.h
@@ -902,7 +873,6 @@ osfmk/kern/lock.h
 osfmk/kern/locks.h
 osfmk/kern/mach_param.h
 osfmk/kern/macro_help.h
-osfmk/kern/monotonic.h
 osfmk/kern/page_decrypt.h
 osfmk/kern/pms.h
 osfmk/kern/policy_internal.h
@@ -916,10 +886,8 @@ osfmk/kern/task.h
 osfmk/kern/telemetry.h
 osfmk/kern/thread.h
 osfmk/kern/thread_call.h
-osfmk/kern/thread_group.h
 osfmk/kern/timer_call.h
 osfmk/kern/waitq.h
-osfmk/kern/work_interval.h
 osfmk/kern/zalloc.h
 osfmk/kextd/kextd_mach.defs
 osfmk/kextd/kextd_mach.h
@@ -1003,7 +971,6 @@ osfmk/mach/mach_voucher_attr_control.defs
 osfmk/mach/mach_voucher_attr_control.h
 osfmk/mach/mach_voucher_types.h
 osfmk/mach/machine.h
-osfmk/mach/machine/_structs.h
 osfmk/mach/machine/asm.h
 osfmk/mach/machine/boolean.h
 osfmk/mach/machine/exception.h
@@ -1056,7 +1023,6 @@ osfmk/mach/task_access.defs
 osfmk/mach/task_access.h
 osfmk/mach/task_access_server.h
 osfmk/mach/task_info.h
-osfmk/mach/task_inspect.h
 osfmk/mach/task_policy.h
 osfmk/mach/task_special_ports.h
 osfmk/mach/telemetry_notification.defs
@@ -1100,7 +1066,6 @@ osfmk/machine/locks.h
 osfmk/machine/machine_cpuid.h
 osfmk/machine/machine_kpc.h
 osfmk/machine/machine_routines.h
-osfmk/machine/monotonic.h
 osfmk/machine/pal_hibernate.h
 osfmk/machine/pal_routines.h
 osfmk/machine/simple_lock.h
@@ -1118,7 +1083,6 @@ osfmk/vm/vm_protos.h
 osfmk/vm/vm_shared_region.h
 osfmk/voucher/ipc_pthread_priority_types.h
 osfmk/x86_64/machine_kpc.h
-osfmk/x86_64/monotonic.h
 pexpert/boot.h
 pexpert/i386/boot.h
 pexpert/i386/efi.h
@@ -1136,8 +1100,6 @@ pexpert/pexpert/machine/protos.h
 pexpert/pexpert/pexpert.h
 pexpert/pexpert/protos.h
 pexpert/protos.h
-san/san/kasan.h
-san/san/memintrinsics.h
 security/audit/audit_ioctl.h
 security/mac.h
 security/mac_policy.h
@@ -1162,7 +1124,6 @@ sys/_symbol_aliasing.h
 sys/_types.h
 sys/_types/_blkcnt_t.h
 sys/_types/_blksize_t.h
-sys/_types/_caddr_t.h
 sys/_types/_clock_t.h
 sys/_types/_ct_rune_t.h
 sys/_types/_dev_t.h
@@ -1222,13 +1183,10 @@ sys/_types/_timespec.h
 sys/_types/_timeval.h
 sys/_types/_timeval32.h
 sys/_types/_timeval64.h
-sys/_types/_u_char.h
-sys/_types/_u_int.h
 sys/_types/_u_int16_t.h
 sys/_types/_u_int32_t.h
 sys/_types/_u_int64_t.h
 sys/_types/_u_int8_t.h
-sys/_types/_u_short.h
 sys/_types/_ucontext.h
 sys/_types/_ucontext64.h
 sys/_types/_uid_t.h
@@ -1245,7 +1203,6 @@ sys/attr.h
 sys/buf.h
 sys/cdefs.h
 sys/clonefile.h
-sys/commpage.h
 sys/conf.h
 sys/dir.h
 sys/dirent.h
@@ -1264,7 +1221,6 @@ sys/fcntl.h
 sys/file.h
 sys/filedesc.h
 sys/filio.h
-sys/fsgetpath.h
 sys/gmon.h
 sys/ioccom.h
 sys/ioctl.h
@@ -1313,7 +1269,6 @@ sys/semaphore.h
 sys/shm.h
 sys/signal.h
 sys/signalvar.h
-sys/snapshot.h
 sys/socket.h
 sys/socketvar.h
 sys/sockio.h
@@ -1329,7 +1284,6 @@ sys/termios.h
 sys/time.h
 sys/timeb.h
 sys/times.h
-sys/timex.h
 sys/tprintf.h
 sys/trace.h
 sys/tty.h
