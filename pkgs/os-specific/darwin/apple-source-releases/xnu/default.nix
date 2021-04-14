@@ -90,7 +90,8 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) ({
   buildFlags = lib.optional headersOnly "exporthdrs";
   installTargets = lib.optional headersOnly "installhdrs";
 
-  postInstall = lib.optionalString headersOnly ''
+  postInstall = let xnu-10_12b = xnu-10_12.override { inherit python3; };
+    in lib.optionalString headersOnly ''
     mv $out/usr/include $out
 
     (cd BUILD/obj/EXPORT_HDRS && find -type f -exec install -D \{} $out/include/\{} \;)
@@ -132,9 +133,9 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) ({
     mv $out/Library/Frameworks/IOKit.framework $out/Library/PrivateFrameworks
     
     # Include headers Apple removed in 10.13 from 10.12 xnu
-    cp ${xnu-10_12}/include/bsd/machine/spl.h $out/include/bsd/machine/spl.h
-    cp ${xnu-10_12}/include/security/mac.h $out/include/security/mac.h
-    cp ${xnu-10_12}/include/security/mac_policy.h \
+    cp ${xnu-10_12b}/include/bsd/machine/spl.h $out/include/bsd/machine/spl.h
+    cp ${xnu-10_12b}/include/security/mac.h $out/include/security/mac.h
+    cp ${xnu-10_12b}/include/security/mac_policy.h \
        $out/include/security/mac_policy.h
   '';
 
