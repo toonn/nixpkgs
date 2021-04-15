@@ -41,13 +41,13 @@ let
   inherit (localSystem) system;
 
   # Bootstrap version needs to be known to reference headers included in the bootstrap tools
-  bootstrapLlvmVersion = if localSystem.isAarch64 then "11.1.0" else "7.1.0";
+  bootstrapLlvmVersion = "11.1.0";
 
   useAppleSDKLibs = localSystem.isAarch64;
   haveKRB5 = localSystem.isx86_64;
 
   # final toolchain is injected into llvmPackages_${finalLlvmVersion}
-  finalLlvmVersion = if localSystem.isAarch64 then "11" else "7";
+  finalLlvmVersion = "11";
   finalLlvmPackages = "llvmPackages_${finalLlvmVersion}";
 
   commonImpureHostDeps = [
