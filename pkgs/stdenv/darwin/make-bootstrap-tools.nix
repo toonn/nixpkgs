@@ -142,9 +142,7 @@ in rec {
         local libs=$(${stdenv.cc.targetPrefix}otool -L "$1" | tail -n +2 | grep -o "$NIX_STORE.*-\S*") || true
         local newlib
         for lib in $libs; do
-          newlib=''${lib:${toString (storePrefixLen + 1)}}
-          newlib=''${newlib#*/}
-          ${stdenv.cc.targetPrefix}install_name_tool -change $lib "@rpath/$newlib" "$1"
+          ${stdenv.cc.targetPrefix}install_name_tool -change $lib "@rpath/$(basename "$lib")" "$1"
         done
       }
 
@@ -166,7 +164,7 @@ in rec {
       for i in $out/bin/*; do
         if test -x "$i" -a ! -L "$i" -a "$(basename $i)" != codesign; then
           echo "Adding @executable_path to rpath in $i"
-          ${stdenv.cc.targetPrefix}install_name_tool -add_rpath '@executable_path/..' $i
+          ${stdenv.cc.targetPrefix}install_name_tool -add_rpath '@executable_path/../lib' $i
         fi
       done
 
