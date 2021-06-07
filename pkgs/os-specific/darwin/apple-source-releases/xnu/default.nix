@@ -89,7 +89,7 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
       if [ "\$1" == "--macosx" ]; then
         echo ${macosVersion}
       elif [ "\$1" == "--ios" ]; then
-        echo 2.0 2.1 2.2 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 5.1 6.0 6.1 7.0 8.0 9.0
+        echo 2.0 2.1 2.2 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 5.1 6.0 6.1 7.0 8.0 9.0 10.0 11.0
       fi
     EOF
     chmod +x sdk/usr/local/libexec/availability.pl
