@@ -97,7 +97,7 @@ with frameworks; with libs; {
   Scripting               = {};
   ScriptingBridge         = {};
   Security                = { inherit IOKit; };
-  SecurityFoundation      = {};
+  SecurityFoundation      = { inherit Security; };
   SecurityInterface       = { inherit Security SecurityFoundation; };
   ServiceManagement       = { inherit Security; };
   Social                  = {};
