@@ -22,6 +22,7 @@ with frameworks; with libs; {
   CalendarStore           = {};
   Cocoa                   = { inherit AppKit CoreData; };
   Collaboration           = {};
+  ColorSync               = {};
   # Impure version of CoreFoundation, this should not be used unless another
   # framework includes headers that are not available in the pure version.
   CoreFoundation          = {};
@@ -113,7 +114,7 @@ with frameworks; with libs; {
 
   # Umbrellas
   Accelerate          = { inherit CoreWLAN IOBluetooth; };
-  ApplicationServices = { inherit CoreGraphics CoreServices CoreText ImageIO; };
+  ApplicationServices = { inherit ColorSync CoreGraphics CoreServices CoreText ImageIO; };
   Carbon              = { inherit libobjc ApplicationServices CoreServices Foundation IOKit Security QuartzCore; };
   CoreBluetooth       = {};
   # TODO: figure out which part of the umbrella depends on CoreFoundation and move it there.
