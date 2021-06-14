@@ -7,6 +7,45 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
+      adv_cmds        = "172";
+      architecture    = "268";
+      basic_cmds      = "55";
+      CommonCrypto    = "60118.50.1";
+      configd         = "963.50.8";
+      copyfile        = "146.50.5";
+      Csu             = "85";
+      diskdev_cmds    = "593";
+      dtrace          = "262.50.12";
+      dyld            = "551.4";
+      eap8021x        = "264.50.5";
+      file_cmds       = "272";
+      hfs             = "407.50.6";
+      ICU             = "59180.0.1";
+      libauto         = "187";
+      Libc            = "1244.50.9";
+      libclosure      = "67";
+      libdispatch     = "913.60.2";
+      libiconv        = "51.50.1";
+      Libinfo         = "517.30.1";
+      Libnotify       = "172";
+      libplatform     = "161.50.1";
+      libpthread      = "301.50.1";
+      libresolv       = "65";
+      Librpcsvc       = "26";
+      Libsystem       = "1252.50.4";
+      libunwind       = "35.3";
+      libutil         = "51.20.1";
+      mDNSResponder   = "878.70.2";
+      network_cmds    = "543.50.4";
+      objc4           = "723";
+      PowerManagement = "703.71.1";
+      ppp             = "847";
+      removefile      = "45";
+      Security        = "58286.70.7";
+      shell_cmds      = "203";
+      system_cmds     = "790.50.6";
+      text_cmds       = "99";
+      top             = "111.20.1";
       xnu             = "4570.71.2";
     };
     "osx-10.12.6" = {
@@ -245,64 +284,62 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     # TODO: shorten this list, we should cut down to a minimum set of bootstrap or necessary packages here.
 
     inherit (adv_cmds-boot) ps locale;
-    architecture    = applePackage "architecture"      "osx-10.11.6"     "1pbpjcd7is69hn8y29i98ci0byik826if8gnp824ha92h90w0fq3" {};
+    architecture    = applePackage "architecture"      "osx-10.13.6"     "1pbpjcd7is69hn8y29i98ci0byik826if8gnp824ha92h90w0fq3" {};
     bsdmake         = applePackage "bsdmake"           "dev-tools-3.2.6" "11a9kkhz5bfgi1i8kpdkis78lhc6b5vxmhd598fcdgra1jw4iac2" {};
     CarbonHeaders   = applePackage "CarbonHeaders"     "osx-10.6.2"      "1zam29847cxr6y9rnl76zqmkbac53nx0szmqm9w5p469a6wzjqar" {};
-    CommonCrypto    = applePackage "CommonCrypto"      "osx-10.12.6"     "0sgsqjcxbdm2g2zfpc50mzmk4b4ldyw7xvvkwiayhpczg1fga4ff" {};
-    configd         = applePackage "configd"           "osx-10.8.5"      "1gxakahk8gallf16xmhxhprdxkh3prrmzxnmxfvj0slr0939mmr2" {
-      Security      = applePackage "Security/boot.nix" "osx-10.9.5"      "1nv0dczf67dhk17hscx52izgdcyacgyy12ag0jh6nl5hmfzsn8yy" {};
-    };
-    copyfile        = applePackage "copyfile"          "osx-10.12.6"     "0a70bvzndkava1a946cdq42lnjhg7i7b5alpii3lap6r5fkvas0n" {};
-    Csu             = applePackage "Csu"               "osx-10.11.6"     "0yh5mslyx28xzpv8qww14infkylvc1ssi57imhi471fs91sisagj" {};
-    dtrace          = applePackage "dtrace"            "osx-10.12.6"     "0hpd6348av463yqf70n3xkygwmf1i5zza8kps4zys52sviqz3a0l" {};
-    dyld            = applePackage "dyld"              "osx-10.12.6"     "0q4jmk78b5ajn33blh4agyq6v2a63lpb3fln78az0dy12bnp1qqk" {};
-    eap8021x        = applePackage "eap8021x"          "osx-10.11.6"     "0iw0qdib59hihyx2275rwq507bq2a06gaj8db4a8z1rkaj1frskh" {};
+    CommonCrypto    = applePackage "CommonCrypto"      "osx-10.13.6"     "0rsi00gq3h5kh566917gk43wn7ky8aggjjf5pgansgis54ps02np" {};
+    configd         = applePackage "configd"           "osx-10.13.6"     "118raga58dzz0iy65a11z6hanxq4vjmm8vpnyfdxq7p5fki3dbf8" {};
+    copyfile        = applePackage "copyfile"          "osx-10.13.6"     "02xhkr2ppmr8h5i60lwcinfp6rdsphkxjiih4qpcynh4fsyf00h0" {};
+    Csu             = applePackage "Csu"               "osx-10.13.6"     "0yh5mslyx28xzpv8qww14infkylvc1ssi57imhi471fs91sisagj" {};
+    dtrace          = applePackage "dtrace"            "osx-10.13.6"     "1siwzc6n9k1h2v5qni3kl9dqrqrshs1wyljmsxql57nlw00b6d0x" {};
+    dyld            = applePackage "dyld"              "osx-10.13.6"     "0775b2yi6kwgmry7blcyxywx91cmfpw2xvnzzv6mziwizdi6py0m" {};
+    eap8021x        = applePackage "eap8021x"          "osx-10.13.6"     "0xbh6psxxq3ijbyp67jz1qv7qv9rz5ldrm1dr1kcpz04rf2mpys4" {};
     IOKit           = applePackage "IOKit"             "osx-10.11.6"     "0kcbrlyxcyirvg5p95hjd9k8a01k161zg0bsfgfhkb90kh2s8x00" { inherit IOKitSrcs; };
     launchd         = applePackage "launchd"           "osx-10.9.5"      "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
-    libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
-    Libc            = applePackage "Libc"              "osx-10.12.6"     "183wcy1nlj2wkpfsx3k3lyv917mk8r2p72qw8lb89mbjsw3yw0xx" {
+    libauto         = applePackage "libauto"           "osx-10.13.6"      "1v0drlaflgsm9k7l2lpv2ksy3l7c7i25z7hirqmc1mywzp776r0f" {};
+    Libc            = applePackage "Libc"              "osx-10.13.6"     "143iv7gw9m1419ngcbc87i85rlk649jdnahgay4bl9kk5shbdwa8" {
       Libc_10-9 = fetchzip {
         url    = "http://www.opensource.apple.com/tarballs/Libc/Libc-997.90.3.tar.gz";
         sha256 = "1xchgxkxg5288r2b9yfrqji2gsgdap92k4wx2dbjwslixws12pq7";
       };
       Libc_old        = applePackage "Libc/825_40_1.nix" "osx-10.8.5"      "0xsx1im52gwlmcrv4lnhhhn9dyk5ci6g27k6yvibn9vj8fzjxwcf" {};
     };
-    libclosure      = applePackage "libclosure"        "osx-10.11.6"     "1zqy1zvra46cmqv6vsf1mcsz3a76r9bky145phfwh4ab6y15vjpq" {};
-    libdispatch     = applePackage "libdispatch"       "osx-10.10.5"     "0jsfbzp87lwk9snlby0hd4zvj7j894p5q3cw0wdx9ny1mcp3kdcj" {};
-    libiconv        = applePackage "libiconv"          "osx-10.12.6"     "1gg5h6z8sk851bhv87vyxzs54jmqz6lh57ny8j4s51j7srja0nly" {};
-    Libinfo         = applePackage "Libinfo"           "osx-10.11.6"     "0qjgkd4y8sjvwjzv5wwyzkb61pg8wwg95bkp721dgzv119dqhr8x" {};
+    libclosure      = applePackage "libclosure"        "osx-10.13.6"     "0ygjz3djsaj3b4hdzx0ssym6ipqgp2mnd7gbs7agm0gywd73bscc" {};
+    libdispatch     = applePackage "libdispatch"       "osx-10.13.6"     "1zdzs9mj9lklssyxaj6apvly6w792wd60799cr70ckgjzn8f334p" {};
+    libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
+    Libinfo         = applePackage "Libinfo"           "osx-10.13.6"     "07him4vjc91hkd17731w25jqih2gw5accf7yrbassqy25yfj7084" {};
     Libm            = applePackage "Libm"              "osx-10.7.4"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
-    Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
-    libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
-    libpthread      = applePackage "libpthread"        "osx-10.12.6"     "1j6541rcgjpas1fc77ip5krjgw4bvz6jq7bq7h9q7axb0jv2ns6c" {};
-    libresolv       = applePackage "libresolv"         "osx-10.12.6"     "077j6ljfh7amqpk2146rr7dsz5vasvr3als830mgv5jzl7l6vz88" {};
-    Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
-    libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
-    libunwind       = applePackage "libunwind"         "osx-10.12.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
-    mDNSResponder   = applePackage "mDNSResponder"     "osx-10.12.6"     "02ms1p8zlgmprzn65jzr7yaqxykh3zxjcrw0c06aayim6h0dsqfy" {};
-    objc4           = applePackage "objc4"             "osx-10.12.6"     "1cj1vhbcs9pkmag2ms8wslagicnq9bxi2qjkszmp3ys7z7ccrbwz" {};
-    ppp             = applePackage "ppp"               "osx-10.12.6"     "1kcc2nc4x1kf8sz0a23i6nfpvxg381kipi0qdisrp8x9z2gbkxb8" {};
-    removefile      = applePackage "removefile"        "osx-10.12.6"     "0jzjxbmxgjzhssqd50z7kq9dlwrv5fsdshh57c0f8mdwcs19bsyx" {};
+    Libnotify       = applePackage "Libnotify"         "osx-10.13.6"     "0yq0hrhy6a5bbzi6asaxsg54k9z8mflnzak9b50jma5sbhdr0qba" {};
+    libplatform     = applePackage "libplatform"       "osx-10.13.6"     "1y6dkfdrxbbm0sh7kdbz1zaagqhvf4slsh1y8dq7w4rvfg0id4n7" {};
+    libpthread      = applePackage "libpthread"        "osx-10.13.6"     "1s0a7dyk0ls7dc8c90i988900cq4vq9ga7qs39y7ls86a5qpsk8n" {};
+    libresolv       = applePackage "libresolv"         "osx-10.13.6"     "0gbp97d7ihv7aszpwi97vn3wxgwpgcyc781slld5l6wwd536dvij" {};
+    Libsystem       = applePackage "Libsystem"         "osx-10.13.6"     "0zndq0p40h068h3iy89kxd3ahcd5sq2di0rs5iwfmjicss6mpkfs" {};
+    libutil         = applePackage "libutil"           "osx-10.13.6"     "0s54cxys1vy3wykb226g26a4isigzvvlc7ayym8vc2v5wmh0q72n" {};
+    libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
+    mDNSResponder   = applePackage "mDNSResponder"     "osx-10.13.6"     "1m9yr17gcxfy1bxgb81y50sk0zc4qjqgi8dvhylnxw85r9qk3l6d" {};
+    objc4           = applePackage "objc4"             "osx-10.13.6"     "1zj2wmbilx4b29kc26a06cifasl6la5vl210bz6wy21f38xx8miz" {};
+    ppp             = applePackage "ppp"               "osx-10.13.6"     "1vgiq099hdqi61zhjk43snmjp4hd58fa79xbr3m3s4x8an3fr1ih" {};
+    removefile      = applePackage "removefile"        "osx-10.13.6"     "0jzjxbmxgjzhssqd50z7kq9dlwrv5fsdshh57c0f8mdwcs19bsyx" {};
     xnu             = if stdenv.isx86_64 then
       applePackage "xnu"                               "osx-10.13.6"     "1k4hyh0fn7zaggsalk9sykznachkpyvglzg3vax1alrlyk5j3ikx" {}
     else macosPackages_11_0_1.xnu;
     hfs             = applePackage "hfs"               "osx-10.12.6"     "1mj3xvqpq1mgd80b6kl1s04knqnap7hccr0gz8rjphalq14rbl5g" {};
-    Librpcsvc       = applePackage "Librpcsvc"         "osx-10.11.6"     "1zwfwcl9irxl1dlnf2b4v30vdybp0p0r6n6g1pd14zbdci1jcg2k" {};
-    adv_cmds        = applePackage "adv_cmds"          "osx-10.11.6"    "12gbv35i09aij9g90p6b3x2f3ramw43qcb2gjrg8lzkzmwvcyw9q" {};
-    basic_cmds      = applePackage "basic_cmds"        "osx-10.11.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
+    Librpcsvc       = applePackage "Librpcsvc"         "osx-10.13.6"     "1zwfwcl9irxl1dlnf2b4v30vdybp0p0r6n6g1pd14zbdci1jcg2k" {};
+    adv_cmds        = applePackage "adv_cmds"          "osx-10.13.6"     "10w01vds4k70rm1v6cv31kxzjkqc0xycz78xvlhylgp184jnxgk8" {};
+    basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
     developer_cmds  = applePackage "developer_cmds"    "osx-10.11.6"     "1r9c2b6dcl22diqf90x58psvz797d3lxh4r2wppr7lldgbgn24di" {};
-    diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.11.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {
+    diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.13.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {
       macosPackages_11_0_1 = macosPackages_11_0_1;
     };
     network_cmds    = if stdenv.isx86_64 then
-      applePackage "network_cmds" "osx-10.11.6" "0lhi9wz84qr1r2ab3fb4nvmdg9gxn817n5ldg7zw9gnf3wwn42kw" {}
+      applePackage "network_cmds"                      "osx-10.13.6"     "0g3zhzhnfns89bkkvfppdm2hpwwrl1dxsd5fz1z5r7hdaivhh80z" {}
     else macosPackages_11_0_1.network_cmds;
-    file_cmds       = applePackage "file_cmds"         "osx-10.11.6"     "1zfxbmasps529pnfdjvc13p7ws2cfx8pidkplypkswyff0nff4wp" {};
-    shell_cmds      = applePackage "shell_cmds"        "osx-10.11.6"     "0084k271v66h4jqp7q7rmjvv7w4mvhx3aq860qs8jbd30canm86n" {};
-    system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
-    text_cmds       = applePackage "text_cmds"         "osx-10.11.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
-    top             = applePackage "top"               "osx-10.11.6"     "0i9120rfwapgwdvjbfg0ya143i29s1m8zbddsxh39pdc59xnsg5l" {};
-    PowerManagement = applePackage "PowerManagement"   "osx-10.11.6"     "1llimhvp0gjffd47322lnjq7cqwinx0c5z7ikli04ad5srpa68mh" {};
+    file_cmds       = applePackage "file_cmds"         "osx-10.13.6"     "1a8gwkxk9s1a2y4wy9i9vrmr3acpvxaaqyfw80adzjhvb95gqbjv" {};
+    shell_cmds      = applePackage "shell_cmds"        "osx-10.13.6"     "0yahpq873im8j5crh91ryya5glm675v17b4ykcz7wjyzz1d6a7lp" {};
+    system_cmds     = applePackage "system_cmds"       "osx-10.13.6"     "0afdf3bz3flkycmjc83zck6ajx2z55rq4hf4lyr8xw632rz7df8l" {};
+    text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
+    top             = applePackage "top"               "osx-10.13.6"     "06yxlxpbjqxbrvvqfc52l5iyygxf50apq8w6rdp5jafx4v2ylknj" {};
+    PowerManagement = applePackage "PowerManagement"   "osx-10.13.6"     "0q09sqmy8np16faw0pjmn63xzs2yk44ghcawl0x5hq81xhm4hq79" {};
 
     # `configdHeaders` can’t use an override because `pkgs.darwin.configd` on aarch64-darwin will
     # be replaced by SystemConfiguration.framework from the macOS SDK.
@@ -316,5 +353,5 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
 
     # TODO(matthewbauer):
     # To be removed, once I figure out how to build a newer Security version.
-    Security        = applePackage "Security/boot.nix" "osx-10.9.5"      "1nv0dczf67dhk17hscx52izgdcyacgyy12ag0jh6nl5hmfzsn8yy" {};
+    Security        = applePackage "Security/boot.nix" "osx-10.13.6"      "0gphjzfm28p1cxgp112cn033jmsxla1adqg1qh9i8p5hhlzli2vk" {};
 }
