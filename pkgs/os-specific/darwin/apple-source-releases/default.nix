@@ -344,7 +344,5 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     hfsHeaders      = pkgs.darwin.hfs.override { headersOnly = true; };
     libresolvHeaders= pkgs.darwin.libresolv.override { headersOnly = true; };
 
-    # TODO(matthewbauer):
-    # To be removed, once I figure out how to build a newer Security version.
     Security        = applePackage "Security/boot.nix" "osx-10.13.6"      "0gphjzfm28p1cxgp112cn033jmsxla1adqg1qh9i8p5hhlzli2vk" {};
 }
