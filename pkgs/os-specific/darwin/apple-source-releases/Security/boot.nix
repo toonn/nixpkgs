@@ -1,7 +1,7 @@
 { appleDerivation', stdenv, darwin-stubs }:
 
 appleDerivation' stdenv {
-  phases = [ "unpackPhase" "installPhase" ];
+  phases = [ "unpackPhase" "patchPhase" "installPhase" ];
 
   __propagatedImpureHostDeps = [
     "/System/Library/Frameworks/Security.framework/Security"
@@ -10,6 +10,8 @@ appleDerivation' stdenv {
     "/System/Library/Frameworks/Security.framework/XPCServices"
     "/System/Library/Frameworks/Security.framework/Versions"
   ];
+
+  patches = [ ./0001-Use-modern-API_AVAILABLE-DEPRECATED.patch ];
 
   installPhase = ''
     mkdir -p $out/Library/Frameworks/Security.framework
