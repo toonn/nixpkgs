@@ -97,6 +97,7 @@ appleDerivation' stdenv {
     cp OSX/libsecurity_keychain/lib/SecTrustedApplication.h $dest
     cp base/Security.h             $dest
     cp keychain/SecAccessControl.h $dest
+    cp trust/oids.h $dest
 
     cp OSX/libsecurity_manifest/lib/SecureDownload.h $dest
 
