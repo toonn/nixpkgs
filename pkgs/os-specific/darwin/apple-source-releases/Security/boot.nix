@@ -78,6 +78,7 @@ appleDerivation' stdenv {
     cp OSX/libsecurity_keychain/lib/SecACL.h                $dest
     cp OSX/libsecurity_keychain/lib/SecAccess.h             $dest
     cp base/SecBase.h               $dest
+    cp base/SecBasePriv.h           $dest
     cp trust/SecCertificate.h        $dest
     cp trust/SecCertificatePriv.h    $dest # Private
     cp OSX/libsecurity_keychain/lib/SecCertificateOIDs.h    $dest
