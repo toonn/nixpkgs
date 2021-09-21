@@ -116,9 +116,6 @@ let
       top           = "108";
       text_cmds     = "99";
     };
-    "osx-10.11.5" = {
-      Libc          = "1082.50.1"; # 10.11.6 still unreleased :/
-    };
     "osx-10.10.5" = {
       adv_cmds      = "158";
       CF            = "1153.18";
@@ -168,12 +165,6 @@ let
     };
     "osx-10.5.8" = {
       adv_cmds = "119";
-    };
-    "dev-tools-7.0" = {
-      bootstrap_cmds = "93";
-    };
-    "dev-tools-5.1" = {
-      bootstrap_cmds = "86";
     };
     "dev-tools-3.2.6" = {
       bsdmake = "24";
