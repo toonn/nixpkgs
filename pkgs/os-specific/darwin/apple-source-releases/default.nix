@@ -345,4 +345,11 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libresolvHeaders= pkgs.darwin.libresolv.override { headersOnly = true; };
 
     Security        = applePackage "Security/boot.nix" "osx-10.13.6"      "0gphjzfm28p1cxgp112cn033jmsxla1adqg1qh9i8p5hhlzli2vk" {};
+
+    xpc             = (pkgs.callPackage (import ../apple-sdk) {
+      inherit fetchurl;
+      python3 = pkgs.python3Minimal;
+      inherit (stdenv.__bootPackages) pbzx;
+      inherit (stdenv.__bootPackages.darwin) darwin-stubs print-reexports;
+    }).libs.xpc;
 }
