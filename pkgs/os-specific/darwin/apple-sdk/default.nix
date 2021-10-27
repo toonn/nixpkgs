@@ -96,7 +96,7 @@ let
         fi
 
         local tbd_source=${darwin-stubs}/System/Library/Frameworks/$nested_path/Versions/$current
-        if [ "${name}" != "Kernel" ]; then
+        if [ -d "$tbd_source" ] && [ "${name}" != "Kernel" ]; then
           # The Kernel.framework has headers but no actual library component.
           cp -v $tbd_source/*.tbd .
         fi
