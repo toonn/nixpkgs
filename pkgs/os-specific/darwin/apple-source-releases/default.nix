@@ -7,6 +7,7 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
+      network_cmds    = "543.50.4";
       xnu             = "4570.71.2";
     };
     "osx-10.12.6" = {
@@ -292,7 +293,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     basic_cmds      = applePackage "basic_cmds"        "osx-10.11.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
     developer_cmds  = applePackage "developer_cmds"    "osx-10.11.6"     "1r9c2b6dcl22diqf90x58psvz797d3lxh4r2wppr7lldgbgn24di" {};
     diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.11.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {};
-    network_cmds    = applePackage "network_cmds"      "osx-10.11.6"     "0lhi9wz84qr1r2ab3fb4nvmdg9gxn817n5ldg7zw9gnf3wwn42kw" {};
+    network_cmds    = applePackage "network_cmds"      "osx-10.13.6"     "sha256-HyAId1QNnlx++K403VugmfMLRW33uj3nSkhbZ+GHfzw=" {};
     file_cmds       = applePackage "file_cmds"         "osx-10.11.6"     "1zfxbmasps529pnfdjvc13p7ws2cfx8pidkplypkswyff0nff4wp" {};
     shell_cmds      = applePackage "shell_cmds"        "osx-10.11.6"     "0084k271v66h4jqp7q7rmjvv7w4mvhx3aq860qs8jbd30canm86n" {};
     system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
