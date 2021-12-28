@@ -32,8 +32,8 @@ lib.makeScopeWithSplicing splicePackages newScope otherSplices (_: {}) (spliced:
 
   impure-cmds = pkgs.callPackage ../os-specific/darwin/impure-cmds { };
 
-  # macOS 10.12 SDK
-  apple_sdk_10_12 = pkgs.callPackage ../os-specific/darwin/apple-sdk {
+  # macOS 10.13 SDK
+  apple_sdk_10_13 = pkgs.callPackage ../os-specific/darwin/apple-sdk {
     inherit (buildPackages.darwin) print-reexports;
     inherit (self) darwin-stubs;
   };
@@ -42,7 +42,7 @@ lib.makeScopeWithSplicing splicePackages newScope otherSplices (_: {}) (spliced:
   apple_sdk_11_0 = pkgs.callPackage ../os-specific/darwin/apple-sdk-11.0 { };
 
   # Pick an SDK
-  apple_sdk = if stdenv.hostPlatform.isAarch64 then apple_sdk_11_0 else apple_sdk_10_12;
+  apple_sdk = if stdenv.hostPlatform.isAarch64 then apple_sdk_11_0 else apple_sdk_10_13;
 
   # Pick the source of libraries: either Apple's open source releases, or the
   # SDK.
@@ -70,7 +70,7 @@ in
 
 impure-cmds // appleSourcePackages // chooseLibs // {
 
-  inherit apple_sdk apple_sdk_10_12 apple_sdk_11_0;
+  inherit apple_sdk apple_sdk_10_13 apple_sdk_11_0;
 
   stdenvNoCF = stdenv.override {
     extraBuildInputs = [];
