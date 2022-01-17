@@ -56,6 +56,9 @@ in rec {
         cp -rL ${libiconv}/include/*       $out/include
         cp -rL ${gnugrep.pcre.dev}/include/*   $out/include
         mv $out/include $out/include-Libsystem
+
+        # Copy print-reexports
+        cp -d ${pkgs.darwin.print-reexports}/bin/print-reexports $out/bin
       ''}
 
       # Copy coreutils, bash, etc.
