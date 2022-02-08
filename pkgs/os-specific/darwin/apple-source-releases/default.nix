@@ -345,11 +345,16 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libresolvHeaders= pkgs.darwin.libresolv.override { headersOnly = true; };
 
     Security        = applePackage "Security/boot.nix" "osx-10.13.6"      "0gphjzfm28p1cxgp112cn033jmsxla1adqg1qh9i8p5hhlzli2vk" {};
+} // (
+  # Resort to the SDK for missing headers
+  let apple_sdk = pkgs.darwin.apple_sdk.override {
+        inherit fetchurl;      python3 = pkgs.python3Minimal;
+        inherit (stdenv.__bootPackages) pbzx;
+        inherit (stdenv.__bootPackages.darwin) darwin-stubs print-reexports;
+      };
+  in ({ xpc = apple_sdk.libs.xpc;
 
-    xpc             = (pkgs.callPackage (import ../apple-sdk) {
-      inherit fetchurl;
-      python3 = pkgs.python3Minimal;
-      inherit (stdenv.__bootPackages) pbzx;
-      inherit (stdenv.__bootPackages.darwin) darwin-stubs print-reexports;
-    }).libs.xpc;
-}
+      } // lib.optionalAttrs stdenv.hostPlatform.isx86_64 {
+       configd = apple_sdk.frameworks.SystemConfiguration;
+      })
+)
