@@ -303,9 +303,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     Libinfo         = applePackage "Libinfo"           "osx-10.11.6"     "0qjgkd4y8sjvwjzv5wwyzkb61pg8wwg95bkp721dgzv119dqhr8x" {};
     Libm            = applePackage "Libm"              "osx-10.7.4"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
     Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
-    libplatform     = applePackage "libplatform"       "osx-10.13.6"     "1y6dkfdrxbbm0sh7kdbz1zaagqhvf4slsh1y8dq7w4rvfg0id4n7" {
-      libplatform-10_12 = applePackage "libplatform/126.50.8" "osx-10.12.6" "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {}; 
-    };
+    libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
     libpthread      = applePackage "libpthread"        "osx-10.12.6"     "1j6541rcgjpas1fc77ip5krjgw4bvz6jq7bq7h9q7axb0jv2ns6c" {};
     libresolv       = applePackage "libresolv"         "osx-10.12.6"     "077j6ljfh7amqpk2146rr7dsz5vasvr3als830mgv5jzl7l6vz88" {};
     Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
