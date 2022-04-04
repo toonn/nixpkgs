@@ -512,6 +512,8 @@ dispatch/semaphore.h
 dispatch/source.h
 dispatch/source_private.h
 dispatch/time.h
+dispatch/voucher_activity_private.h
+dispatch/voucher_private.h
 dlfcn.h
 dns.h
 dns_sd.h
@@ -1072,8 +1074,6 @@ os/overflow.h
 os/semaphore_private.h
 os/trace.h
 os/tsd.h
-os/voucher_activity_private.h
-os/voucher_private.h
 osfmk/UserNotification/KUNCUserNotifications.h
 osfmk/UserNotification/UNDReply.defs
 osfmk/UserNotification/UNDRequest.defs
