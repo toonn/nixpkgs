@@ -1,0 +1,274 @@
+From cded5e45a9d63f07ff177a2aafdda01112e4dbbf Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Fri, 22 Apr 2022 18:19:54 +0200
+Subject: [PATCH 3/3] Handle __MAC_NA and __IPHONE_NA from the old availability
+ macros
+
+---
+ EXTERNAL_HEADERS/Availability.h | 250 ++++++++++++++++++++++++--------
+ 1 file changed, 189 insertions(+), 61 deletions(-)
+
+diff --git a/EXTERNAL_HEADERS/Availability.h b/EXTERNAL_HEADERS/Availability.h
+index 6ccd4fd..411b5a0 100644
+--- a/EXTERNAL_HEADERS/Availability.h
++++ b/EXTERNAL_HEADERS/Availability.h
+@@ -187,67 +187,195 @@
+ 
+ #include <AvailabilityInternal.h>
+ 
+-#define API___IPHONE_2_0 2.0
+-#define API___IPHONE_2_1 2.1
+-#define API___IPHONE_2_2 2.2
+-#define API___IPHONE_3_0 3.0
+-#define API___IPHONE_3_1 3.1
+-#define API___IPHONE_3_2 3.2
+-#define API___IPHONE_4_0 4.0
+-#define API___IPHONE_4_1 4.1
+-#define API___IPHONE_4_2 4.2
+-#define API___IPHONE_4_3 4.3
+-#define API___IPHONE_5_0 5.0
+-#define API___IPHONE_5_1 5.1
+-#define API___IPHONE_6_0 6.0
+-#define API___IPHONE_6_1 6.1
+-#define API___IPHONE_7_0 7.0
+-#define API___IPHONE_7_1 7.1
+-#define API___IPHONE_8_0 8.0
+-#define API___IPHONE_8_1 8.1
+-#define API___IPHONE_8_2 8.2
+-#define API___IPHONE_8_3 8.3
+-#define API___IPHONE_8_4 8.4
+-#define API___IPHONE_9_0 9.0
+-#define API___IPHONE_9_1 9.1
+-#define API___IPHONE_9_2 9.2
+-#define API___IPHONE_9_3 9.3
+-#define API___IPHONE_10_0 10.0
+-#define API___IPHONE_10_1 10.1
+-#define API___IPHONE_10_2 10.2
+-#define API___IPHONE_10_3 10.3
+-#define API___IPHONE_11_0 11.0
+-#define API___IPHONE_11_1 11.1
+-#define API___IPHONE_11_2 11.2
+-#define API___IPHONE_11_3 11.3
+-#define API___MAC_10_0 10.0
+-#define API___MAC_10_1 10.1
+-#define API___MAC_10_2 10.2
+-#define API___MAC_10_3 10.3
+-#define API___MAC_10_4 10.4
+-#define API___MAC_10_5 10.5
+-#define API___MAC_10_6 10.6
+-#define API___MAC_10_7 10.7
+-#define API___MAC_10_8 10.8
+-#define API___MAC_10_9 10.9
+-#define API___MAC_10_10 10.10
+-#define API___MAC_10_10_2 10.10.2
+-#define API___MAC_10_10_3 10.10.3
+-#define API___MAC_10_11 10.11
+-#define API___MAC_10_11_2 10.11.2
+-#define API___MAC_10_11_3 10.11.3
+-#define API___MAC_10_11_4 10.11.4
+-#define API___MAC_10_12 10.12
+-#define API___MAC_10_12_1 10.12.1
+-#define API___MAC_10_12_2 10.12.2
+-#define API___MAC_10_12_4 10.12.4
+-#define API___MAC_10_13 10.13
+-#define API___MAC_10_13_1 10.13.1
+-#define API___MAC_10_13_2 10.13.2
+-#define API___MAC_10_13_4 10.13.4
+-#define __OSX_AVAILABLE_STARTING(_osx, _ios) __API_AVAILABLE(macos(API_##_osx),ios(API_##_ios))
+-#define __OSX_AVAILABLE_BUT_DEPRECATED(_osxIntro, _osxDep, _iosIntro, _iosDep) __API_DEPRECATED("deprecated", macos(API_##_osxIntro,API_##_osxDep), ios(API_##_iosIntro,API_##_iosDep))
+-#define __OSX_AVAILABLE_BUT_DEPRECATED_MSG(_osxIntro, _osxDep, _iosIntro, _iosDep, _msg) __API_DEPRECATED(_msg, macos(API_##_osxIntro,API_##_osxDep), ios(API_##_iosIntro,API_##_iosDep))
++#define ___AVAILABLE____IPHONE_2_0  __API_AVAILABLE(ios(2.0))
++#define ___AVAILABLE____IPHONE_2_1  __API_AVAILABLE(ios(2.1))
++#define ___AVAILABLE____IPHONE_2_2  __API_AVAILABLE(ios(2.2))
++#define ___AVAILABLE____IPHONE_3_0  __API_AVAILABLE(ios(3.0))
++#define ___AVAILABLE____IPHONE_3_1  __API_AVAILABLE(ios(3.1))
++#define ___AVAILABLE____IPHONE_3_2  __API_AVAILABLE(ios(3.2))
++#define ___AVAILABLE____IPHONE_4_0  __API_AVAILABLE(ios(4.0))
++#define ___AVAILABLE____IPHONE_4_1  __API_AVAILABLE(ios(4.1))
++#define ___AVAILABLE____IPHONE_4_2  __API_AVAILABLE(ios(4.2))
++#define ___AVAILABLE____IPHONE_4_3  __API_AVAILABLE(ios(4.3))
++#define ___AVAILABLE____IPHONE_5_0  __API_AVAILABLE(ios(5.0))
++#define ___AVAILABLE____IPHONE_5_1  __API_AVAILABLE(ios(5.1))
++#define ___AVAILABLE____IPHONE_6_0  __API_AVAILABLE(ios(6.0))
++#define ___AVAILABLE____IPHONE_6_1  __API_AVAILABLE(ios(6.1))
++#define ___AVAILABLE____IPHONE_7_0  __API_AVAILABLE(ios(7.0))
++#define ___AVAILABLE____IPHONE_7_1  __API_AVAILABLE(ios(7.1))
++#define ___AVAILABLE____IPHONE_8_0  __API_AVAILABLE(ios(8.0))
++#define ___AVAILABLE____IPHONE_8_1  __API_AVAILABLE(ios(8.1))
++#define ___AVAILABLE____IPHONE_8_2  __API_AVAILABLE(ios(8.2))
++#define ___AVAILABLE____IPHONE_8_3  __API_AVAILABLE(ios(8.3))
++#define ___AVAILABLE____IPHONE_8_4  __API_AVAILABLE(ios(8.4))
++#define ___AVAILABLE____IPHONE_9_0  __API_AVAILABLE(ios(9.0))
++#define ___AVAILABLE____IPHONE_9_1  __API_AVAILABLE(ios(9.1))
++#define ___AVAILABLE____IPHONE_9_2  __API_AVAILABLE(ios(9.2))
++#define ___AVAILABLE____IPHONE_9_3  __API_AVAILABLE(ios(9.3))
++#define ___AVAILABLE____IPHONE_10_0 __API_AVAILABLE(ios(10.0))
++#define ___AVAILABLE____IPHONE_10_1 __API_AVAILABLE(ios(10.1))
++#define ___AVAILABLE____IPHONE_10_2 __API_AVAILABLE(ios(10.2))
++#define ___AVAILABLE____IPHONE_10_3 __API_AVAILABLE(ios(10.3))
++#define ___AVAILABLE____IPHONE_11_0 __API_AVAILABLE(ios(11.0))
++#define ___AVAILABLE____IPHONE_11_1 __API_AVAILABLE(ios(11.1))
++#define ___AVAILABLE____IPHONE_11_2 __API_AVAILABLE(ios(11.2))
++#define ___AVAILABLE____IPHONE_11_3 __API_AVAILABLE(ios(11.3))
++#define ___AVAILABLE____IPHONE_NA
++
++#define ___AVAILABLE____MAC_10_0    __API_AVAILABLE(macos(10.0))
++#define ___AVAILABLE____MAC_10_1    __API_AVAILABLE(macos(10.1))
++#define ___AVAILABLE____MAC_10_2    __API_AVAILABLE(macos(10.2))
++#define ___AVAILABLE____MAC_10_3    __API_AVAILABLE(macos(10.3))
++#define ___AVAILABLE____MAC_10_4    __API_AVAILABLE(macos(10.4))
++#define ___AVAILABLE____MAC_10_5    __API_AVAILABLE(macos(10.5))
++#define ___AVAILABLE____MAC_10_6    __API_AVAILABLE(macos(10.6))
++#define ___AVAILABLE____MAC_10_7    __API_AVAILABLE(macos(10.7))
++#define ___AVAILABLE____MAC_10_8    __API_AVAILABLE(macos(10.8))
++#define ___AVAILABLE____MAC_10_9    __API_AVAILABLE(macos(10.9))
++#define ___AVAILABLE____MAC_10_10   __API_AVAILABLE(macos(10.10))
++#define ___AVAILABLE____MAC_10_10_2 __API_AVAILABLE(macos(10.10.2))
++#define ___AVAILABLE____MAC_10_10_3 __API_AVAILABLE(macos(10.10.3))
++#define ___AVAILABLE____MAC_10_11   __API_AVAILABLE(macos(10.11))
++#define ___AVAILABLE____MAC_10_11_2 __API_AVAILABLE(macos(10.11.2))
++#define ___AVAILABLE____MAC_10_11_3 __API_AVAILABLE(macos(10.11.3))
++#define ___AVAILABLE____MAC_10_11_4 __API_AVAILABLE(macos(10.11.4))
++#define ___AVAILABLE____MAC_10_12   __API_AVAILABLE(macos(10.12))
++#define ___AVAILABLE____MAC_10_12_1 __API_AVAILABLE(macos(10.12.1))
++#define ___AVAILABLE____MAC_10_12_2 __API_AVAILABLE(macos(10.12.2))
++#define ___AVAILABLE____MAC_10_12_4 __API_AVAILABLE(macos(10.12.4))
++#define ___AVAILABLE____MAC_10_13   __API_AVAILABLE(macos(10.13))
++#define ___AVAILABLE____MAC_10_13_1 __API_AVAILABLE(macos(10.13.1))
++#define ___AVAILABLE____MAC_10_13_2 __API_AVAILABLE(macos(10.13.2))
++#define ___AVAILABLE____MAC_10_13_4 __API_AVAILABLE(macos(10.13.4))
++#define ___AVAILABLE____MAC_NA
++
++#define ___INTRODUCED____IPHONE_2_0  introduced=2.0,
++#define ___INTRODUCED____IPHONE_2_1  introduced=2.1,
++#define ___INTRODUCED____IPHONE_2_2  introduced=2.2,
++#define ___INTRODUCED____IPHONE_3_0  introduced=3.0,
++#define ___INTRODUCED____IPHONE_3_1  introduced=3.1,
++#define ___INTRODUCED____IPHONE_3_2  introduced=3.2,
++#define ___INTRODUCED____IPHONE_4_0  introduced=4.0,
++#define ___INTRODUCED____IPHONE_4_1  introduced=4.1,
++#define ___INTRODUCED____IPHONE_4_2  introduced=4.2,
++#define ___INTRODUCED____IPHONE_4_3  introduced=4.3,
++#define ___INTRODUCED____IPHONE_5_0  introduced=5.0,
++#define ___INTRODUCED____IPHONE_5_1  introduced=5.1,
++#define ___INTRODUCED____IPHONE_6_0  introduced=6.0,
++#define ___INTRODUCED____IPHONE_6_1  introduced=6.1,
++#define ___INTRODUCED____IPHONE_7_0  introduced=7.0,
++#define ___INTRODUCED____IPHONE_7_1  introduced=7.1,
++#define ___INTRODUCED____IPHONE_8_0  introduced=8.0,
++#define ___INTRODUCED____IPHONE_8_1  introduced=8.1,
++#define ___INTRODUCED____IPHONE_8_2  introduced=8.2,
++#define ___INTRODUCED____IPHONE_8_3  introduced=8.3,
++#define ___INTRODUCED____IPHONE_8_4  introduced=8.4,
++#define ___INTRODUCED____IPHONE_9_0  introduced=9.0,
++#define ___INTRODUCED____IPHONE_9_1  introduced=9.1,
++#define ___INTRODUCED____IPHONE_9_2  introduced=9.2,
++#define ___INTRODUCED____IPHONE_9_3  introduced=9.3,
++#define ___INTRODUCED____IPHONE_10_0 introduced=10.0,
++#define ___INTRODUCED____IPHONE_10_1 introduced=10.1,
++#define ___INTRODUCED____IPHONE_10_2 introduced=10.2,
++#define ___INTRODUCED____IPHONE_10_3 introduced=10.3,
++#define ___INTRODUCED____IPHONE_11_0 introduced=11.0,
++#define ___INTRODUCED____IPHONE_11_1 introduced=11.1,
++#define ___INTRODUCED____IPHONE_11_2 introduced=11.2,
++#define ___INTRODUCED____IPHONE_11_3 introduced=11.3,
++#define ___INTRODUCED____IPHONE_NA
++
++#define ___INTRODUCED____MAC_10_0    introduced=10.0,
++#define ___INTRODUCED____MAC_10_1    introduced=10.1,
++#define ___INTRODUCED____MAC_10_2    introduced=10.2,
++#define ___INTRODUCED____MAC_10_3    introduced=10.3,
++#define ___INTRODUCED____MAC_10_4    introduced=10.4,
++#define ___INTRODUCED____MAC_10_5    introduced=10.5,
++#define ___INTRODUCED____MAC_10_6    introduced=10.6,
++#define ___INTRODUCED____MAC_10_7    introduced=10.7,
++#define ___INTRODUCED____MAC_10_8    introduced=10.8,
++#define ___INTRODUCED____MAC_10_9    introduced=10.9,
++#define ___INTRODUCED____MAC_10_10   introduced=10.10,
++#define ___INTRODUCED____MAC_10_10_2 introduced=10.10.2,
++#define ___INTRODUCED____MAC_10_10_3 introduced=10.10.3,
++#define ___INTRODUCED____MAC_10_11   introduced=10.11,
++#define ___INTRODUCED____MAC_10_11_2 introduced=10.11.2,
++#define ___INTRODUCED____MAC_10_11_3 introduced=10.11.3,
++#define ___INTRODUCED____MAC_10_11_4 introduced=10.11.4,
++#define ___INTRODUCED____MAC_10_12   introduced=10.12,
++#define ___INTRODUCED____MAC_10_12_1 introduced=10.12.1,
++#define ___INTRODUCED____MAC_10_12_2 introduced=10.12.2,
++#define ___INTRODUCED____MAC_10_12_4 introduced=10.12.4,
++#define ___INTRODUCED____MAC_10_13   introduced=10.13,
++#define ___INTRODUCED____MAC_10_13_1 introduced=10.13.1,
++#define ___INTRODUCED____MAC_10_13_2 introduced=10.13.2,
++#define ___INTRODUCED____MAC_10_13_4 introduced=10.13.4,
++#define ___INTRODUCED____MAC_NA
++
++#define ___AVAILABLE_DEPRECATED___IPHONE_2_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=2.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_2_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=2.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_2_2(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=2.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_3_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=3.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_3_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=3.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_3_2(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=3.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_4_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=4.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_4_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=4.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_4_2(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=4.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_4_3(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=4.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_5_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=5.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_5_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=5.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_6_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=6.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_6_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=6.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_7_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=7.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_7_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=7.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_8_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=8.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_8_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=8.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_8_2(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=8.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_8_3(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=8.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_8_4(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=8.4, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_9_0(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=9.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_9_1(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=9.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_9_2(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=9.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_9_3(msg,x)  __attribute__((availability(ios, ___INTRODUCED_##x deprecated=9.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_10_0(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=10.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_10_1(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=10.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_10_2(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=10.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_10_3(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=10.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_11_0(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=11.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_11_1(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=11.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_11_2(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=11.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_11_3(msg,x) __attribute__((availability(ios, ___INTRODUCED_##x deprecated=11.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___IPHONE_NA(msg,x)   ___AVAILABLE_##x
++
++#define ___AVAILABLE_DEPRECATED___MAC_10_0(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.0, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_1(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_2(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_3(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_4(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.4, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_5(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.5, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_6(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.6, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_7(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.7, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_8(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.8, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_9(msg,x)    __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.9, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_10(msg,x)   __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.10, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_10_2(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.10.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_10_3(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.10.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_11(msg,x)   __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.11, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_11_2(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.11.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_11_3(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.11.3, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_11_4(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.11.4, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_12(msg,x)   __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.12, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_12_1(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.12.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_12_2(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.12.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_12_4(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.12.4, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_13(msg,x)   __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.13, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_13_1(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.13.1, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_13_2(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.13.2, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_10_13_4(msg,x) __attribute__((availability(macos, ___INTRODUCED_##x deprecated=10.13.4, message=msg)))
++#define ___AVAILABLE_DEPRECATED___MAC_NA(msg,x)      ___AVAILABLE_##x
++
++#define __OSX_AVAILABLE_STARTING(_osx, _ios) ___AVAILABLE__##_osx ___AVAILABLE__##_ios
++#define __OSX_AVAILABLE_BUT_DEPRECATED(_osxIntro, _osxDep, _iosIntro, _iosDep) ___AVAILABLE_DEPRECATED_##_osxDep("deprecated", _##_osxIntro) ___AVAILABLE_DEPRECATED_##_iosDep("deprecated", _##_iosIntro)
++#define __OSX_AVAILABLE_BUT_DEPRECATED_MSG(_osxIntro, _osxDep, _iosIntro, _iosDep, _msg) ___AVAILABLE_DEPRECATED_##_osxDep(_msg, _##_osxIntro) ___AVAILABLE_DEPRECATED_##_iosDep(_msg, _##_iosIntro)
+ 
+ 
+ #if defined(__has_feature)
+-- 
+2.17.2 (Apple Git-113)
+
