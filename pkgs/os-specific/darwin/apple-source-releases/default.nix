@@ -7,6 +7,7 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
+      inherit (versions."osx-10.13") text_cmds;
       adv_cmds        = "172";
       architecture    = "268";
       basic_cmds      = "55";
@@ -44,9 +45,11 @@ let
       Security        = "58286.70.7";
       shell_cmds      = "203";
       system_cmds     = "790.50.6";
-      text_cmds       = "99";
       top             = "111.20.1";
       xnu             = "4570.71.2";
+    };
+    "osx-10.13" = {
+      text_cmds = "99";
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
@@ -114,7 +117,6 @@ let
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
       top           = "108";
-      text_cmds     = "99";
     };
     "osx-10.10.5" = {
       adv_cmds      = "158";
@@ -330,7 +332,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     file_cmds       = applePackage "file_cmds"         "osx-10.11.6"     "1zfxbmasps529pnfdjvc13p7ws2cfx8pidkplypkswyff0nff4wp" {};
     shell_cmds      = applePackage "shell_cmds"        "osx-10.11.6"     "0084k271v66h4jqp7q7rmjvv7w4mvhx3aq860qs8jbd30canm86n" {};
     system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
-    text_cmds       = applePackage "text_cmds"         "osx-10.11.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
+    text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
     top             = applePackage "top"               "osx-10.11.6"     "0i9120rfwapgwdvjbfg0ya143i29s1m8zbddsxh39pdc59xnsg5l" {};
     PowerManagement = applePackage "PowerManagement"   "osx-10.11.6"     "1llimhvp0gjffd47322lnjq7cqwinx0c5z7ikli04ad5srpa68mh" {};
 
