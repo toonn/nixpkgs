@@ -10,6 +10,7 @@ let
       inherit (versions."osx-10.9") basic_cmds;
       inherit (versions."osx-10.13") text_cmds;
       inherit (versions."osx-10.13.4") eap8021x;
+      inherit (versions."osx-10.13.5") ICU;
       adv_cmds        = "172";
       architecture    = "268";
       CommonCrypto    = "60118.50.1";
@@ -21,7 +22,6 @@ let
       dyld            = "551.4";
       file_cmds       = "272";
       hfs             = "407.50.6";
-      ICU             = "59180.0.1";
       libauto         = "187";
       Libc            = "1244.50.9";
       libclosure      = "67";
@@ -47,6 +47,9 @@ let
       system_cmds     = "790.50.6";
       top             = "111.20.1";
       xnu             = "4570.71.2";
+    };
+    "osx-10.13.5" = {
+      ICU = "59180.0.1";
     };
     "osx-10.13.4" = {
       eap8021x = "264.50.5";
@@ -122,7 +125,6 @@ let
     "osx-10.10.5" = {
       adv_cmds      = "158";
       CF            = "1153.18";
-      ICU           = "531.48";
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
