@@ -7,10 +7,10 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
+      inherit (versions."osx-10.9") basic_cmds;
       inherit (versions."osx-10.13") text_cmds;
       adv_cmds        = "172";
       architecture    = "268";
-      basic_cmds      = "55";
       CommonCrypto    = "60118.50.1";
       configd         = "963.50.8";
       copyfile        = "146.50.5";
@@ -110,7 +110,6 @@ let
       Librpcsvc     = "26";
       developer_cmds= "62";
       network_cmds  = "481.20.1";
-      basic_cmds    = "55";
       adv_cmds      = "163";
       file_cmds     = "264.1.1";
       shell_cmds    = "187";
@@ -150,6 +149,9 @@ let
       security_dotmac_tp = "55107.1";
 
       IOStorageFamily = "172";
+    };
+    "osx-10.9" = {
+      basic_cmds = "55";
     };
     "osx-10.8.5" = {
       configd     = "453.19";
@@ -321,7 +323,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     hfs             = applePackage "hfs"               "osx-10.12.6"     "1mj3xvqpq1mgd80b6kl1s04knqnap7hccr0gz8rjphalq14rbl5g" {};
     Librpcsvc       = applePackage "Librpcsvc"         "osx-10.11.6"     "1zwfwcl9irxl1dlnf2b4v30vdybp0p0r6n6g1pd14zbdci1jcg2k" {};
     adv_cmds        = applePackage "adv_cmds"          "osx-10.11.6"    "12gbv35i09aij9g90p6b3x2f3ramw43qcb2gjrg8lzkzmwvcyw9q" {};
-    basic_cmds      = applePackage "basic_cmds"        "osx-10.11.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
+    basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
     developer_cmds  = applePackage "developer_cmds"    "osx-10.11.6"     "1r9c2b6dcl22diqf90x58psvz797d3lxh4r2wppr7lldgbgn24di" {};
     diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.11.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {
       macosPackages_11_0_1 = macosPackages_11_0_1;
