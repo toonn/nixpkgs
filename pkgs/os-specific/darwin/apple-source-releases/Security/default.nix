@@ -9,7 +9,7 @@ appleDerivation {
 
   # NIX_CFLAGS_COMPILE = "-Wno-error -I${xnu}/include/libkern -DPRIVATE -I${xnu}/Library/Frameworks/System.framework/Headers";
 
-  patches = [ ./0001-Use-modern-API_AVAILABLE-DEPRECATED.patch ];
+  patches = [ ./0001-Correct-__PHONE_NA-macros-to-__IPHONE_NA.patch ];
 
   preBuild = ''
     dtrace -h -C -s OSX/libsecurity_utilities/lib/security_utilities.d -o OSX/libsecurity_utilities/lib/utilities_dtrace.h

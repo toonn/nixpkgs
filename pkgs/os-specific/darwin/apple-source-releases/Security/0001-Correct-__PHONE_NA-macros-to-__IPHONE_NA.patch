@@ -1,0 +1,44 @@
+From 6fbd76094f39a751898ac9faefacdff21e81cdb4 Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Mon, 19 Sep 2022 14:06:43 +0200
+Subject: [PATCH] Correct __PHONE_NA macros to __IPHONE_NA
+
+This is necessary for compatibility with the newly rewritten
+Availability macros.
+---
+ OSX/libsecurity_authorization/lib/AuthorizationPlugin.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/OSX/libsecurity_authorization/lib/AuthorizationPlugin.h b/OSX/libsecurity_authorization/lib/AuthorizationPlugin.h
+index baed696..8700bda 100644
+--- a/OSX/libsecurity_authorization/lib/AuthorizationPlugin.h
++++ b/OSX/libsecurity_authorization/lib/AuthorizationPlugin.h
+@@ -255,7 +255,7 @@ typedef struct AuthorizationCallbacks {
+ 	 userful for kSecUseAuthenticationContext for SecItem calls.
+      Caller is responsible for outValue release	 */
+     OSStatus (*GetLAContext)(AuthorizationEngineRef inEngine,
+-        CFTypeRef __nullable * __nullable outValue) __OSX_AVAILABLE_STARTING(__MAC_10_13, __PHONE_NA);
++        CFTypeRef __nullable * __nullable outValue) __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_NA);
+ 
+     /*
+ 	 Available only on systems with callback version 2 or higher
+@@ -265,14 +265,14 @@ typedef struct AuthorizationCallbacks {
+      Caller is responsible for outValue release */
+     OSStatus (*GetTokenIdentities)(AuthorizationEngineRef inEngine,
+         CFTypeRef context,
+-        CFArrayRef __nullable * __nullable outValue) __OSX_AVAILABLE_STARTING(__MAC_10_13, __PHONE_NA);
++        CFArrayRef __nullable * __nullable outValue) __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_NA);
+ 
+     /*
+      Available only on systems with callback version 3 or higher
+      Constructs TKTokenWatcher object.
+      Caller is responsible for outValue release     */
+     OSStatus (*GetTKTokenWatcher)(AuthorizationEngineRef inEngine,
+-        CFTypeRef __nullable * __nullable outValue)  __OSX_AVAILABLE_STARTING(__MAC_10_13_4, __PHONE_NA);
++        CFTypeRef __nullable * __nullable outValue)  __OSX_AVAILABLE_STARTING(__MAC_10_13_4, __IPHONE_NA);
+ 
+ } AuthorizationCallbacks;
+ 
+-- 
+2.17.2 (Apple Git-113)
+
