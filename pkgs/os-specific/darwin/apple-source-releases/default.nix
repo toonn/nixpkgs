@@ -295,6 +295,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     dtrace          = applePackage "dtrace"            "osx-10.12.6"     "0hpd6348av463yqf70n3xkygwmf1i5zza8kps4zys52sviqz3a0l" {};
     dyld            = applePackage "dyld"              "osx-10.12.6"     "0q4jmk78b5ajn33blh4agyq6v2a63lpb3fln78az0dy12bnp1qqk" {};
     eap8021x        = applePackage "eap8021x"          "osx-10.13.6"     "0iw0qdib59hihyx2275rwq507bq2a06gaj8db4a8z1rkaj1frskh" {};
+    ICU             = applePackage "ICU"               "osx-10.13.6"     "02p9h2jq20g305nrz6n5530m1dk3vqv53lh6yyl1hgayzyjd3f07" {};
     IOKit           = applePackage "IOKit"             "osx-10.11.6"     "0kcbrlyxcyirvg5p95hjd9k8a01k161zg0bsfgfhkb90kh2s8x00" { inherit IOKitSrcs; };
     launchd         = applePackage "launchd"           "osx-10.9.5"      "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
     libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
