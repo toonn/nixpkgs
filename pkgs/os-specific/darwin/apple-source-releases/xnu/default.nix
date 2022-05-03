@@ -16,7 +16,6 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
     ./python3.patch
     ./0001-Implement-missing-availability-platform.patch
     ./0002-Intercept-old-availability-macros-to-use-modern-appr.patch
-    ./0003-Handle-__MAC_NA-and-__IPHONE_NA-from-the-old-availab.patch
   ];
 
   postPatch = ''
