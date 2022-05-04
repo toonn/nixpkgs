@@ -8,7 +8,7 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.9") basic_cmds libunwind;
-      inherit (versions."osx-10.13") text_cmds objc4 ppp;
+      inherit (versions."osx-10.13") bootstrap_cmds text_cmds objc4 ppp;
       inherit (versions."osx-10.13.4") eap8021x libiconv;
       inherit (versions."osx-10.13.5") ICU;
       adv_cmds        = "172";
@@ -52,9 +52,10 @@ let
       libiconv = "51.50.1";
     };
     "osx-10.13" = {
-      text_cmds = "99";
-      objc4     = "723";
-      ppp       = "847";
+      bootstrap_cmds = "98";
+      text_cmds      = "99";
+      objc4          = "723";
+      ppp            = "847";
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
@@ -276,6 +277,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
 
     inherit (adv_cmds-boot) ps locale;
     architecture    = applePackage "architecture"      "osx-10.11.6"     "1pbpjcd7is69hn8y29i98ci0byik826if8gnp824ha92h90w0fq3" {};
+    bootstrap_cmds  = applePackage "bootstrap_cmds"    "osx-10.13.6"     "14xp48h9fij749mn9jdxb41swk24hk9r2f6v3qyqs6s7z2jwlyxi" {};
     bsdmake         = applePackage "bsdmake"           "dev-tools-3.2.6" "11a9kkhz5bfgi1i8kpdkis78lhc6b5vxmhd598fcdgra1jw4iac2" {};
     CarbonHeaders   = applePackage "CarbonHeaders"     "osx-10.6.2"      "1zam29847cxr6y9rnl76zqmkbac53nx0szmqm9w5p469a6wzjqar" {};
     CommonCrypto    = applePackage "CommonCrypto"      "osx-10.12.6"     "0sgsqjcxbdm2g2zfpc50mzmk4b4ldyw7xvvkwiayhpczg1fga4ff" {};
