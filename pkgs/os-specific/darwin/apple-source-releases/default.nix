@@ -8,7 +8,7 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.9") basic_cmds libunwind;
-      inherit (versions."osx-10.13") text_cmds;
+      inherit (versions."osx-10.13") text_cmds objc4;
       inherit (versions."osx-10.13.4") eap8021x libiconv;
       inherit (versions."osx-10.13.5") ICU;
       adv_cmds        = "172";
@@ -36,7 +36,6 @@ let
       libutil         = "51.20.1";
       mDNSResponder   = "878.70.2";
       network_cmds    = "543.50.4";
-      objc4           = "723";
       PowerManagement = "703.71.1";
       ppp             = "847";
       removefile      = "45";
@@ -55,11 +54,11 @@ let
     };
     "osx-10.13" = {
       text_cmds = "99";
+      objc4     = "723";
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
       Libnotify     = "165.20.1";
-      objc4         = "709.1";
       dyld          = "433.5";
       CommonCrypto  = "60092.50.5";
       copyfile      = "138";
@@ -83,7 +82,6 @@ let
       xnu           = "3248.60.10";
       libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
-      objc4         = "680";
       dyld          = "360.22";
       architecture  = "268";
       CommonCrypto  = "60075.50.1";
@@ -315,7 +313,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
     libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
     mDNSResponder   = applePackage "mDNSResponder"     "osx-10.12.6"     "02ms1p8zlgmprzn65jzr7yaqxykh3zxjcrw0c06aayim6h0dsqfy" {};
-    objc4           = applePackage "objc4"             "osx-10.12.6"     "1cj1vhbcs9pkmag2ms8wslagicnq9bxi2qjkszmp3ys7z7ccrbwz" {};
+    objc4           = applePackage "objc4"             "osx-10.13.6"     "1zj2wmbilx4b29kc26a06cifasl6la5vl210bz6wy21f38xx8miz" {};
     ppp             = applePackage "ppp"               "osx-10.12.6"     "1kcc2nc4x1kf8sz0a23i6nfpvxg381kipi0qdisrp8x9z2gbkxb8" {};
     removefile      = applePackage "removefile"        "osx-10.12.6"     "0jzjxbmxgjzhssqd50z7kq9dlwrv5fsdshh57c0f8mdwcs19bsyx" {};
     xnu             = if stdenv.isx86_64 then
