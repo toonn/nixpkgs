@@ -7,7 +7,7 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
-      inherit (versions."osx-10.9") basic_cmds;
+      inherit (versions."osx-10.9") basic_cmds libunwind;
       inherit (versions."osx-10.13") text_cmds;
       inherit (versions."osx-10.13.4") eap8021x libiconv;
       inherit (versions."osx-10.13.5") ICU;
@@ -33,7 +33,6 @@ let
       libresolv       = "65";
       Librpcsvc       = "26";
       Libsystem       = "1252.50.4";
-      libunwind       = "35.3";
       libutil         = "51.20.1";
       mDNSResponder   = "878.70.2";
       network_cmds    = "543.50.4";
@@ -73,7 +72,6 @@ let
       libplatform   = "126.50.8";
       mDNSResponder = "765.50.9";
       libutil       = "47.30.1";
-      libunwind     = "35.3";
       Libc          = "1158.50.2";
       dtrace        = "209.50.12";
       libpthread    = "218.60.3";
@@ -109,7 +107,6 @@ let
       IOKit         = "";
 
       libutil       = "43";
-      libunwind     = "35.3";
       Librpcsvc     = "26";
       developer_cmds= "62";
       network_cmds  = "481.20.1";
@@ -154,6 +151,7 @@ let
     };
     "osx-10.9" = {
       basic_cmds = "55";
+      libunwind  = "35.3";
     };
     "osx-10.8.5" = {
       configd     = "453.19";
@@ -315,7 +313,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libresolv       = applePackage "libresolv"         "osx-10.12.6"     "077j6ljfh7amqpk2146rr7dsz5vasvr3als830mgv5jzl7l6vz88" {};
     Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
     libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
-    libunwind       = applePackage "libunwind"         "osx-10.12.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
+    libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
     mDNSResponder   = applePackage "mDNSResponder"     "osx-10.12.6"     "02ms1p8zlgmprzn65jzr7yaqxykh3zxjcrw0c06aayim6h0dsqfy" {};
     objc4           = applePackage "objc4"             "osx-10.12.6"     "1cj1vhbcs9pkmag2ms8wslagicnq9bxi2qjkszmp3ys7z7ccrbwz" {};
     ppp             = applePackage "ppp"               "osx-10.12.6"     "1kcc2nc4x1kf8sz0a23i6nfpvxg381kipi0qdisrp8x9z2gbkxb8" {};
