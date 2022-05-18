@@ -8,7 +8,8 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.9") basic_cmds libunwind;
-      inherit (versions."osx-10.13") bootstrap_cmds text_cmds objc4 ppp;
+      inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily objc4 ppp
+        text_cmds;
       inherit (versions."osx-10.13.4") eap8021x libiconv;
       inherit (versions."osx-10.13.5") ICU;
       adv_cmds        = "172";
@@ -53,9 +54,10 @@ let
     };
     "osx-10.13" = {
       bootstrap_cmds = "98";
-      text_cmds      = "99";
+      IOAudioFamily  = "206.5";
       objc4          = "723";
       ppp            = "847";
+      text_cmds      = "99";
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
@@ -120,7 +122,6 @@ let
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
-      IOAudioFamily                        = "203.3";
       IOFireWireFamily                     = "458";
       IOFWDVComponents                     = "207.4.1";
       IOFireWireAVC                        = "423";
@@ -222,7 +223,7 @@ let
   });
 
   IOKitSpecs = {
-    IOAudioFamily                        = fetchApple "osx-10.10.5" "0ggq7za3iq8g02j16rj67prqhrw828jsw3ah3bxq8a1cvr55aqnq";
+    IOAudioFamily                        = fetchApple "osx-10.13.6" "sha256-RE+h8DASGR4TvRM3XjIwUwrCKl0aYRqBybXzvs8poNM=";
     IOFireWireFamily                     = fetchApple "osx-10.10.5" "059qa1m668kwvchl90cqcx35b31zaqdg61zi11y1imn5s389y2g1";
     IOFWDVComponents                     = fetchApple "osx-10.10.5" "1brr0yn6mxgapw3bvlhyissfksifzj2mqsvj9vmps6zwcsxjfw7m";
     IOFireWireAVC                        = fetchApple "osx-10.10.5" "194an37gbqs9s5s891lmw6prvd1m2362602s8lj5m89fp9h8mbal";
