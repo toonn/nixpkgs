@@ -13,7 +13,8 @@ let
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily objc4 ppp
         text_cmds;
-      inherit (versions."osx-10.13.4") eap8021x IOFireWireSBP2 libiconv;
+      inherit (versions."osx-10.13.4") eap8021x IOFireWireSBP2
+        IONetworkingFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
       architecture    = "268";
@@ -57,9 +58,10 @@ let
       IOFireWireFamily = "472";
     };
     "osx-10.13.4" = {
-      eap8021x       = "264.50.5";
-      libiconv       = "51.50.1";
-      IOFireWireSBP2 = "428";
+      eap8021x           = "264.50.5";
+      libiconv           = "51.50.1";
+      IOFireWireSBP2     = "428";
+      IONetworkingFamily = "124.50.3";
     };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
@@ -138,7 +140,6 @@ let
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
-      IONetworkingFamily                   = "101";
       IOSerialFamily                       = "74.20.1";
       IOStorageFamily                      = "182.1.1";
     };
@@ -240,7 +241,7 @@ let
     IOGraphics                           = fetchApple "osx-10.13.6" "sha256-/nb8ywP9Pm6F6+biRb0sIcW3+fr3LvO9SlzG5nQyLaY=";
     IOHIDFamily                          = fetchApple "osx-10.13.6" "sha256-Rlrbx1wHgfcVAmrqWHb33QfMAGMBAX369giTKJVqgI4=";
     IOKitUser                            = fetchApple "osx-10.13.6" "sha256-4pwP/pabkoXt8iRh5UliVq0ThyKv7eyEDB7cBoWNSag=";
-    IONetworkingFamily                   = fetchApple "osx-10.10.5" "04as1hc8avncijf61mp9dmplz8vb1inhirkd1g74gah08lgrfs9j";
+    IONetworkingFamily                   = fetchApple "osx-10.13.6" "sha256-MjQ+f4gqB31GAQTusbPVPnY8FzBwrpzYspCpIcPQRkc=";
     IOSerialFamily                       = fetchApple "osx-10.10.5" "0jh12aanxcigqi9w6wqzbwjdin9m48zwrhdj3n4ki0h41sg89y91";
     IOStorageFamily                      = fetchApple "osx-10.9.5"  "0w5yr8ppl82anwph2zba0ppjji6ipf5x410zhcm1drzwn4bbkxrj";
     # There should be an IOStreamFamily project here, but they haven't released it :(
