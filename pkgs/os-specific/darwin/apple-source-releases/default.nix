@@ -8,6 +8,7 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.9") basic_cmds libunwind;
+      inherit (versions."osx-10.12") IOFWDVComponents;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily objc4 ppp
         text_cmds;
@@ -82,6 +83,9 @@ let
       libpthread    = "218.60.3";
       hfs           = "366.70.1";
     };
+    "osx-10.12" = {
+      IOFWDVComponents = "208";
+    };
     "osx-10.11.6" = {
       PowerManagement = "572.50.1";
       dtrace        = "168";
@@ -127,7 +131,6 @@ let
       Security      = "57031.40.6";
 
       IOFireWireFamily                     = "458";
-      IOFWDVComponents                     = "207.4.1";
       IOFireWireAVC                        = "423";
       IOFireWireSBP2                       = "427";
       IOFireWireSerialBusProtocolTransport = "251.0.1";
@@ -228,8 +231,8 @@ let
     IOBDStorageFamily                    = fetchApple "osx-10.13.6" "sha256-KehxMGfnQbzDffTJZWGIxkNTVugaJ5zk6JbJM1oGoE0=";
     IOCDStorageFamily                    = fetchApple "osx-10.13.6" "sha256-3/cdF7PCP8xQQmKmVYlFqYytI2T4AYbR2Qpu5lP2QPM=";
     IODVDStorageFamily                   = fetchApple "osx-10.13.6" "sha256-kXfE1jzPM8tPGvEWnlyBB9Egq0JYo6Kssk8xucxGMvc=";
+    IOFWDVComponents                     = fetchApple "osx-10.13.6" "sha256-93NA8NLSSjFxNMibXLpM3rrMBF7wC5Y5dbd0tBF8xUs=";
     IOFireWireFamily                     = fetchApple "osx-10.10.5" "059qa1m668kwvchl90cqcx35b31zaqdg61zi11y1imn5s389y2g1";
-    IOFWDVComponents                     = fetchApple "osx-10.10.5" "1brr0yn6mxgapw3bvlhyissfksifzj2mqsvj9vmps6zwcsxjfw7m";
     IOFireWireAVC                        = fetchApple "osx-10.10.5" "194an37gbqs9s5s891lmw6prvd1m2362602s8lj5m89fp9h8mbal";
     IOFireWireSBP2                       = fetchApple "osx-10.10.5" "1mym158kp46y1vfiq625b15ihh4jjbpimfm7d56wlw6l2syajqvi";
     IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.10.5" "09kiq907qpk94zbij1mrcfcnyyc5ncvlxavxjrj4v5braxm78lhi";
