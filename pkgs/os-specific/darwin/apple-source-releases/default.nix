@@ -26,6 +26,7 @@ let
       dyld            = "551.4";
       file_cmds       = "272";
       hfs             = "407.50.6";
+      IOGraphics      = "519.20";
       libauto         = "187";
       Libc            = "1244.50.9";
       libclosure      = "67";
@@ -135,7 +136,6 @@ let
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
-      IOGraphics                           = "485.40.1";
       IOHIDFamily                          = "606.40.1";
       IONetworkingFamily                   = "101";
       IOSerialFamily                       = "74.20.1";
@@ -237,7 +237,7 @@ let
     IOFireWireFamily                     = fetchApple "osx-10.13.6" "sha256-YahZ8fVAwgevD4WlOTX5wWN9rD6ktyvKDiavyyNG8v0=";
     IOFireWireSBP2                       = fetchApple "osx-10.13.6" "sha256-3QhzYNuMae/47ublxqGm3NIzeHDWP3uDLFQSmgNcFUc=";
     IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.13.6" "sha256-FpVTZiSG1rSZ9Od8FxRCEj1WzljvbaXziYpAkBFx+G0=";
-    IOGraphics                           = fetchApple "osx-10.10.5" "1z0x3yrv0p8pfdqnvwf8rvrf9wip593lhm9q6yzbclz3fn53ad0p";
+    IOGraphics                           = fetchApple "osx-10.13.6" "sha256-/nb8ywP9Pm6F6+biRb0sIcW3+fr3LvO9SlzG5nQyLaY=";
     IOHIDFamily                          = fetchApple "osx-10.10.5" "0yibagwk74imp3j3skjycm703s5ybdqw0qlsmnml6zwjpbrz5894";
     IONetworkingFamily                   = fetchApple "osx-10.10.5" "04as1hc8avncijf61mp9dmplz8vb1inhirkd1g74gah08lgrfs9j";
     IOSerialFamily                       = fetchApple "osx-10.10.5" "0jh12aanxcigqi9w6wqzbwjdin9m48zwrhdj3n4ki0h41sg89y91";
