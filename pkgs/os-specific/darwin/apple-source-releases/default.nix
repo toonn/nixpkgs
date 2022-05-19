@@ -14,7 +14,7 @@ let
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         objc4 ppp text_cmds;
       inherit (versions."osx-10.13.4") eap8021x IOFireWireSBP2
-        IONetworkingFamily libiconv;
+        IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
       architecture    = "268";
@@ -62,6 +62,7 @@ let
       libiconv           = "51.50.1";
       IOFireWireSBP2     = "428";
       IONetworkingFamily = "124.50.3";
+      IOStorageFamily    = "218.50.2";
     };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
@@ -140,8 +141,6 @@ let
       CF            = "1153.18";
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
-
-      IOStorageFamily                      = "182.1.1";
     };
     "osx-10.9.5" = {
       launchd            = "842.92.1";
@@ -150,8 +149,6 @@ let
       Libsystem          = "1197.1.1";
       Security           = "55471.14.18";
       security_dotmac_tp = "55107.1";
-
-      IOStorageFamily = "172";
     };
     "osx-10.9" = {
       basic_cmds = "55";
@@ -243,7 +240,7 @@ let
     IOKitUser                            = fetchApple "osx-10.13.6" "sha256-4pwP/pabkoXt8iRh5UliVq0ThyKv7eyEDB7cBoWNSag=";
     IONetworkingFamily                   = fetchApple "osx-10.13.6" "sha256-MjQ+f4gqB31GAQTusbPVPnY8FzBwrpzYspCpIcPQRkc=";
     IOSerialFamily                       = fetchApple "osx-10.13.6" "sha256-bMa4VBuaPwbtjtsy1oNUIE0WhuAkTb09phdDMHPCtNU=";
-    IOStorageFamily                      = fetchApple "osx-10.9.5"  "0w5yr8ppl82anwph2zba0ppjji6ipf5x410zhcm1drzwn4bbkxrj";
+    IOStorageFamily                      = fetchApple "osx-10.13.6" "sha256-MmnxgkidyNwykmv2OA02d9itxowC5kDavK85fkTAzJM=";
     # There should be an IOStreamFamily project here, but they haven't released it :(
     IOUSBFamily                          = fetchApple "osx-10.8.5"  "1znqb6frxgab9mkyv7csa08c26p9p0ip6hqb4wm9c7j85kf71f4j"; # This is from 10.8 :(
     IOUSBFamily_older                    = fetchApple "osx-10.8.4"  "113lmpz8n6sibd27p42h8bl7a6c3myc6zngwri7gnvf8qlajzyml" "IOUSBFamily"; # This is even older :(
