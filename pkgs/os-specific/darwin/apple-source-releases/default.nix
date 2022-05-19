@@ -12,7 +12,7 @@ let
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily objc4 ppp
         text_cmds;
-      inherit (versions."osx-10.13.4") eap8021x libiconv;
+      inherit (versions."osx-10.13.4") eap8021x IOFireWireSBP2 libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
       architecture    = "268";
@@ -53,8 +53,9 @@ let
       IOFireWireFamily = "472";
     };
     "osx-10.13.4" = {
-      eap8021x = "264.50.5";
-      libiconv = "51.50.1";
+      eap8021x       = "264.50.5";
+      libiconv       = "51.50.1";
+      IOFireWireSBP2 = "428";
     };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
@@ -132,7 +133,6 @@ let
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
-      IOFireWireSBP2                       = "427";
       IOFireWireSerialBusProtocolTransport = "251.0.1";
       IOGraphics                           = "485.40.1";
       IOHIDFamily                          = "606.40.1";
@@ -234,7 +234,7 @@ let
     IOFWDVComponents                     = fetchApple "osx-10.13.6" "sha256-93NA8NLSSjFxNMibXLpM3rrMBF7wC5Y5dbd0tBF8xUs=";
     IOFireWireAVC                        = fetchApple "osx-10.13.6" "sha256-VK2KYLouoVokRVoAI8wQNbSdr+GVhoR00Unj9c6wiqQ=";
     IOFireWireFamily                     = fetchApple "osx-10.13.6" "sha256-YahZ8fVAwgevD4WlOTX5wWN9rD6ktyvKDiavyyNG8v0=";
-    IOFireWireSBP2                       = fetchApple "osx-10.10.5" "1mym158kp46y1vfiq625b15ihh4jjbpimfm7d56wlw6l2syajqvi";
+    IOFireWireSBP2                       = fetchApple "osx-10.13.6" "sha256-3QhzYNuMae/47ublxqGm3NIzeHDWP3uDLFQSmgNcFUc=";
     IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.10.5" "09kiq907qpk94zbij1mrcfcnyyc5ncvlxavxjrj4v5braxm78lhi";
     IOGraphics                           = fetchApple "osx-10.10.5" "1z0x3yrv0p8pfdqnvwf8rvrf9wip593lhm9q6yzbclz3fn53ad0p";
     IOHIDFamily                          = fetchApple "osx-10.10.5" "0yibagwk74imp3j3skjycm703s5ybdqw0qlsmnml6zwjpbrz5894";
