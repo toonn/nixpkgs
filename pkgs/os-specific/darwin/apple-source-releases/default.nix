@@ -28,6 +28,7 @@ let
       hfs             = "407.50.6";
       IOGraphics      = "519.20";
       IOHIDFamily     = "1035.70.7";
+      IOKitUser       = "1445.71.1";
       libauto         = "187";
       Libc            = "1244.50.9";
       libclosure      = "67";
@@ -140,7 +141,6 @@ let
       IONetworkingFamily                   = "101";
       IOSerialFamily                       = "74.20.1";
       IOStorageFamily                      = "182.1.1";
-      IOKitUser                            = "1050.20.2";
     };
     "osx-10.9.5" = {
       launchd            = "842.92.1";
@@ -239,13 +239,13 @@ let
     IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.13.6" "sha256-FpVTZiSG1rSZ9Od8FxRCEj1WzljvbaXziYpAkBFx+G0=";
     IOGraphics                           = fetchApple "osx-10.13.6" "sha256-/nb8ywP9Pm6F6+biRb0sIcW3+fr3LvO9SlzG5nQyLaY=";
     IOHIDFamily                          = fetchApple "osx-10.13.6" "sha256-Rlrbx1wHgfcVAmrqWHb33QfMAGMBAX369giTKJVqgI4=";
+    IOKitUser                            = fetchApple "osx-10.13.6" "sha256-4pwP/pabkoXt8iRh5UliVq0ThyKv7eyEDB7cBoWNSag=";
     IONetworkingFamily                   = fetchApple "osx-10.10.5" "04as1hc8avncijf61mp9dmplz8vb1inhirkd1g74gah08lgrfs9j";
     IOSerialFamily                       = fetchApple "osx-10.10.5" "0jh12aanxcigqi9w6wqzbwjdin9m48zwrhdj3n4ki0h41sg89y91";
     IOStorageFamily                      = fetchApple "osx-10.9.5"  "0w5yr8ppl82anwph2zba0ppjji6ipf5x410zhcm1drzwn4bbkxrj";
     # There should be an IOStreamFamily project here, but they haven't released it :(
     IOUSBFamily                          = fetchApple "osx-10.8.5"  "1znqb6frxgab9mkyv7csa08c26p9p0ip6hqb4wm9c7j85kf71f4j"; # This is from 10.8 :(
     IOUSBFamily_older                    = fetchApple "osx-10.8.4"  "113lmpz8n6sibd27p42h8bl7a6c3myc6zngwri7gnvf8qlajzyml" "IOUSBFamily"; # This is even older :(
-    IOKitUser                            = fetchApple "osx-10.10.5" "1jzndziv97bhjxmla8nib5fpcswbvsxr04447g251ls81rw313lb";
     # There should be an IOVideo here, but they haven't released it :(
   };
 
