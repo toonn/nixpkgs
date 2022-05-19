@@ -8,7 +8,8 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.9") basic_cmds libunwind;
-      inherit (versions."osx-10.12") IOFWDVComponents;
+      inherit (versions."osx-10.12") IOFWDVComponents
+        IOFireWireSerialBusProtocolTransport;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily objc4 ppp
         text_cmds;
@@ -87,7 +88,8 @@ let
       hfs           = "366.70.1";
     };
     "osx-10.12" = {
-      IOFWDVComponents = "208";
+      IOFWDVComponents                     = "208";
+      IOFireWireSerialBusProtocolTransport = "252";
     };
     "osx-10.11.6" = {
       PowerManagement = "572.50.1";
@@ -133,7 +135,6 @@ let
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
-      IOFireWireSerialBusProtocolTransport = "251.0.1";
       IOGraphics                           = "485.40.1";
       IOHIDFamily                          = "606.40.1";
       IONetworkingFamily                   = "101";
@@ -235,7 +236,7 @@ let
     IOFireWireAVC                        = fetchApple "osx-10.13.6" "sha256-VK2KYLouoVokRVoAI8wQNbSdr+GVhoR00Unj9c6wiqQ=";
     IOFireWireFamily                     = fetchApple "osx-10.13.6" "sha256-YahZ8fVAwgevD4WlOTX5wWN9rD6ktyvKDiavyyNG8v0=";
     IOFireWireSBP2                       = fetchApple "osx-10.13.6" "sha256-3QhzYNuMae/47ublxqGm3NIzeHDWP3uDLFQSmgNcFUc=";
-    IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.10.5" "09kiq907qpk94zbij1mrcfcnyyc5ncvlxavxjrj4v5braxm78lhi";
+    IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.13.6" "sha256-FpVTZiSG1rSZ9Od8FxRCEj1WzljvbaXziYpAkBFx+G0=";
     IOGraphics                           = fetchApple "osx-10.10.5" "1z0x3yrv0p8pfdqnvwf8rvrf9wip593lhm9q6yzbclz3fn53ad0p";
     IOHIDFamily                          = fetchApple "osx-10.10.5" "0yibagwk74imp3j3skjycm703s5ybdqw0qlsmnml6zwjpbrz5894";
     IONetworkingFamily                   = fetchApple "osx-10.10.5" "04as1hc8avncijf61mp9dmplz8vb1inhirkd1g74gah08lgrfs9j";
