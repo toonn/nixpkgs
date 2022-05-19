@@ -32,6 +32,7 @@ appleDerivation' stdenv {
     pushd $dest
     mkdir audio avc DV firewire graphics hid hidsystem i2c kext ndrvsupport
     mkdir network ps pwr_mgt sbp2 scsi serial storage stream usb video
+    mkdir -p storage/ata
     popd
 
     # root: complete
@@ -141,7 +142,8 @@ appleDerivation' stdenv {
     cp IOSerialFamily-*/IOSerialFamily.kmodproj/ioss.h         $dest/serial
 
     # storage: complete
-    # Needs ata subdirectory
+    cp IOATABlockStorage-*/UserClientLib/ATASMARTLib.h $dest/storage/ata
+    cp IOATABlockStorage-*/IOATAStorageDefines.h       $dest/storage/ata
     cp IOStorageFamily-*/IOAppleLabelScheme.h                                    $dest/storage
     cp IOStorageFamily-*/IOApplePartitionScheme.h                                $dest/storage
     cp IOBDStorageFamily-*/IOBDBlockStorageDevice.h                              $dest/storage

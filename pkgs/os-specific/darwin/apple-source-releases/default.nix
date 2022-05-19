@@ -7,6 +7,7 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
+      inherit (versions."osx-10.3") IOATABlockStorage;
       inherit (versions."osx-10.9") basic_cmds libunwind;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport;
@@ -171,6 +172,9 @@ let
     "osx-10.5.8" = {
       adv_cmds = "119";
     };
+    "osx-10.3" = {
+      IOATABlockStorage = "130.3.1"; # Old but most recent version available
+    };
     "dev-tools-3.2.6" = {
       bsdmake = "24";
     };
@@ -226,6 +230,7 @@ let
   });
 
   IOKitSpecs = {
+    IOATABlockStorage                    = fetchApple "osx-10.13.6" "sha256-6gRCbdnTX9LO9sKWeVUErvjdnj3BBxyOlRpGujaU1nc=";
     IOAudioFamily                        = fetchApple "osx-10.13.6" "sha256-RE+h8DASGR4TvRM3XjIwUwrCKl0aYRqBybXzvs8poNM=";
     IOBDStorageFamily                    = fetchApple "osx-10.13.6" "sha256-KehxMGfnQbzDffTJZWGIxkNTVugaJ5zk6JbJM1oGoE0=";
     IOCDStorageFamily                    = fetchApple "osx-10.13.6" "sha256-3/cdF7PCP8xQQmKmVYlFqYytI2T4AYbR2Qpu5lP2QPM=";
