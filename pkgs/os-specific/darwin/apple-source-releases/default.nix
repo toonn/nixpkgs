@@ -11,8 +11,8 @@ let
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
-        IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily objc4 ppp
-        text_cmds;
+        IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
+        objc4 ppp text_cmds;
       inherit (versions."osx-10.13.4") eap8021x IOFireWireSBP2
         IONetworkingFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
@@ -69,6 +69,7 @@ let
       IOBDStorageFamily  = "19";
       IOCDStorageFamily  = "58";
       IODVDStorageFamily = "42";
+      IOSerialFamily     = "93";
       objc4              = "723";
       ppp                = "847";
       text_cmds          = "99";
@@ -140,7 +141,6 @@ let
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
 
-      IOSerialFamily                       = "74.20.1";
       IOStorageFamily                      = "182.1.1";
     };
     "osx-10.9.5" = {
@@ -242,7 +242,7 @@ let
     IOHIDFamily                          = fetchApple "osx-10.13.6" "sha256-Rlrbx1wHgfcVAmrqWHb33QfMAGMBAX369giTKJVqgI4=";
     IOKitUser                            = fetchApple "osx-10.13.6" "sha256-4pwP/pabkoXt8iRh5UliVq0ThyKv7eyEDB7cBoWNSag=";
     IONetworkingFamily                   = fetchApple "osx-10.13.6" "sha256-MjQ+f4gqB31GAQTusbPVPnY8FzBwrpzYspCpIcPQRkc=";
-    IOSerialFamily                       = fetchApple "osx-10.10.5" "0jh12aanxcigqi9w6wqzbwjdin9m48zwrhdj3n4ki0h41sg89y91";
+    IOSerialFamily                       = fetchApple "osx-10.13.6" "sha256-bMa4VBuaPwbtjtsy1oNUIE0WhuAkTb09phdDMHPCtNU=";
     IOStorageFamily                      = fetchApple "osx-10.9.5"  "0w5yr8ppl82anwph2zba0ppjji6ipf5x410zhcm1drzwn4bbkxrj";
     # There should be an IOStreamFamily project here, but they haven't released it :(
     IOUSBFamily                          = fetchApple "osx-10.8.5"  "1znqb6frxgab9mkyv7csa08c26p9p0ip6hqb4wm9c7j85kf71f4j"; # This is from 10.8 :(
