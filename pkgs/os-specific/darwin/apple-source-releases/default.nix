@@ -8,8 +8,8 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.9") basic_cmds libunwind;
-      inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily objc4 ppp
-        text_cmds;
+      inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
+        IOBDStorageFamily objc4 ppp text_cmds;
       inherit (versions."osx-10.13.4") eap8021x libiconv;
       inherit (versions."osx-10.13.5") ICU;
       adv_cmds        = "172";
@@ -53,11 +53,12 @@ let
       libiconv = "51.50.1";
     };
     "osx-10.13" = {
-      bootstrap_cmds = "98";
-      IOAudioFamily  = "206.5";
-      objc4          = "723";
-      ppp            = "847";
-      text_cmds      = "99";
+      bootstrap_cmds    = "98";
+      IOAudioFamily     = "206.5";
+      IOBDStorageFamily = "19";
+      objc4             = "723";
+      ppp               = "847";
+      text_cmds         = "99";
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
@@ -132,7 +133,6 @@ let
       IONetworkingFamily                   = "101";
       IOSerialFamily                       = "74.20.1";
       IOStorageFamily                      = "182.1.1";
-      IOBDStorageFamily                    = "14";
       IOCDStorageFamily                    = "51";
       IODVDStorageFamily                   = "35";
       IOKitUser                            = "1050.20.2";
@@ -224,6 +224,7 @@ let
 
   IOKitSpecs = {
     IOAudioFamily                        = fetchApple "osx-10.13.6" "sha256-RE+h8DASGR4TvRM3XjIwUwrCKl0aYRqBybXzvs8poNM=";
+    IOBDStorageFamily                    = fetchApple "osx-10.13.6" "sha256-KehxMGfnQbzDffTJZWGIxkNTVugaJ5zk6JbJM1oGoE0=";
     IOFireWireFamily                     = fetchApple "osx-10.10.5" "059qa1m668kwvchl90cqcx35b31zaqdg61zi11y1imn5s389y2g1";
     IOFWDVComponents                     = fetchApple "osx-10.10.5" "1brr0yn6mxgapw3bvlhyissfksifzj2mqsvj9vmps6zwcsxjfw7m";
     IOFireWireAVC                        = fetchApple "osx-10.10.5" "194an37gbqs9s5s891lmw6prvd1m2362602s8lj5m89fp9h8mbal";
@@ -234,7 +235,6 @@ let
     IONetworkingFamily                   = fetchApple "osx-10.10.5" "04as1hc8avncijf61mp9dmplz8vb1inhirkd1g74gah08lgrfs9j";
     IOSerialFamily                       = fetchApple "osx-10.10.5" "0jh12aanxcigqi9w6wqzbwjdin9m48zwrhdj3n4ki0h41sg89y91";
     IOStorageFamily                      = fetchApple "osx-10.9.5"  "0w5yr8ppl82anwph2zba0ppjji6ipf5x410zhcm1drzwn4bbkxrj";
-    IOBDStorageFamily                    = fetchApple "osx-10.10.5" "1rbvmh311n853j5qb6hfda94vym9wkws5w736w2r7dwbrjyppc1q";
     IOCDStorageFamily                    = fetchApple "osx-10.10.5" "1905sxwmpxdcnm6yggklc5zimx1558ygm3ycj6b34f9h48xfxzgy";
     IODVDStorageFamily                   = fetchApple "osx-10.10.5" "1fv82rn199mi998l41c0qpnlp3irhqp2rb7v53pxbx7cra4zx3i6";
     # There should be an IOStreamFamily project here, but they haven't released it :(
