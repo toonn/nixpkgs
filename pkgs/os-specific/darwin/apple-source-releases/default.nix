@@ -13,7 +13,7 @@ let
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily objc4 ppp
         text_cmds;
       inherit (versions."osx-10.13.4") eap8021x libiconv;
-      inherit (versions."osx-10.13.5") ICU;
+      inherit (versions."osx-10.13.5") ICU IOFireWireAVC;
       adv_cmds        = "172";
       architecture    = "268";
       CommonCrypto    = "60118.50.1";
@@ -48,7 +48,8 @@ let
       xnu             = "4570.71.2";
     };
     "osx-10.13.5" = {
-      ICU = "59180.0.1";
+      ICU           = "59180.0.1";
+      IOFireWireAVC = "423";
     };
     "osx-10.13.4" = {
       eap8021x = "264.50.5";
@@ -131,7 +132,6 @@ let
       Security      = "57031.40.6";
 
       IOFireWireFamily                     = "458";
-      IOFireWireAVC                        = "423";
       IOFireWireSBP2                       = "427";
       IOFireWireSerialBusProtocolTransport = "251.0.1";
       IOGraphics                           = "485.40.1";
@@ -232,8 +232,8 @@ let
     IOCDStorageFamily                    = fetchApple "osx-10.13.6" "sha256-3/cdF7PCP8xQQmKmVYlFqYytI2T4AYbR2Qpu5lP2QPM=";
     IODVDStorageFamily                   = fetchApple "osx-10.13.6" "sha256-kXfE1jzPM8tPGvEWnlyBB9Egq0JYo6Kssk8xucxGMvc=";
     IOFWDVComponents                     = fetchApple "osx-10.13.6" "sha256-93NA8NLSSjFxNMibXLpM3rrMBF7wC5Y5dbd0tBF8xUs=";
+    IOFireWireAVC                        = fetchApple "osx-10.13.6" "sha256-VK2KYLouoVokRVoAI8wQNbSdr+GVhoR00Unj9c6wiqQ=";
     IOFireWireFamily                     = fetchApple "osx-10.10.5" "059qa1m668kwvchl90cqcx35b31zaqdg61zi11y1imn5s389y2g1";
-    IOFireWireAVC                        = fetchApple "osx-10.10.5" "194an37gbqs9s5s891lmw6prvd1m2362602s8lj5m89fp9h8mbal";
     IOFireWireSBP2                       = fetchApple "osx-10.10.5" "1mym158kp46y1vfiq625b15ihh4jjbpimfm7d56wlw6l2syajqvi";
     IOFireWireSerialBusProtocolTransport = fetchApple "osx-10.10.5" "09kiq907qpk94zbij1mrcfcnyyc5ncvlxavxjrj4v5braxm78lhi";
     IOGraphics                           = fetchApple "osx-10.10.5" "1z0x3yrv0p8pfdqnvwf8rvrf9wip593lhm9q6yzbclz3fn53ad0p";
