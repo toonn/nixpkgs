@@ -137,9 +137,10 @@ appleDerivation' stdenv {
     cp IONetworkingFamily-*/IONetworkStats.h             $dest/network
     cp IONetworkingFamily-*/IONetworkUserClient.h        $dest/network
 
-    # ps: missing IOUPSPlugIn.h
+    # ps: complete
     cp IOKitUser-*/ps.subproj/IOPowerSources.h $dest/ps
     cp IOKitUser-*/ps.subproj/IOPSKeys.h       $dest/ps
+    cp IOKitUser-*/ps.subproj/IOUPSPlugIn.h    $dest/ps
 
     # pwr_mgt: complete
     cp IOKitUser-*/pwr_mgt.subproj/IOPMKeys.h       $dest/pwr_mgt
