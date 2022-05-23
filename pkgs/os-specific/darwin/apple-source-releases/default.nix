@@ -9,6 +9,8 @@ let
     "osx-10.13.6" = {
       inherit (versions."osx-10.3") IOATABlockStorage;
       inherit (versions."osx-10.3.9") IOSCSIArchitectureModelFamily;
+      "IOUSBFamily-10.8.4" = versions."osx-10.8.4".IOUSBFamily;
+      inherit (versions."osx-10.8.5") IOUSBFamily;
       inherit (versions."osx-10.9") basic_cmds libunwind;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport;
@@ -252,8 +254,8 @@ let
     IOSerialFamily                       = fetchApple "osx-10.13.6" "sha256-bMa4VBuaPwbtjtsy1oNUIE0WhuAkTb09phdDMHPCtNU=";
     IOStorageFamily                      = fetchApple "osx-10.13.6" "sha256-MmnxgkidyNwykmv2OA02d9itxowC5kDavK85fkTAzJM=";
     # There should be an IOStreamFamily project here, but they haven't released it :(
-    IOUSBFamily                          = fetchApple "osx-10.8.5"  "1znqb6frxgab9mkyv7csa08c26p9p0ip6hqb4wm9c7j85kf71f4j"; # This is from 10.8 :(
-    IOUSBFamily_older                    = fetchApple "osx-10.8.4"  "113lmpz8n6sibd27p42h8bl7a6c3myc6zngwri7gnvf8qlajzyml" "IOUSBFamily"; # This is even older :(
+    IOUSBFamily                          = fetchApple "osx-10.13.6" "1znqb6frxgab9mkyv7csa08c26p9p0ip6hqb4wm9c7j85kf71f4j"; # This is from 10.8 :(
+    "IOUSBFamily-10.8.4"                 = fetchApple "osx-10.13.6" "113lmpz8n6sibd27p42h8bl7a6c3myc6zngwri7gnvf8qlajzyml" "IOUSBFamily"; # This is even older :(
     # There should be an IOVideo here, but they haven't released it :(
   };
 
