@@ -204,6 +204,8 @@ appleDerivation' stdenv {
     popd
 
     # stream: missing altogether
+    # IOStreamLib.h
+    # IOStreamShared.h
 
     # usb: complete
     cp IOUSBFamily-630.4.5/IOUSBFamily/Headers/IOUSBLib.h            $dest/usb
@@ -212,6 +214,15 @@ appleDerivation' stdenv {
     cp IOUSBFamily-630.4.5/IOUSBFamily/Headers/USBSpec.h             $dest/usb
 
     # video: missing altogether
+    # IOVideoControlDictionary.h
+    # IOVideoDevice.h
+    # IOVideoDeviceClientInit.h
+    # IOVideoDeviceLib.h
+    # IOVideoDeviceShared.h
+    # IOVideoStream.h
+    # IOVideoStreamDictionary.h
+    # IOVideoStreamFormatDictionary.h
+    # IOVideoTypes.h
   '';
 
   meta = with lib; {
