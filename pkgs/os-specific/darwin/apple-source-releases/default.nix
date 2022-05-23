@@ -18,11 +18,10 @@ let
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         objc4 ppp text_cmds;
-      inherit (versions."osx-10.13.4") eap8021x IOFireWireSBP2
+      inherit (versions."osx-10.13.4") CommonCrypto eap8021x IOFireWireSBP2
         IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
-      CommonCrypto    = "60118.50.1";
       configd         = "963.50.8";
       copyfile        = "146.50.5";
       Csu             = "85";
@@ -62,6 +61,7 @@ let
       IOFireWireFamily = "472";
     };
     "osx-10.13.4" = {
+      CommonCrypto       = "60118.50.1";
       eap8021x           = "264.50.5";
       libiconv           = "51.50.1";
       IOFireWireSBP2     = "428";
@@ -83,7 +83,6 @@ let
       xnu           = "3789.70.16";
       Libnotify     = "165.20.1";
       dyld          = "433.5";
-      CommonCrypto  = "60092.50.5";
       copyfile      = "138";
       libclosure    = "67";
       Libinfo       = "503.50.4";
@@ -108,7 +107,6 @@ let
       libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
       dyld          = "360.22";
-      CommonCrypto  = "60075.50.1";
       copyfile      = "127";
       Csu           = "85";
       libclosure    = "65";
@@ -297,7 +295,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     bootstrap_cmds  = applePackage "bootstrap_cmds"    "osx-10.13.6"     "14xp48h9fij749mn9jdxb41swk24hk9r2f6v3qyqs6s7z2jwlyxi" {};
     bsdmake         = applePackage "bsdmake"           "dev-tools-3.2.6" "11a9kkhz5bfgi1i8kpdkis78lhc6b5vxmhd598fcdgra1jw4iac2" {};
     CarbonHeaders   = applePackage "CarbonHeaders"     "osx-10.6.2"      "1zam29847cxr6y9rnl76zqmkbac53nx0szmqm9w5p469a6wzjqar" {};
-    CommonCrypto    = applePackage "CommonCrypto"      "osx-10.12.6"     "0sgsqjcxbdm2g2zfpc50mzmk4b4ldyw7xvvkwiayhpczg1fga4ff" {};
+    CommonCrypto    = applePackage "CommonCrypto"      "osx-10.13.6"     "sha256-1wqgLyk6Pm3Vu8VJ+Z5Cfh7LB5nvhGRMgbPAgR8AUWc=" {};
     configd         = applePackage "configd"           "osx-10.8.5"      "1gxakahk8gallf16xmhxhprdxkh3prrmzxnmxfvj0slr0939mmr2" {
       Security      = applePackage "Security/boot.nix" "osx-10.9.5"      "1nv0dczf67dhk17hscx52izgdcyacgyy12ag0jh6nl5hmfzsn8yy" {};
     };

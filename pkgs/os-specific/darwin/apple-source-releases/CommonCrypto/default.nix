@@ -26,6 +26,7 @@ appleDerivation' stdenvNoCC {
     CommonCrypto/CommonKeyDerivationSPI.h
     CommonCrypto/CommonNumerics.h
     CommonCrypto/CommonRSACryptor.h
+    CommonCrypto/CommonRSACryptorSPI.h
     CommonCrypto/CommonRandom.h
     CommonCrypto/CommonRandomSPI.h
     CommonCrypto/CommonSymmetricKeywrap.h
