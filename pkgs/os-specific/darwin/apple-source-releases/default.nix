@@ -8,6 +8,7 @@ let
   versions = {
     "osx-10.13.6" = {
       inherit (versions."osx-10.3") IOATABlockStorage;
+      inherit (versions."osx-10.3.9") IOSCSIArchitectureModelFamily;
       inherit (versions."osx-10.9") basic_cmds libunwind;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport;
@@ -172,6 +173,9 @@ let
     "osx-10.5.8" = {
       adv_cmds = "119";
     };
+    "osx-10.3.9" = {
+      IOSCSIArchitectureModelFamily = "139.0.2"; # Old but most recent version
+    };
     "osx-10.3" = {
       IOATABlockStorage = "130.3.1"; # Old but most recent version available
     };
@@ -244,6 +248,7 @@ let
     IOHIDFamily                          = fetchApple "osx-10.13.6" "sha256-Rlrbx1wHgfcVAmrqWHb33QfMAGMBAX369giTKJVqgI4=";
     IOKitUser                            = fetchApple "osx-10.13.6" "sha256-4pwP/pabkoXt8iRh5UliVq0ThyKv7eyEDB7cBoWNSag=";
     IONetworkingFamily                   = fetchApple "osx-10.13.6" "sha256-MjQ+f4gqB31GAQTusbPVPnY8FzBwrpzYspCpIcPQRkc=";
+    IOSCSIArchitectureModelFamily        = fetchApple "osx-10.13.6" "sha256-3b8zRIszBS8FG99uaP5bDDW0k3sLrJlkNKL6S9oR06w=";
     IOSerialFamily                       = fetchApple "osx-10.13.6" "sha256-bMa4VBuaPwbtjtsy1oNUIE0WhuAkTb09phdDMHPCtNU=";
     IOStorageFamily                      = fetchApple "osx-10.13.6" "sha256-MmnxgkidyNwykmv2OA02d9itxowC5kDavK85fkTAzJM=";
     # There should be an IOStreamFamily project here, but they haven't released it :(

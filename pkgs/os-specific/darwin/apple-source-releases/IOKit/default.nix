@@ -135,7 +135,14 @@ appleDerivation' stdenv {
     # sbp2: complete
     cp IOFireWireSBP2-*/IOFireWireSBP2Lib/IOFireWireSBP2Lib.h $dest/sbp2
 
-    # scsi: omitted for now
+    # scsi: complete
+    pushd IOSCSIArchitectureModelFamily-*
+    cp IOSCSIMultimediaCommands/IOSCSIMultimediaCommandsDevice.h $dest/scsi
+    cp IOSCSIArchitectureModel/SCSICmds_*_Def*s.h                $dest/scsi
+    cp IOSCSIArchitectureModel/SCSICommand*.h                    $dest/scsi
+    cp IOSCSIArchitectureModel/SCSITask.h                        $dest/scsi
+    cp UserClientLib/SCSITaskLib.h                               $dest/scsi
+    popd
 
     # serial: complete
     cp IOSerialFamily-*/IOSerialFamily.kmodproj/IOSerialKeys.h $dest/serial
