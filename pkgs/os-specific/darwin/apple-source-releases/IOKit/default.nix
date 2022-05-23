@@ -106,8 +106,10 @@ appleDerivation' stdenv {
     cp IOLLEvent.h                                         $dest/hidsystem
     popd
 
-    cp IOKitUser-*/hidsystem.subproj/event_status_driver.h $dest/hidsystem
-    cp IOKitUser-*/hidsystem.subproj/IOHIDLib.h            $dest/hidsystem
+    cp IOKitUser-*/hidsystem.subproj/event_status_driver.h    $dest/hidsystem
+    cp IOKitUser-*/hidsystem.subproj/IOHIDEventSystemClient.h $dest/hidsystem
+    cp IOKitUser-*/hidsystem.subproj/IOHIDLib.h               $dest/hidsystem
+    cp IOKitUser-*/hidsystem.subproj/IOHIDServiceClient.h     $dest/hidsystem
 
 
     # i2c: complete
