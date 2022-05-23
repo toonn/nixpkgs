@@ -12,6 +12,7 @@ let
       "IOUSBFamily-10.8.4" = versions."osx-10.8.4".IOUSBFamily;
       inherit (versions."osx-10.8.5") IOUSBFamily;
       inherit (versions."osx-10.9") basic_cmds libunwind;
+      inherit (versions."osx-10.11") architecture;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
@@ -21,7 +22,6 @@ let
         IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
-      architecture    = "268";
       CommonCrypto    = "60118.50.1";
       configd         = "963.50.8";
       copyfile        = "146.50.5";
@@ -108,7 +108,6 @@ let
       libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
       dyld          = "360.22";
-      architecture  = "268";
       CommonCrypto  = "60075.50.1";
       copyfile      = "127";
       Csu           = "85";
@@ -138,6 +137,9 @@ let
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
       top           = "108";
+    };
+    "osx-10.11" = {
+      architecture = "268";
     };
     "osx-10.10.5" = {
       adv_cmds      = "158";
@@ -291,7 +293,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     # TODO: shorten this list, we should cut down to a minimum set of bootstrap or necessary packages here.
 
     inherit (adv_cmds-boot) ps locale;
-    architecture    = applePackage "architecture"      "osx-10.11.6"     "1pbpjcd7is69hn8y29i98ci0byik826if8gnp824ha92h90w0fq3" {};
+    architecture    = applePackage "architecture"      "osx-10.13.6"     "1pbpjcd7is69hn8y29i98ci0byik826if8gnp824ha92h90w0fq3" {};
     bootstrap_cmds  = applePackage "bootstrap_cmds"    "osx-10.13.6"     "14xp48h9fij749mn9jdxb41swk24hk9r2f6v3qyqs6s7z2jwlyxi" {};
     bsdmake         = applePackage "bsdmake"           "dev-tools-3.2.6" "11a9kkhz5bfgi1i8kpdkis78lhc6b5vxmhd598fcdgra1jw4iac2" {};
     CarbonHeaders   = applePackage "CarbonHeaders"     "osx-10.6.2"      "1zam29847cxr6y9rnl76zqmkbac53nx0szmqm9w5p469a6wzjqar" {};
