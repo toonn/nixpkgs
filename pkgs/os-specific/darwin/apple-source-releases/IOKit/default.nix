@@ -168,38 +168,39 @@ appleDerivation' stdenv {
     cp IOSerialFamily-*/IOSerialFamily.kmodproj/ioss.h         $dest/serial
 
     # storage: complete
-    cp IOATABlockStorage-*/UserClientLib/ATASMARTLib.h      $dest/storage/ata
-    cp IOATABlockStorage-*/IOATAStorageDefines.h            $dest/storage/ata
-    cp IOStorageFamily-*/IOAppleLabelScheme.h               $dest/storage
-    cp IOStorageFamily-*/IOApplePartitionScheme.h           $dest/storage
-    cp IOBDStorageFamily-*/IOBDBlockStorageDevice.h         $dest/storage
-    cp IOBDStorageFamily-*/IOBDMedia.h                      $dest/storage
-    cp IOBDStorageFamily-*/IOBDMediaBSDClient.h             $dest/storage
-    cp IOBDStorageFamily-*/IOBDTypes.h                      $dest/storage
-    cp IOStorageFamily-*/IOBlockStorageDevice.h             $dest/storage
-    cp IOStorageFamily-*/IOBlockStorageDriver.h             $dest/storage
-    cp IOCDStorageFamily-*/IOCDBlockStorageDevice.h         $dest/storage
-    cp IOCDStorageFamily-*/IOCDMedia.h                      $dest/storage
-    cp IOCDStorageFamily-*/IOCDMediaBSDClient.h             $dest/storage
-    cp IOCDStorageFamily-*/IOCDPartitionScheme.h            $dest/storage
-    cp IOCDStorageFamily-*/IOCDTypes.h                      $dest/storage
-    cp IODVDStorageFamily-*/IODVDBlockStorageDevice.h       $dest/storage
-    cp IODVDStorageFamily-*/IODVDMedia.h                    $dest/storage
-    cp IODVDStorageFamily-*/IODVDMediaBSDClient.h           $dest/storage
-    cp IODVDStorageFamily-*/IODVDTypes.h                    $dest/storage
-    cp IOStorageFamily-*/IOFDiskPartitionScheme.h           $dest/storage
-    cp IOStorageFamily-*/IOFilterScheme.h                   $dest/storage
-    cp IOStorageFamily-*/IOGUIDPartitionScheme.h            $dest/storage
-    cp IOStorageFamily-*/IOMedia.h                          $dest/storage
-    cp IOStorageFamily-*/IOMediaBSDClient.h                 $dest/storage
-    cp IOStorageFamily-*/IOPartitionScheme.h                $dest/storage
-    cp IOStorageFamily-*/IOStorage.h                        $dest/storage
-    cp IOStorageFamily-*/IOStorageCardCharacteristics.h     $dest/storage
-    cp IOStorageFamily-*/IOStorageDeviceCharacteristics.h   $dest/storage
-    cp IOStorageFamily-*/IOStorageProtocolCharacteristics.h $dest/storage
+    cp IOATABlockStorage-*/UserClientLib/ATASMARTLib.h        $dest/storage/ata
+    cp IOATABlockStorage-*/IOATAStorageDefines.h              $dest/storage/ata
+    cp IOStorageFamily-*/IOAppleLabelScheme.h                 $dest/storage
+    cp IOStorageFamily-*/IOApplePartitionScheme.h             $dest/storage
+    cp IOBDStorageFamily-*/IOBDBlockStorageDevice.h           $dest/storage
+    cp IOBDStorageFamily-*/IOBDMedia.h                        $dest/storage
+    cp IOBDStorageFamily-*/IOBDMediaBSDClient.h               $dest/storage
+    cp IOBDStorageFamily-*/IOBDTypes.h                        $dest/storage
+    cp IOStorageFamily-*/IOBlockStorageDevice.h               $dest/storage
+    cp IOStorageFamily-*/IOBlockStorageDriver.h               $dest/storage
+    cp IOCDStorageFamily-*/IOCDBlockStorageDevice.h           $dest/storage
+    cp IOCDStorageFamily-*/IOCDMedia.h                        $dest/storage
+    cp IOCDStorageFamily-*/IOCDMediaBSDClient.h               $dest/storage
+    cp IOCDStorageFamily-*/IOCDPartitionScheme.h              $dest/storage
+    cp IOCDStorageFamily-*/IOCDTypes.h                        $dest/storage
+    cp IODVDStorageFamily-*/IODVDBlockStorageDevice.h         $dest/storage
+    cp IODVDStorageFamily-*/IODVDMedia.h                      $dest/storage
+    cp IODVDStorageFamily-*/IODVDMediaBSDClient.h             $dest/storage
+    cp IODVDStorageFamily-*/IODVDTypes.h                      $dest/storage
+    cp IOStorageFamily-*/IOFDiskPartitionScheme.h             $dest/storage
+    cp IOStorageFamily-*/IOFilterScheme.h                     $dest/storage
+    cp IOStorageFamily-*/IOGUIDPartitionScheme.h              $dest/storage
+    cp IOStorageFamily-*/IOMedia.h                            $dest/storage
+    cp IOStorageFamily-*/IOMediaBSDClient.h                   $dest/storage
+    cp IOStorageFamily-*/IOPartitionScheme.h                  $dest/storage
+    cp IOStorageFamily-*/IOStorage.h                          $dest/storage
+    cp IOStorageFamily-*/IOStorageCardCharacteristics.h       $dest/storage
+    cp IOStorageFamily-*/IOStorageControllerCharacteristics.h $dest/storage
+    cp IOStorageFamily-*/IOStorageDeviceCharacteristics.h     $dest/storage
+    cp IOStorageFamily-*/IOStorageProtocolCharacteristics.h   $dest/storage
 
     pushd IOFireWireSerialBusProtocolTransport-*
-    cp IOFireWireStorageCharacteristics.h                   $dest/storage
+    cp IOFireWireStorageCharacteristics.h                     $dest/storage
     popd
 
     # stream: missing altogether
