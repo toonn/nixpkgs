@@ -103,7 +103,6 @@ let
       IOFireWireSerialBusProtocolTransport = "252";
     };
     "osx-10.11.6" = {
-      PowerManagement = "572.50.1";
       dtrace        = "168";
       xnu           = "3248.60.10";
       libpthread    = "138.10.4";
@@ -351,7 +350,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
     text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
     top             = applePackage "top"               "osx-10.11.6"     "0i9120rfwapgwdvjbfg0ya143i29s1m8zbddsxh39pdc59xnsg5l" {};
-    PowerManagement = applePackage "PowerManagement"   "osx-10.11.6"     "1llimhvp0gjffd47322lnjq7cqwinx0c5z7ikli04ad5srpa68mh" {};
+    PowerManagement = applePackage "PowerManagement"   "osx-10.13.6"     "sha256-6WBIKuwBYVg6oFwx+AiZXujfh7FVXsCVM+Fa5CvWCWA=" {};
 
     # `configdHeaders` can’t use an override because `pkgs.darwin.configd` on aarch64-darwin will
     # be replaced by SystemConfiguration.framework from the macOS SDK.
