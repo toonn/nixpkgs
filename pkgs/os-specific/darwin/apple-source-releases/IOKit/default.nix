@@ -93,6 +93,7 @@ appleDerivation' stdenv {
     cp IOKitUser-*/hid.subproj/IOHIDTransaction.h   $dest/hid
     cp IOKitUser-*/hid.subproj/IOHIDValue.h         $dest/hid
     cp IOHIDFamily-*/IOHIDFamily/IOHIDKeys.h        $dest/hid
+    cp IOHIDFamily-*/IOHIDFamily/IOHIDProperties.h  $dest/hid
     cp IOHIDFamily-*/IOHIDFamily/IOHIDUsageTables.h $dest/hid
     cp IOHIDFamily-*/IOHIDLib/IOHIDLibObsolete.h    $dest/hid
 
