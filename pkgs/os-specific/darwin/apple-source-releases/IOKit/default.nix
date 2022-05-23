@@ -21,8 +21,9 @@ appleDerivation' stdenv {
       $out/Library/Frameworks/IOKit.framework
 
     ###### STUBS
-    cp ${darwin-stubs}/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit.tbd \
-      $out/Library/Frameworks/IOKit.framework
+    pushd ${darwin-stubs}/System/Library/Frameworks/IOKit.framework/Versions/A
+    cp IOKit.tbd $out/Library/Frameworks/IOKit.framework
+    popd
 
     ###### HEADERS
 
@@ -44,7 +45,8 @@ appleDerivation' stdenv {
     cp IOKitUser-*/IODataQueueClient.h                                $dest
     cp IOKitUser-*/IOKitLib.h                                         $dest
     cp IOKitUser-*/iokitmig.h                                         $dest
-    cp ${xnu}/Library/PrivateFrameworks/IOKit.framework/Versions/A/Headers/*.h $dest
+    cp ${xnu}/Library/PrivateFrameworks/IOKit.framework/Versions/A/Headers/*.h \
+      $dest
 
     # audio: complete
     cp IOAudioFamily-*/IOAudioDefines.h          $dest/audio
@@ -59,21 +61,26 @@ appleDerivation' stdenv {
     cp IOFWDVComponents-*/DVFamily.h $dest/DV
 
     # firewire: complete
-    cp IOFireWireFamily-*/IOFireWireFamily.kmodproj/IOFireWireFamilyCommon.h $dest/firewire
-    cp IOFireWireFamily-*/IOFireWireLib.CFPlugInProj/IOFireWireLib.h         $dest/firewire
-    cp IOFireWireFamily-*/IOFireWireLib.CFPlugInProj/IOFireWireLibIsoch.h    $dest/firewire
-    cp IOFireWireFamily-*/IOFireWireFamily.kmodproj/IOFWIsoch.h              $dest/firewire
+    pushd IOFireWireFamily-*
+    cp IOFireWireFamily.kmodproj/IOFireWireFamilyCommon.h $dest/firewire
+    cp IOFireWireLib.CFPlugInProj/IOFireWireLib.h         $dest/firewire
+    cp IOFireWireLib.CFPlugInProj/IOFireWireLibIsoch.h    $dest/firewire
+    cp IOFireWireFamily.kmodproj/IOFWIsoch.h              $dest/firewire
+    popd
 
     # graphics: missing AppleGraphicsDeviceControlUserCommand.h
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOAccelClientConnect.h     $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOAccelSurfaceConnect.h    $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOAccelTypes.h             $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOFramebufferShared.h      $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOGraphicsEngine.h         $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOGraphicsInterface.h      $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOGraphicsInterfaceTypes.h $dest/graphics
-    cp IOKitUser-*/graphics.subproj/IOGraphicsLib.h                            $dest/graphics
-    cp IOGraphics-*/IOGraphicsFamily/IOKit/graphics/IOGraphicsTypes.h          $dest/graphics
+    pushd IOGraphics-*/IOGraphicsFamily/IOKit/graphics
+    cp IOAccelClientConnect.h                       $dest/graphics
+    cp IOAccelSurfaceConnect.h                      $dest/graphics
+    cp IOAccelTypes.h                               $dest/graphics
+    cp IOFramebufferShared.h                        $dest/graphics
+    cp IOGraphicsEngine.h                           $dest/graphics
+    cp IOGraphicsInterface.h                        $dest/graphics
+    cp IOGraphicsInterfaceTypes.h                   $dest/graphics
+    cp IOGraphicsTypes.h                            $dest/graphics
+    popd
+
+    cp IOKitUser-*/graphics.subproj/IOGraphicsLib.h $dest/graphics
 
     # hid: complete
     cp IOKitUser-*/hid.subproj/IOHIDBase.h          $dest/hid
@@ -90,13 +97,16 @@ appleDerivation' stdenv {
     cp IOHIDFamily-*/IOHIDLib/IOHIDLibObsolete.h    $dest/hid
 
     # hidsystem: complete
-    cp IOHIDFamily-*/IOHIDSystem/IOKit/hidsystem/ev_keymap.h      $dest/hidsystem
-    cp IOKitUser-*/hidsystem.subproj/event_status_driver.h        $dest/hidsystem
-    cp IOKitUser-*/hidsystem.subproj/IOHIDLib.h                   $dest/hidsystem
-    cp IOHIDFamily-*/IOHIDSystem/IOKit/hidsystem/IOHIDParameter.h $dest/hidsystem
-    cp IOHIDFamily-*/IOHIDSystem/IOKit/hidsystem/IOHIDShared.h    $dest/hidsystem
-    cp IOHIDFamily-*/IOHIDSystem/IOKit/hidsystem/IOHIDTypes.h     $dest/hidsystem
-    cp IOHIDFamily-*/IOHIDSystem/IOKit/hidsystem/IOLLEvent.h      $dest/hidsystem
+    pushd IOHIDFamily-*/IOHIDSystem/IOKit/hidsystem
+    cp ev_keymap.h                                         $dest/hidsystem
+    cp IOHIDParameter.h                                    $dest/hidsystem
+    cp IOHIDShared.h                                       $dest/hidsystem
+    cp IOHIDTypes.h                                        $dest/hidsystem
+    cp IOLLEvent.h                                         $dest/hidsystem
+    popd
+
+    cp IOKitUser-*/hidsystem.subproj/event_status_driver.h $dest/hidsystem
+    cp IOKitUser-*/hidsystem.subproj/IOHIDLib.h            $dest/hidsystem
 
 
     # i2c: complete
@@ -106,8 +116,10 @@ appleDerivation' stdenv {
     cp IOKitUser-*/kext.subproj/KextManager.h $dest/kext
 
     # ndrvsupport: complete
-    cp IOGraphics-*/IONDRVSupport/IOKit/ndrvsupport/IOMacOSTypes.h $dest/ndrvsupport
-    cp IOGraphics-*/IONDRVSupport/IOKit/ndrvsupport/IOMacOSVideo.h $dest/ndrvsupport
+    pushd IOGraphics-*/IONDRVSupport/IOKit/ndrvsupport
+    cp IOMacOSTypes.h $dest/ndrvsupport
+    cp IOMacOSVideo.h $dest/ndrvsupport
+    popd
 
     # network: complete
     cp IONetworkingFamily-*/IOEthernetController.h       $dest/network
@@ -127,10 +139,13 @@ appleDerivation' stdenv {
     cp IOKitUser-*/ps.subproj/IOPSKeys.h       $dest/ps
 
     # pwr_mgt: complete
-    cp IOKitUser-*/pwr_mgt.subproj/IOPMKeys.h                                          $dest/pwr_mgt
-    cp IOKitUser-*/pwr_mgt.subproj/IOPMLib.h                                           $dest/pwr_mgt
-    cp ${xnu}/Library/PrivateFrameworks/IOKit.framework/Versions/A/Headers/pwr_mgt/*.h $dest/pwr_mgt
-    cp IOKitUser-*/pwr_mgt.subproj/IOPMLibPrivate.h                                    $dest/pwr_mgt # Private
+    cp IOKitUser-*/pwr_mgt.subproj/IOPMKeys.h       $dest/pwr_mgt
+    cp IOKitUser-*/pwr_mgt.subproj/IOPMLib.h        $dest/pwr_mgt
+    cp IOKitUser-*/pwr_mgt.subproj/IOPMLibPrivate.h $dest/pwr_mgt # Private
+
+    pushd ${xnu}/Library/PrivateFrameworks/IOKit.framework/Versions/A/Headers
+    cp pwr_mgt/*.h                                  $dest/pwr_mgt
+    popd
 
     # sbp2: complete
     cp IOFireWireSBP2-*/IOFireWireSBP2Lib/IOFireWireSBP2Lib.h $dest/sbp2
@@ -149,36 +164,39 @@ appleDerivation' stdenv {
     cp IOSerialFamily-*/IOSerialFamily.kmodproj/ioss.h         $dest/serial
 
     # storage: complete
-    cp IOATABlockStorage-*/UserClientLib/ATASMARTLib.h $dest/storage/ata
-    cp IOATABlockStorage-*/IOATAStorageDefines.h       $dest/storage/ata
-    cp IOStorageFamily-*/IOAppleLabelScheme.h                                    $dest/storage
-    cp IOStorageFamily-*/IOApplePartitionScheme.h                                $dest/storage
-    cp IOBDStorageFamily-*/IOBDBlockStorageDevice.h                              $dest/storage
-    cp IOBDStorageFamily-*/IOBDMedia.h                                           $dest/storage
-    cp IOBDStorageFamily-*/IOBDMediaBSDClient.h                                  $dest/storage
-    cp IOBDStorageFamily-*/IOBDTypes.h                                           $dest/storage
-    cp IOStorageFamily-*/IOBlockStorageDevice.h                                  $dest/storage
-    cp IOStorageFamily-*/IOBlockStorageDriver.h                                  $dest/storage
-    cp IOCDStorageFamily-*/IOCDBlockStorageDevice.h                              $dest/storage
-    cp IOCDStorageFamily-*/IOCDMedia.h                                           $dest/storage
-    cp IOCDStorageFamily-*/IOCDMediaBSDClient.h                                  $dest/storage
-    cp IOCDStorageFamily-*/IOCDPartitionScheme.h                                 $dest/storage
-    cp IOCDStorageFamily-*/IOCDTypes.h                                           $dest/storage
-    cp IODVDStorageFamily-*/IODVDBlockStorageDevice.h                            $dest/storage
-    cp IODVDStorageFamily-*/IODVDMedia.h                                         $dest/storage
-    cp IODVDStorageFamily-*/IODVDMediaBSDClient.h                                $dest/storage
-    cp IODVDStorageFamily-*/IODVDTypes.h                                         $dest/storage
-    cp IOStorageFamily-*/IOFDiskPartitionScheme.h                                $dest/storage
-    cp IOStorageFamily-*/IOFilterScheme.h                                        $dest/storage
-    cp IOFireWireSerialBusProtocolTransport-*/IOFireWireStorageCharacteristics.h $dest/storage
-    cp IOStorageFamily-*/IOGUIDPartitionScheme.h                                 $dest/storage
-    cp IOStorageFamily-*/IOMedia.h                                               $dest/storage
-    cp IOStorageFamily-*/IOMediaBSDClient.h                                      $dest/storage
-    cp IOStorageFamily-*/IOPartitionScheme.h                                     $dest/storage
-    cp IOStorageFamily-*/IOStorage.h                                             $dest/storage
-    cp IOStorageFamily-*/IOStorageCardCharacteristics.h                          $dest/storage
-    cp IOStorageFamily-*/IOStorageDeviceCharacteristics.h                        $dest/storage
-    cp IOStorageFamily-*/IOStorageProtocolCharacteristics.h                      $dest/storage
+    cp IOATABlockStorage-*/UserClientLib/ATASMARTLib.h      $dest/storage/ata
+    cp IOATABlockStorage-*/IOATAStorageDefines.h            $dest/storage/ata
+    cp IOStorageFamily-*/IOAppleLabelScheme.h               $dest/storage
+    cp IOStorageFamily-*/IOApplePartitionScheme.h           $dest/storage
+    cp IOBDStorageFamily-*/IOBDBlockStorageDevice.h         $dest/storage
+    cp IOBDStorageFamily-*/IOBDMedia.h                      $dest/storage
+    cp IOBDStorageFamily-*/IOBDMediaBSDClient.h             $dest/storage
+    cp IOBDStorageFamily-*/IOBDTypes.h                      $dest/storage
+    cp IOStorageFamily-*/IOBlockStorageDevice.h             $dest/storage
+    cp IOStorageFamily-*/IOBlockStorageDriver.h             $dest/storage
+    cp IOCDStorageFamily-*/IOCDBlockStorageDevice.h         $dest/storage
+    cp IOCDStorageFamily-*/IOCDMedia.h                      $dest/storage
+    cp IOCDStorageFamily-*/IOCDMediaBSDClient.h             $dest/storage
+    cp IOCDStorageFamily-*/IOCDPartitionScheme.h            $dest/storage
+    cp IOCDStorageFamily-*/IOCDTypes.h                      $dest/storage
+    cp IODVDStorageFamily-*/IODVDBlockStorageDevice.h       $dest/storage
+    cp IODVDStorageFamily-*/IODVDMedia.h                    $dest/storage
+    cp IODVDStorageFamily-*/IODVDMediaBSDClient.h           $dest/storage
+    cp IODVDStorageFamily-*/IODVDTypes.h                    $dest/storage
+    cp IOStorageFamily-*/IOFDiskPartitionScheme.h           $dest/storage
+    cp IOStorageFamily-*/IOFilterScheme.h                   $dest/storage
+    cp IOStorageFamily-*/IOGUIDPartitionScheme.h            $dest/storage
+    cp IOStorageFamily-*/IOMedia.h                          $dest/storage
+    cp IOStorageFamily-*/IOMediaBSDClient.h                 $dest/storage
+    cp IOStorageFamily-*/IOPartitionScheme.h                $dest/storage
+    cp IOStorageFamily-*/IOStorage.h                        $dest/storage
+    cp IOStorageFamily-*/IOStorageCardCharacteristics.h     $dest/storage
+    cp IOStorageFamily-*/IOStorageDeviceCharacteristics.h   $dest/storage
+    cp IOStorageFamily-*/IOStorageProtocolCharacteristics.h $dest/storage
+
+    pushd IOFireWireSerialBusProtocolTransport-*
+    cp IOFireWireStorageCharacteristics.h                   $dest/storage
+    popd
 
     # stream: missing altogether
 
