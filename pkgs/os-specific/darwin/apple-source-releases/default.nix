@@ -7,6 +7,7 @@ let
   # now it's staying here.
   versions = {
     "osx-10.13.6" = {
+      inherit (versions."Developer-Tools-9.0") developer_cmds;
       inherit (versions."osx-10.3") IOATABlockStorage;
       inherit (versions."osx-10.3.9") IOSCSIArchitectureModelFamily;
       "IOUSBFamily-10.8.4" = versions."osx-10.8.4".IOUSBFamily;
@@ -124,7 +125,6 @@ let
 
       libutil       = "43";
       Librpcsvc     = "26";
-      developer_cmds= "62";
       network_cmds  = "481.20.1";
       adv_cmds      = "163";
       file_cmds     = "264.1.1";
@@ -179,6 +179,9 @@ let
     };
     "osx-10.3" = {
       IOATABlockStorage = "130.3.1"; # Old but most recent version available
+    };
+    "Developer-Tools-9.0" = {
+      developer_cmds = "66";
     };
     "dev-tools-3.1.3" = {
       bsdmake = "24";
@@ -338,7 +341,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     Librpcsvc       = applePackage "Librpcsvc"         "osx-10.11.6"     "1zwfwcl9irxl1dlnf2b4v30vdybp0p0r6n6g1pd14zbdci1jcg2k" {};
     adv_cmds        = applePackage "adv_cmds"          "osx-10.11.6"    "12gbv35i09aij9g90p6b3x2f3ramw43qcb2gjrg8lzkzmwvcyw9q" {};
     basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
-    developer_cmds  = applePackage "developer_cmds"    "osx-10.11.6"     "1r9c2b6dcl22diqf90x58psvz797d3lxh4r2wppr7lldgbgn24di" {};
+    developer_cmds  = applePackage "developer_cmds"    "osx-10.13.6"     "sha256-mdbE708yWT35N6QtUEAMFwVCR+h1q4z7O/Dy3hmpCGA=" {};
     diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.11.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {
       macosPackages_11_0_1 = macosPackages_11_0_1;
     };
