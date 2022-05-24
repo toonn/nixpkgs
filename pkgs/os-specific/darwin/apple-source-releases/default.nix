@@ -18,12 +18,11 @@ let
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         objc4 ppp text_cmds;
-      inherit (versions."osx-10.13.4") CommonCrypto eap8021x IOFireWireSBP2
-        IONetworkingFamily IOStorageFamily libiconv;
+      inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x
+        IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
       configd         = "963.50.8";
-      copyfile        = "146.50.5";
       Csu             = "85";
       diskdev_cmds    = "593";
       dtrace          = "262.50.12";
@@ -62,6 +61,7 @@ let
     };
     "osx-10.13.4" = {
       CommonCrypto       = "60118.50.1";
+      copyfile           = "146.50.5";
       eap8021x           = "264.50.5";
       libiconv           = "51.50.1";
       IOFireWireSBP2     = "428";
@@ -83,7 +83,6 @@ let
       xnu           = "3789.70.16";
       Libnotify     = "165.20.1";
       dyld          = "433.5";
-      copyfile      = "138";
       libclosure    = "67";
       Libinfo       = "503.50.4";
       Libsystem     = "1238.60.2";
@@ -107,7 +106,6 @@ let
       libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
       dyld          = "360.22";
-      copyfile      = "127";
       Csu           = "85";
       libclosure    = "65";
       Libinfo       = "477.50.4";
@@ -144,6 +142,9 @@ let
       CF            = "1153.18";
       libdispatch   = "442.1.4";
       Security      = "57031.40.6";
+    };
+    "osx-10.10" = {
+      Csu = "85";
     };
     "osx-10.9.5" = {
       launchd            = "842.92.1";
@@ -299,7 +300,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     configd         = applePackage "configd"           "osx-10.8.5"      "1gxakahk8gallf16xmhxhprdxkh3prrmzxnmxfvj0slr0939mmr2" {
       Security      = applePackage "Security/boot.nix" "osx-10.9.5"      "1nv0dczf67dhk17hscx52izgdcyacgyy12ag0jh6nl5hmfzsn8yy" {};
     };
-    copyfile        = applePackage "copyfile"          "osx-10.12.6"     "0a70bvzndkava1a946cdq42lnjhg7i7b5alpii3lap6r5fkvas0n" {};
+    copyfile        = applePackage "copyfile"          "osx-10.13.6"     "sha256-AALgvHYEWs8uJjBG2Se8umVznY2MU2BigSjXe0WesAs=" {};
     Csu             = applePackage "Csu"               "osx-10.11.6"     "0yh5mslyx28xzpv8qww14infkylvc1ssi57imhi471fs91sisagj" {};
     dtrace          = applePackage "dtrace"            "osx-10.12.6"     "0hpd6348av463yqf70n3xkygwmf1i5zza8kps4zys52sviqz3a0l" {};
     dyld            = applePackage "dyld"              "osx-10.12.6"     "0q4jmk78b5ajn33blh4agyq6v2a63lpb3fln78az0dy12bnp1qqk" {};
