@@ -20,7 +20,7 @@ let
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         objc4 ppp text_cmds;
-      inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x
+      inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
@@ -29,7 +29,6 @@ let
       dtrace          = "262.50.12";
       dyld            = "551.4";
       file_cmds       = "272";
-      hfs             = "407.50.6";
       IOGraphics      = "519.20";
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
@@ -64,10 +63,14 @@ let
       CommonCrypto       = "60118.50.1";
       copyfile           = "146.50.5";
       eap8021x           = "264.50.5";
+      hfs                = "407.50.6";
       libiconv           = "51.50.1";
       IOFireWireSBP2     = "428";
       IONetworkingFamily = "124.50.3";
       IOStorageFamily    = "218.50.2";
+    };
+    "osx-10.13.2" = {
+      hfs = "407.30.1"; # Old but current version is missing hfs_mount.h
     };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
@@ -94,7 +97,6 @@ let
       Libc          = "1158.50.2";
       dtrace        = "209.50.12";
       libpthread    = "218.60.3";
-      hfs           = "366.70.1";
     };
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
@@ -201,8 +203,9 @@ let
     inherit sha256;
   };
 
-  fetchApple = sdkName: sha256: pname: let
-    version = versions.${sdkName}.${pname};
+  fetchApple = sdkName: sha256: aname: let
+    pname = builtins.head (lib.splitString "-" aname);
+    version = versions.${sdkName}.${aname};
   in fetchApple' pname version sha256;
 
   appleDerivation'' = stdenv: pname: version: sdkName: sha256: attrs: stdenv.mkDerivation ({
@@ -338,7 +341,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     xnu             = if stdenv.isx86_64 then
       applePackage "xnu"                               "osx-10.13.6"     "1k4hyh0fn7zaggsalk9sykznachkpyvglzg3vax1alrlyk5j3ikx" {}
     else macosPackages_11_0_1.xnu;
-    hfs             = applePackage "hfs"               "osx-10.12.6"     "1mj3xvqpq1mgd80b6kl1s04knqnap7hccr0gz8rjphalq14rbl5g" {};
+    hfs             = applePackage "hfs"               "osx-10.13.2"     "sha256-OXuwJt3FibFpqwJ+SKD1u9OiuRFNLt9AEZWrg/u72XY=" {}; # Old but current version does not contain the headers we need
     Librpcsvc       = applePackage "Librpcsvc"         "osx-10.11.6"     "1zwfwcl9irxl1dlnf2b4v30vdybp0p0r6n6g1pd14zbdci1jcg2k" {};
     adv_cmds        = applePackage "adv_cmds"          "osx-10.11.6"    "12gbv35i09aij9g90p6b3x2f3ramw43qcb2gjrg8lzkzmwvcyw9q" {};
     basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
