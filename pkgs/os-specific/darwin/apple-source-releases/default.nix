@@ -13,6 +13,7 @@ let
       "IOUSBFamily-10.8.4" = versions."osx-10.8.4".IOUSBFamily;
       inherit (versions."osx-10.8.5") IOUSBFamily;
       inherit (versions."osx-10.9") basic_cmds libunwind;
+      inherit (versions."osx-10.9.4") launchd;
       inherit (versions."osx-10.10") Csu;
       inherit (versions."osx-10.11") architecture;
       inherit (versions."osx-10.12") IOFWDVComponents
@@ -146,12 +147,14 @@ let
       Csu = "85";
     };
     "osx-10.9.5" = {
-      launchd            = "842.92.1";
       libauto            = "185.5";
       Libc               = "997.90.3"; # We use this, but not from here
       Libsystem          = "1197.1.1";
       Security           = "55471.14.18";
       security_dotmac_tp = "55107.1";
+    };
+    "osx-10.9.4" = {
+      launchd = "842.92.1";
     };
     "osx-10.9" = {
       basic_cmds = "55";
@@ -313,7 +316,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     eap8021x        = applePackage "eap8021x"          "osx-10.13.6"     "0iw0qdib59hihyx2275rwq507bq2a06gaj8db4a8z1rkaj1frskh" {};
     ICU             = applePackage "ICU"               "osx-10.13.6"     "02p9h2jq20g305nrz6n5530m1dk3vqv53lh6yyl1hgayzyjd3f07" {};
     IOKit           = applePackage "IOKit"             "osx-10.11.6"     "0kcbrlyxcyirvg5p95hjd9k8a01k161zg0bsfgfhkb90kh2s8x00" { inherit IOKitSrcs; };
-    launchd         = applePackage "launchd"           "osx-10.9.5"      "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
+    launchd         = applePackage "launchd"           "osx-10.13.6"     "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
     libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
     Libc            = applePackage "Libc"              "osx-10.12.6"     "183wcy1nlj2wkpfsx3k3lyv917mk8r2p72qw8lb89mbjsw3yw0xx" {
       Libc_10-9 = fetchzip {
