@@ -186,6 +186,9 @@ let
     };
   };
 
+  appleTarballUrl = pname: version:
+    "http://www.opensource.apple.com/tarballs/${pname}/${pname}-${version}.tar.gz";
+
   fetchApple' = pname: version: sha256: let
     # When cross-compiling, fetchurl depends on libiconv, resulting
     # in an infinite recursion without this. It's not clear why this
@@ -194,7 +197,7 @@ let
       then stdenv.fetchurlBoot
       else fetchurl;
   in fetch {
-    url = "http://www.opensource.apple.com/tarballs/${pname}/${pname}-${version}.tar.gz";
+    url = appleTarballUrl pname version;
     inherit sha256;
   };
 
@@ -311,7 +314,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
     Libc            = applePackage "Libc"              "osx-10.12.6"     "183wcy1nlj2wkpfsx3k3lyv917mk8r2p72qw8lb89mbjsw3yw0xx" {
       Libc_10-9 = fetchzip {
-        url    = "http://www.opensource.apple.com/tarballs/Libc/Libc-997.90.3.tar.gz";
+        url    = appleTarballUrl "Libc" "997.90.3";
         sha256 = "1xchgxkxg5288r2b9yfrqji2gsgdap92k4wx2dbjwslixws12pq7";
       };
       Libc_old        = applePackage "Libc/825_40_1.nix" "osx-10.8.5"      "0xsx1im52gwlmcrv4lnhhhn9dyk5ci6g27k6yvibn9vj8fzjxwcf" {};
