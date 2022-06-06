@@ -20,7 +20,7 @@ let
         IOFireWireSerialBusProtocolTransport;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
-        objc4 ppp text_cmds;
+        libresolv objc4 OpenPAM ppp shell_cmds text_cmds;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
@@ -41,7 +41,6 @@ let
       Libnotify       = "172";
       libplatform     = "161.50.1";
       libpthread      = "301.50.1";
-      libresolv       = "65";
       Librpcsvc       = "26";
       Libsystem       = "1252.50.4";
       libutil         = "51.20.1";
@@ -80,6 +79,7 @@ let
       IOCDStorageFamily  = "58";
       IODVDStorageFamily = "42";
       IOSerialFamily     = "93";
+      libresolv          = "65";
       objc4              = "723";
       ppp                = "847";
       text_cmds          = "99";
@@ -91,7 +91,6 @@ let
       Libinfo       = "503.50.4";
       Libsystem     = "1238.60.2";
       removefile    = "45";
-      libresolv     = "64";
       libplatform   = "126.50.8";
       mDNSResponder = "765.50.9";
       libutil       = "47.30.1";
@@ -112,7 +111,6 @@ let
       Libinfo       = "477.50.4";
       Libsystem     = "1226.10.1";
       removefile    = "41";
-      libresolv     = "60";
 
       # Their release page is a bit of a mess here, so I'm going to lie a bit and say this version
       # is the right one, even though it isn't. The version I have here doesn't appear to be linked
@@ -333,7 +331,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
     libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
     libpthread      = applePackage "libpthread"        "osx-10.12.6"     "1j6541rcgjpas1fc77ip5krjgw4bvz6jq7bq7h9q7axb0jv2ns6c" {};
-    libresolv       = applePackage "libresolv"         "osx-10.12.6"     "077j6ljfh7amqpk2146rr7dsz5vasvr3als830mgv5jzl7l6vz88" {};
+    libresolv       = applePackage "libresolv"         "osx-10.13.6"     "sha256-Mu5mRmmcG1oapTqgwzx7l7/Oh90nRX6/VmfDeNpJdz0=" {};
     Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
     libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
     libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
