@@ -20,7 +20,7 @@ let
         IOFireWireSerialBusProtocolTransport;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
-        libresolv objc4 OpenPAM ppp shell_cmds text_cmds;
+        libedit libresolv objc4 OpenPAM ppp shell_cmds text_cmds;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
@@ -79,6 +79,7 @@ let
       IOCDStorageFamily  = "58";
       IODVDStorageFamily = "42";
       IOSerialFamily     = "93";
+      libedit            = "50";
       libresolv          = "65";
       objc4              = "723";
       ppp                = "847";
@@ -325,6 +326,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     };
     libclosure      = applePackage "libclosure"        "osx-10.11.6"     "1zqy1zvra46cmqv6vsf1mcsz3a76r9bky145phfwh4ab6y15vjpq" {};
     libdispatch     = applePackage "libdispatch"       "osx-10.10.5"     "0jsfbzp87lwk9snlby0hd4zvj7j894p5q3cw0wdx9ny1mcp3kdcj" {};
+    libedit         = applePackage "libedit"           "osx-10.13.6"     "sha256-aAPn4DMvJ4z+D0DCoOmgTXEES19DmhWSODpMpvzqfrA=" {};
     libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
     Libinfo         = applePackage "Libinfo"           "osx-10.11.6"     "0qjgkd4y8sjvwjzv5wwyzkb61pg8wwg95bkp721dgzv119dqhr8x" {};
     Libm            = applePackage "Libm"              "osx-10.7.4"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
