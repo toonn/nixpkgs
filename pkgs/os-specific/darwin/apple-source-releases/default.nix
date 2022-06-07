@@ -49,7 +49,6 @@ let
       PowerManagement = "703.71.1";
       removefile      = "45";
       Security        = "58286.70.7";
-      shell_cmds      = "203";
       system_cmds     = "790.50.6";
       top             = "111.20.1";
       xnu             = "4570.71.2";
@@ -83,6 +82,7 @@ let
       libresolv          = "65";
       objc4              = "723";
       ppp                = "847";
+      shell_cmds         = "203";
       text_cmds          = "99";
     };
     "osx-10.12.6" = {
@@ -128,7 +128,6 @@ let
       network_cmds  = "481.20.1";
       adv_cmds      = "163";
       file_cmds     = "264.1.1";
-      shell_cmds    = "187";
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
       top           = "108";
@@ -356,7 +355,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
       applePackage "network_cmds"                      "osx-10.11.6"     "0lhi9wz84qr1r2ab3fb4nvmdg9gxn817n5ldg7zw9gnf3wwn42kw" {}
     else macosPackages_11_0_1.network_cmds;
     file_cmds       = applePackage "file_cmds"         "osx-10.11.6"     "1zfxbmasps529pnfdjvc13p7ws2cfx8pidkplypkswyff0nff4wp" {};
-    shell_cmds      = applePackage "shell_cmds"        "osx-10.11.6"     "0084k271v66h4jqp7q7rmjvv7w4mvhx3aq860qs8jbd30canm86n" {};
+    shell_cmds      = applePackage "shell_cmds"        "osx-10.13.6"     "sha256-lx5lWvjfS34+m56sE3Y5ptJXlPc5JJhZkajGcRC+UHk=" {};
     system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
     text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
     top             = applePackage "top"               "osx-10.11.6"     "0i9120rfwapgwdvjbfg0ya143i29s1m8zbddsxh39pdc59xnsg5l" {};

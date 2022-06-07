@@ -1,29 +1,47 @@
-{ lib, appleDerivation, xcbuildHook, launchd }:
+{ lib, appleDerivation, xcbuildHook, bison, libedit, libresolv, libutil }:
 
 appleDerivation {
-  nativeBuildInputs = [ xcbuildHook launchd ];
-
   patchPhase = ''
     # NOTE: these hashes must be recalculated for each version change
 
     # disables:
-    # - su ('security/pam_appl.h' file not found)
-    # - find (Undefined symbol '_get_date')
-    # - w (Undefined symbol '_res_9_init')
+    # - su ('bsm/audit_session.h' file not found, pam_appl.h comes from OpenPAM)
+    # fixes:
+    # - find
     # - expr
+    # By running the yacc step manually, xcbuild tries to run yacc without an
+    # argument and this makes bison (disguised as yacc) error.
     substituteInPlace shell_cmds.xcodeproj/project.pbxproj \
       --replace "FCBA168714A146D000AA698B /* PBXTargetDependency */," "" \
-      --replace "FCBA165914A146D000AA698B /* PBXTargetDependency */," "" \
-      --replace "FCBA169514A146D000AA698B /* PBXTargetDependency */," "" \
-      --replace "FCBA165514A146D000AA698B /* PBXTargetDependency */," ""
+      --replace "expr.y" "expr.c" \
+      --replace "getdate.y" "getdate.c" \
+      --replace "sourcecode.yacc" "sourcecode.c.c" \
+      --replace "/AppleInternal" "$out/AppleInternal"
 
-    # disable w, test install
+    # test is usually in /bin but we don't have a /usr/bin to distinguish
     # get rid of permission stuff
     substituteInPlace xcodescripts/install-files.sh \
-      --replace 'ln -f "$BINDIR/w" "$BINDIR/uptime"' "" \
-      --replace 'ln -f "$DSTROOT/bin/test" "$DSTROOT/bin/["' "" \
+      --replace 'bin/' 'usr/bin/' \
       --replace "-o root -g wheel -m 0755" "" \
       --replace "-o root -g wheel -m 0644" ""
+  '';
+
+  nativeBuildInputs = [ xcbuildHook bison ];
+
+  buildInputs = [ libedit libresolv libutil ];
+
+  NIX_LDFLAGS = "-lresolv";
+
+  preBuild = ''
+    mkdir -p "$PWD"/Intermediates/shell_cmds.build/Release/sh.build/DerivedSources
+
+    # Run yacc steps manually, xcbuild runs yacc (bison in disguise) without
+    # arguments and it errors because it needs an input file
+    for d in expr find; do
+      for f in "$d"/*.y; do
+        yacc --output-file="''${f/.y/.c}" "$f"
+      done
+    done
   '';
 
   # temporary install phase until xcodebuild has "install" support
@@ -41,6 +59,7 @@ appleDerivation {
     mv $out/usr/* $out
     mv $out/private/etc $out
     rmdir $out/usr $out/private
+    rm -r $out/AppleInternal # Looks like a bunch of test results we don't need
   '';
 
   meta = {
