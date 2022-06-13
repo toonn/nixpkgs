@@ -18,7 +18,7 @@ let
       inherit (versions."osx-10.11") architecture;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport;
-      inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
+      inherit (versions."osx-10.13") bootstrap_cmds file_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         libedit libresolv objc4 ppp shell_cmds text_cmds;
       inherit (versions."osx-10.13.2") Libinfo;
@@ -30,7 +30,6 @@ let
       diskdev_cmds    = "593";
       dtrace          = "262.50.12";
       dyld            = "551.4";
-      file_cmds       = "272";
       IOGraphics      = "519.20";
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
@@ -74,6 +73,7 @@ let
     };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
+      file_cmds          = "272";
       IOAudioFamily      = "206.5";
       IOBDStorageFamily  = "19";
       IOCDStorageFamily  = "58";
@@ -119,7 +119,6 @@ let
       Librpcsvc     = "26";
       network_cmds  = "481.20.1";
       adv_cmds      = "163";
-      file_cmds     = "264.1.1";
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
       top           = "108";
@@ -346,7 +345,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     network_cmds    = if stdenv.isx86_64 then
       applePackage "network_cmds"                      "osx-10.11.6"     "0lhi9wz84qr1r2ab3fb4nvmdg9gxn817n5ldg7zw9gnf3wwn42kw" {}
     else macosPackages_11_0_1.network_cmds;
-    file_cmds       = applePackage "file_cmds"         "osx-10.11.6"     "1zfxbmasps529pnfdjvc13p7ws2cfx8pidkplypkswyff0nff4wp" {};
+    file_cmds       = applePackage "file_cmds"         "osx-10.13.6"     "sha256-Wy78Slobyt8UQNx5rFTfl6mRa94pJs+JFyroNPvkD6k=" {};
     shell_cmds      = applePackage "shell_cmds"        "osx-10.13.6"     "sha256-lx5lWvjfS34+m56sE3Y5ptJXlPc5JJhZkajGcRC+UHk=" {};
     system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
     text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
