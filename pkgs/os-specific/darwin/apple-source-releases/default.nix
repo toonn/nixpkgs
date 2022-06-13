@@ -93,7 +93,6 @@ let
       Libsystem     = "1238.60.2";
       removefile    = "45";
       libplatform   = "126.50.8";
-      mDNSResponder = "765.50.9";
       libutil       = "47.30.1";
       Libc          = "1158.50.2";
       dtrace        = "209.50.12";
@@ -111,13 +110,7 @@ let
       libclosure    = "65";
       Libsystem     = "1226.10.1";
       removefile    = "41";
-
-      # Their release page is a bit of a mess here, so I'm going to lie a bit and say this version
-      # is the right one, even though it isn't. The version I have here doesn't appear to be linked
-      # to any OS releases, but Apple also doesn't mention mDNSResponder from 10.11 to 10.11.6, and
-      # neither of those versions are publicly available.
       libplatform   = "125";
-      mDNSResponder = "625.41.2";
 
       # IOKit contains a set of packages with different versions, so we don't have a general version
       IOKit         = "";
@@ -335,7 +328,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
     libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
     libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
-    mDNSResponder   = applePackage "mDNSResponder"     "osx-10.12.6"     "02ms1p8zlgmprzn65jzr7yaqxykh3zxjcrw0c06aayim6h0dsqfy" {};
+    mDNSResponder   = applePackage "mDNSResponder"     "osx-10.13.6"     "sha256-zdAxccoF8W6ph7uh+LDEhH0wNSg+oPX6Ct519k7IPtU=" {};
     objc4           = applePackage "objc4"             "osx-10.13.6"     "1zj2wmbilx4b29kc26a06cifasl6la5vl210bz6wy21f38xx8miz" {};
     ppp             = applePackage "ppp"               "osx-10.13.6"     "1vgiq099hdqi61zhjk43snmjp4hd58fa79xbr3m3s4x8an3fr1ih" {};
     removefile      = applePackage "removefile"        "osx-10.12.6"     "0jzjxbmxgjzhssqd50z7kq9dlwrv5fsdshh57c0f8mdwcs19bsyx" {};
