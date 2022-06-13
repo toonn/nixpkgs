@@ -20,7 +20,8 @@ let
         IOFireWireSerialBusProtocolTransport;
       inherit (versions."osx-10.13") bootstrap_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
-        libedit libresolv objc4 OpenPAM ppp shell_cmds text_cmds;
+        libedit libresolv objc4 ppp shell_cmds text_cmds;
+      inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
@@ -37,7 +38,6 @@ let
       Libc            = "1244.50.9";
       libclosure      = "67";
       libdispatch     = "913.60.2";
-      Libinfo         = "517.30.1";
       Libnotify       = "172";
       libplatform     = "161.50.1";
       libpthread      = "301.50.1";
@@ -69,7 +69,8 @@ let
       IOStorageFamily    = "218.50.2";
     };
     "osx-10.13.2" = {
-      hfs = "407.30.1"; # Old but current version is missing hfs_mount.h
+      hfs     = "407.30.1"; # Old but current version is missing hfs_mount.h
+      Libinfo = "517.30.1";
     };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
@@ -89,7 +90,6 @@ let
       xnu           = "3789.70.16";
       Libnotify     = "165.20.1";
       libclosure    = "67";
-      Libinfo       = "503.50.4";
       Libsystem     = "1238.60.2";
       removefile    = "45";
       libplatform   = "126.50.8";
@@ -109,7 +109,6 @@ let
       libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
       libclosure    = "65";
-      Libinfo       = "477.50.4";
       Libsystem     = "1226.10.1";
       removefile    = "41";
 
@@ -327,7 +326,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libdispatch     = applePackage "libdispatch"       "osx-10.10.5"     "0jsfbzp87lwk9snlby0hd4zvj7j894p5q3cw0wdx9ny1mcp3kdcj" {};
     libedit         = applePackage "libedit"           "osx-10.13.6"     "sha256-aAPn4DMvJ4z+D0DCoOmgTXEES19DmhWSODpMpvzqfrA=" {};
     libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
-    Libinfo         = applePackage "Libinfo"           "osx-10.11.6"     "0qjgkd4y8sjvwjzv5wwyzkb61pg8wwg95bkp721dgzv119dqhr8x" {};
+    Libinfo         = applePackage "Libinfo"           "osx-10.13.6"     "sha256-BIEjnS/CY63Vyv44xlThT8CIZRE8jHNCmzAkJjepER4=" {};
     Libm            = applePackage "Libm"              "osx-10.7.4"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
     Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
     libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
