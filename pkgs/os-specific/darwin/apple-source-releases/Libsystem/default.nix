@@ -20,7 +20,7 @@ appleDerivation' stdenv {
       mkdir -p $1
       while read f; do
         mkdir -p $1/$(dirname $f)
-        cp --parents -pn $f $1
+        cp --parents -pnPR $f $1
       done
     }
 
