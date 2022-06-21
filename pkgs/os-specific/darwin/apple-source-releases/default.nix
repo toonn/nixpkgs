@@ -213,7 +213,7 @@ let
     installCheckPhase = ''
       cd $out/include
 
-      result=$(diff -u "$appleHeadersPath" <(find * -type f | sort) --label "Listed in appleHeaders" --label "Found in \$out/include" || true)
+      result=$(diff -u "$appleHeadersPath" <(find * -type f,l | sort) --label "Listed in appleHeaders" --label "Found in \$out/include" || true)
 
       if [ -z "$result" ]; then
         echo "Apple header list is matched."
