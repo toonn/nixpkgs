@@ -23,7 +23,7 @@ let
         libedit libresolv objc4 ppp shell_cmds text_cmds;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
-        IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv;
+        IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv libmalloc;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
       configd         = "963.50.8";
@@ -63,6 +63,7 @@ let
       eap8021x           = "264.50.5";
       hfs                = "407.50.6";
       libiconv           = "51.50.1";
+      libmalloc          = "140.50.6";
       IOFireWireSBP2     = "428";
       IONetworkingFamily = "124.50.3";
       IOStorageFamily    = "218.50.2";
@@ -320,6 +321,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
     Libinfo         = applePackage "Libinfo"           "osx-10.13.6"     "sha256-BIEjnS/CY63Vyv44xlThT8CIZRE8jHNCmzAkJjepER4=" {};
     Libm            = applePackage "Libm"              "osx-10.7.4"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
+    libmalloc       = applePackage "libmalloc"         "osx-10.13.6"     "sha256-Ky3I3Ox+1no16d0tIz7jEfCl90221bQoqnK8qNHiBcc=" {};
     Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
     libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
     libpthread      = applePackage "libpthread"        "osx-10.12.6"     "1j6541rcgjpas1fc77ip5krjgw4bvz6jq7bq7h9q7axb0jv2ns6c" {};
