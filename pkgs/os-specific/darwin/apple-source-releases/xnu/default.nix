@@ -132,6 +132,9 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
     mv $out/System/* $out/
     rmdir $out/System
 
+    # Get buried headers
+    mv libsyscall/wrappers/{libproc/libproc,spawn/spawn}.h $out/include
+
     # TODO: do I need this?
     mv $out/internal_hdr/include/mach/*.h $out/include/mach
 
