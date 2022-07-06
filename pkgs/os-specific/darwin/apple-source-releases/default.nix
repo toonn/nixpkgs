@@ -13,6 +13,7 @@ let
       "IOUSBFamily-10.8.4" = versions."osx-10.8.4".IOUSBFamily;
       inherit (versions."osx-10.8.5") IOUSBFamily;
       inherit (versions."osx-10.9") basic_cmds libunwind;
+      "Libc-10.9.2" = versions."osx-10.9.2".Libc;
       inherit (versions."osx-10.9.4") launchd;
       inherit (versions."osx-10.10") Csu;
       inherit (versions."osx-10.11") architecture;
@@ -23,7 +24,8 @@ let
         libedit libresolv objc4 ppp shell_cmds text_cmds;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
-        IOFireWireSBP2 IONetworkingFamily IOStorageFamily libiconv libmalloc;
+        IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
+        libmalloc;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
       adv_cmds        = "172";
       configd         = "963.50.8";
@@ -34,7 +36,6 @@ let
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
-      Libc            = "1244.50.9";
       libclosure      = "67";
       libdispatch     = "913.60.2";
       Libnotify       = "172";
@@ -63,6 +64,7 @@ let
       copyfile           = "146.50.5";
       eap8021x           = "264.50.5";
       hfs                = "407.50.6";
+      Libc               = "1244.50.9";
       libiconv           = "51.50.1";
       libmalloc          = "140.50.6";
       IOFireWireSBP2     = "428";
@@ -96,7 +98,6 @@ let
       removefile    = "45";
       libplatform   = "126.50.8";
       libutil       = "47.30.1";
-      Libc          = "1158.50.2";
       dtrace        = "209.50.12";
       libpthread    = "218.60.3";
     };
@@ -139,7 +140,6 @@ let
     };
     "osx-10.9.5" = {
       libauto            = "185.5";
-      Libc               = "997.90.3"; # We use this, but not from here
       Libsystem          = "1197.1.1";
       Security           = "55471.14.18";
       security_dotmac_tp = "55107.1";
@@ -147,13 +147,15 @@ let
     "osx-10.9.4" = {
       launchd = "842.92.1";
     };
+    "osx-10.9.2" = {
+      Libc = "997.90.3";
+    };
     "osx-10.9" = {
       basic_cmds = "55";
       libunwind  = "35.3";
     };
     "osx-10.8.5" = {
       configd     = "453.19";
-      Libc        = "825.40.1";
       IOUSBFamily = "630.4.5";
     };
     "osx-10.8.4" = {
@@ -309,12 +311,12 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     IOKit           = applePackage "IOKit"             "osx-10.11.6"     "0kcbrlyxcyirvg5p95hjd9k8a01k161zg0bsfgfhkb90kh2s8x00" { inherit IOKitSrcs; };
     launchd         = applePackage "launchd"           "osx-10.13.6"     "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
     libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
-    Libc            = applePackage "Libc"              "osx-10.12.6"     "183wcy1nlj2wkpfsx3k3lyv917mk8r2p72qw8lb89mbjsw3yw0xx" {
-      Libc_10-9 = fetchzip {
-        url    = appleTarballUrl "Libc" "997.90.3";
+    Libc            = applePackage "Libc"              "osx-10.13.6"     "sha256-SPG2oC5zJrqIVw8q22QiZtJcUDyILfZsCiTUxN/ZcZA=" {
+      # Most recent version to include the `NSSystemDirectories.h` header
+      Libc-10_9_2 = fetchzip {
+        url    = appleTarballUrl "Libc" "${versions."osx-10.9.2".Libc}";
         sha256 = "1xchgxkxg5288r2b9yfrqji2gsgdap92k4wx2dbjwslixws12pq7";
       };
-      Libc_old        = applePackage "Libc/825_40_1.nix" "osx-10.8.5"      "0xsx1im52gwlmcrv4lnhhhn9dyk5ci6g27k6yvibn9vj8fzjxwcf" {};
     };
     libclosure      = applePackage "libclosure"        "osx-10.11.6"     "1zqy1zvra46cmqv6vsf1mcsz3a76r9bky145phfwh4ab6y15vjpq" {};
     libdispatch     = applePackage "libdispatch"       "osx-10.10.5"     "0jsfbzp87lwk9snlby0hd4zvj7j894p5q3cw0wdx9ny1mcp3kdcj" {};

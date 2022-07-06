@@ -1,6 +1,10 @@
 CrashReporterClient.h
 NSSystemDirectories.h
+__wctype.h
+_ctype.h
 _locale.h
+_regex.h
+_stdio.h
 _types.h
 _types/_intmax_t.h
 _types/_nl_item.h
@@ -21,7 +25,6 @@ arpa/inet.h
 arpa/nameser_compat.h
 arpa/telnet.h
 arpa/tftp.h
-asl.h
 assert.h
 bitstring.h
 cpio.h
@@ -29,6 +32,7 @@ crt_externs.h
 ctype.h
 db.h
 dirent.h
+dirstat.h
 disktab.h
 err.h
 errno.h
@@ -49,12 +53,8 @@ langinfo.h
 libc.h
 libc_private.h
 libgen.h
-libkern/OSAtomic.h
-libkern/OSCacheControl.h
-libproc.h
 limits.h
 locale.h
-malloc/malloc.h
 memory.h
 monetary.h
 monitor.h
@@ -75,7 +75,6 @@ protocols/timed.h
 pthread.h
 pthread_impl.h
 pthread_spis.h
-pthread_workqueue.h
 ranlib.h
 readpassphrase.h
 regex.h
@@ -85,11 +84,10 @@ search.h
 secure/_common.h
 secure/_stdio.h
 secure/_string.h
+secure/_strings.h
 semaphore.h
-setjmp.h
 sgtty.h
 signal.h
-spawn.h
 stab.h
 standards.h
 stddef.h
@@ -112,7 +110,6 @@ time.h
 timeconv.h
 ttyent.h
 tzfile.h
-ucontext.h
 ulimit.h
 unistd.h
 util.h
