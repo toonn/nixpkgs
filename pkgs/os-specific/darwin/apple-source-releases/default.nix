@@ -18,7 +18,7 @@ let
       inherit (versions."osx-10.10") Csu;
       inherit (versions."osx-10.11") architecture;
       inherit (versions."osx-10.12") IOFWDVComponents
-        IOFireWireSerialBusProtocolTransport;
+        IOFireWireSerialBusProtocolTransport libclosure;
       inherit (versions."osx-10.13") bootstrap_cmds file_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         libedit libresolv objc4 ppp shell_cmds text_cmds;
@@ -36,7 +36,6 @@ let
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
-      libclosure      = "67";
       libdispatch     = "913.60.2";
       Libnotify       = "172";
       libplatform     = "161.50.1";
@@ -93,7 +92,6 @@ let
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
       Libnotify     = "165.20.1";
-      libclosure    = "67";
       Libsystem     = "1238.60.2";
       removefile    = "45";
       libplatform   = "126.50.8";
@@ -104,13 +102,13 @@ let
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
       IOFireWireSerialBusProtocolTransport = "252";
+      libclosure                           = "67";
     };
     "osx-10.11.6" = {
       dtrace        = "168";
       xnu           = "3248.60.10";
       libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
-      libclosure    = "65";
       Libsystem     = "1226.10.1";
       removefile    = "41";
       libplatform   = "125";
@@ -318,7 +316,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
         sha256 = "1xchgxkxg5288r2b9yfrqji2gsgdap92k4wx2dbjwslixws12pq7";
       };
     };
-    libclosure      = applePackage "libclosure"        "osx-10.11.6"     "1zqy1zvra46cmqv6vsf1mcsz3a76r9bky145phfwh4ab6y15vjpq" {};
+    libclosure      = applePackage "libclosure"        "osx-10.13.6"     "sha256-jOk1TuP+gfrU0eudZqu4D99oqtca9N8gWUMqLdv48nk=" {};
     libdispatch     = applePackage "libdispatch"       "osx-10.10.5"     "0jsfbzp87lwk9snlby0hd4zvj7j894p5q3cw0wdx9ny1mcp3kdcj" {};
     libedit         = applePackage "libedit"           "osx-10.13.6"     "sha256-aAPn4DMvJ4z+D0DCoOmgTXEES19DmhWSODpMpvzqfrA=" {};
     libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
