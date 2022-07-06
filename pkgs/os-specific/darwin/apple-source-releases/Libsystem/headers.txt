@@ -35,10 +35,14 @@ ExtentManager.h
 MacTypes.h
 NSSystemDirectories.h
 TargetConditionals.h
+__wctype.h
+_ctype.h
 _errno.h
 _libkernel_init.h
 _locale.h
+_regex.h
 _simple.h
+_stdio.h
 _types.h
 _types/_intmax_t.h
 _types/_nl_item.h
@@ -490,6 +494,7 @@ device/device_port.h
 device/device_types.defs
 device/device_types.h
 dirent.h
+dirstat.h
 disktab.h
 dispatch/base.h
 dispatch/benchmark.h
@@ -1400,7 +1405,6 @@ pthread/sched.h
 pthread/spawn.h
 pthread_impl.h
 pthread_spis.h
-pthread_workqueue.h
 pwd.h
 ranlib.h
 readpassphrase.h
@@ -1430,6 +1434,7 @@ search.h
 secure/_common.h
 secure/_stdio.h
 secure/_string.h
+secure/_strings.h
 security/audit/audit_ioctl.h
 security/security/_label.h
 security/security/mac.h
