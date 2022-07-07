@@ -26,7 +26,8 @@ let
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
         libmalloc;
-      inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily;
+      inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
+        libdispatch;
       adv_cmds        = "172";
       configd         = "963.50.8";
       diskdev_cmds    = "593";
@@ -36,7 +37,6 @@ let
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
-      libdispatch     = "913.60.2";
       Libnotify       = "172";
       libplatform     = "161.50.1";
       libpthread      = "301.50.1";
@@ -57,6 +57,7 @@ let
       ICU              = "59180.0.1";
       IOFireWireAVC    = "423";
       IOFireWireFamily = "472";
+      libdispatch      = "913.60.2";
     };
     "osx-10.13.4" = {
       CommonCrypto       = "60118.50.1";
@@ -130,7 +131,6 @@ let
     "osx-10.10.5" = {
       adv_cmds      = "158";
       CF            = "1153.18";
-      libdispatch   = "442.1.4";
       Security      = "57031.40.6";
     };
     "osx-10.10" = {
@@ -317,7 +317,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
       };
     };
     libclosure      = applePackage "libclosure"        "osx-10.13.6"     "sha256-jOk1TuP+gfrU0eudZqu4D99oqtca9N8gWUMqLdv48nk=" {};
-    libdispatch     = applePackage "libdispatch"       "osx-10.10.5"     "0jsfbzp87lwk9snlby0hd4zvj7j894p5q3cw0wdx9ny1mcp3kdcj" {};
+    libdispatch     = applePackage "libdispatch"       "osx-10.13.6"     "sha256-l4zhkP3yTQZOZikdYBoX6XDj6b7KSNW91nTSJGvSv/0=" {};
     libedit         = applePackage "libedit"           "osx-10.13.6"     "sha256-aAPn4DMvJ4z+D0DCoOmgTXEES19DmhWSODpMpvzqfrA=" {};
     libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
     Libinfo         = applePackage "Libinfo"           "osx-10.13.6"     "sha256-BIEjnS/CY63Vyv44xlThT8CIZRE8jHNCmzAkJjepER4=" {};

@@ -7,7 +7,6 @@ appleDerivation' stdenvNoCC {
     mkdir -p $out/include/dispatch $out/include/os
 
     # Move these headers so CF can find <os/voucher_private.h>
-    mv private/voucher*.h  $out/include/os
     cp -r private/*.h  $out/include/dispatch
 
     cp -r dispatch/*.h $out/include/dispatch
@@ -48,7 +47,5 @@ appleDerivation' stdenvNoCC {
     dispatch/time.h
     os/object.h
     os/object_private.h
-    os/voucher_activity_private.h
-    os/voucher_private.h
   '';
 }
