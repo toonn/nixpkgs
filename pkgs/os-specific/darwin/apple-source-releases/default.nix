@@ -25,7 +25,7 @@ let
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
-        libmalloc;
+        libmalloc libpthread;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
       adv_cmds        = "172";
@@ -39,7 +39,6 @@ let
       libauto         = "187";
       Libnotify       = "172";
       libplatform     = "161.50.1";
-      libpthread      = "301.50.1";
       Librpcsvc       = "26";
       Libsystem       = "1252.50.4";
       libutil         = "51.20.1";
@@ -67,6 +66,7 @@ let
       Libc               = "1244.50.9";
       libiconv           = "51.50.1";
       libmalloc          = "140.50.6";
+      libpthread         = "301.50.1";
       IOFireWireSBP2     = "428";
       IONetworkingFamily = "124.50.3";
       IOStorageFamily    = "218.50.2";
@@ -98,7 +98,6 @@ let
       libplatform   = "126.50.8";
       libutil       = "47.30.1";
       dtrace        = "209.50.12";
-      libpthread    = "218.60.3";
     };
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
@@ -108,7 +107,6 @@ let
     "osx-10.11.6" = {
       dtrace        = "168";
       xnu           = "3248.60.10";
-      libpthread    = "138.10.4";
       Libnotify     = "150.40.1";
       Libsystem     = "1226.10.1";
       removefile    = "41";
@@ -325,7 +323,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libmalloc       = applePackage "libmalloc"         "osx-10.13.6"     "sha256-Ky3I3Ox+1no16d0tIz7jEfCl90221bQoqnK8qNHiBcc=" {};
     Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
     libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
-    libpthread      = applePackage "libpthread"        "osx-10.12.6"     "1j6541rcgjpas1fc77ip5krjgw4bvz6jq7bq7h9q7axb0jv2ns6c" {};
+    libpthread      = applePackage "libpthread"        "osx-10.13.6"     "sha256-Fk19cVEGaXp8Ghof9RLeBDMAEkIpgsQQa0dTMH07Cug=" {};
     libresolv       = applePackage "libresolv"         "osx-10.13.6"     "sha256-Mu5mRmmcG1oapTqgwzx7l7/Oh90nRX6/VmfDeNpJdz0=" {};
     Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
     libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
