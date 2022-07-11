@@ -10,6 +10,7 @@ let
       inherit (versions."Developer-Tools-9.0") developer_cmds;
       inherit (versions."osx-10.3") IOATABlockStorage;
       inherit (versions."osx-10.3.9") IOSCSIArchitectureModelFamily;
+      inherit (versions."osx-10.7.4") Libm;
       "IOUSBFamily-10.8.4" = versions."osx-10.8.4".IOUSBFamily;
       inherit (versions."osx-10.8.5") IOUSBFamily;
       inherit (versions."osx-10.9") basic_cmds libunwind;
@@ -319,7 +320,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libedit         = applePackage "libedit"           "osx-10.13.6"     "sha256-aAPn4DMvJ4z+D0DCoOmgTXEES19DmhWSODpMpvzqfrA=" {};
     libiconv        = applePackage "libiconv"          "osx-10.13.6"     "0ax3pgjcslik92kmz4wmag4l6d1jnmmlfbimkacpzf3lzxrab2xp" {};
     Libinfo         = applePackage "Libinfo"           "osx-10.13.6"     "sha256-BIEjnS/CY63Vyv44xlThT8CIZRE8jHNCmzAkJjepER4=" {};
-    Libm            = applePackage "Libm"              "osx-10.7.4"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
+    Libm            = applePackage "Libm"              "osx-10.13.6"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
     libmalloc       = applePackage "libmalloc"         "osx-10.13.6"     "sha256-Ky3I3Ox+1no16d0tIz7jEfCl90221bQoqnK8qNHiBcc=" {};
     Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
     libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
