@@ -63,13 +63,13 @@ let
       copyfile           = "146.50.5";
       eap8021x           = "264.50.5";
       hfs                = "407.50.6";
+      IOFireWireSBP2     = "428";
+      IONetworkingFamily = "124.50.3";
+      IOStorageFamily    = "218.50.2";
       Libc               = "1244.50.9";
       libiconv           = "51.50.1";
       libmalloc          = "140.50.6";
       libpthread         = "301.50.1";
-      IOFireWireSBP2     = "428";
-      IONetworkingFamily = "124.50.3";
-      IOStorageFamily    = "218.50.2";
     };
     "osx-10.13.2" = {
       hfs     = "407.30.1"; # Old but current version is missing hfs_mount.h
