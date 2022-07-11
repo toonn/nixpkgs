@@ -33,6 +33,13 @@ appleDerivation' stdenv {
     rmdir $out/usr
   '';
 
+  appleHeaders = ''
+    editline/readline.h
+    histedit.h
+    readline/history.h
+    readline/readline.h
+  '';
+
   meta = with lib; {
     maintainers = with maintainers; [ toonn ];
     platforms   = platforms.darwin;
