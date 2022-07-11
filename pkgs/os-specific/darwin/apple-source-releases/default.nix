@@ -22,7 +22,7 @@ let
         IOFireWireSerialBusProtocolTransport libclosure;
       inherit (versions."osx-10.13") bootstrap_cmds file_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
-        libedit libresolv objc4 ppp shell_cmds text_cmds;
+        libedit Libnotify libresolv objc4 ppp shell_cmds text_cmds;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
@@ -38,7 +38,6 @@ let
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
-      Libnotify       = "172";
       libplatform     = "161.50.1";
       Librpcsvc       = "26";
       Libsystem       = "1252.50.4";
@@ -85,6 +84,7 @@ let
       IODVDStorageFamily = "42";
       IOSerialFamily     = "93";
       libedit            = "50";
+      Libnotify          = "172";
       libresolv          = "65";
       objc4              = "723";
       ppp                = "847";
@@ -93,7 +93,6 @@ let
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
-      Libnotify     = "165.20.1";
       Libsystem     = "1238.60.2";
       removefile    = "45";
       libplatform   = "126.50.8";
@@ -108,7 +107,6 @@ let
     "osx-10.11.6" = {
       dtrace        = "168";
       xnu           = "3248.60.10";
-      Libnotify     = "150.40.1";
       Libsystem     = "1226.10.1";
       removefile    = "41";
       libplatform   = "125";
@@ -322,7 +320,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     Libinfo         = applePackage "Libinfo"           "osx-10.13.6"     "sha256-BIEjnS/CY63Vyv44xlThT8CIZRE8jHNCmzAkJjepER4=" {};
     Libm            = applePackage "Libm"              "osx-10.13.6"      "02sd82ig2jvvyyfschmb4gpz6psnizri8sh6i982v341x6y4ysl7" {};
     libmalloc       = applePackage "libmalloc"         "osx-10.13.6"     "sha256-Ky3I3Ox+1no16d0tIz7jEfCl90221bQoqnK8qNHiBcc=" {};
-    Libnotify       = applePackage "Libnotify"         "osx-10.12.6"     "0p5qhvalf6j1w6n8xwywhn6dvbpzv74q5wqrgs8rwfpf74wg6s9z" {};
+    Libnotify       = applePackage "Libnotify"         "osx-10.13.6"     "sha256-amGQG1y6qCpBWWmqb6mr6KdJytNdaWXiX6so42GGAHs=" {};
     libplatform     = applePackage "libplatform"       "osx-10.12.6"     "0rh1f5ybvwz8s0nwfar8s0fh7jbgwqcy903cv2x8m15iq1x599yn" {};
     libpthread      = applePackage "libpthread"        "osx-10.13.6"     "sha256-Fk19cVEGaXp8Ghof9RLeBDMAEkIpgsQQa0dTMH07Cug=" {};
     libresolv       = applePackage "libresolv"         "osx-10.13.6"     "sha256-Mu5mRmmcG1oapTqgwzx7l7/Oh90nRX6/VmfDeNpJdz0=" {};
