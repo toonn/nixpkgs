@@ -11,7 +11,7 @@ appleDerivation' stdenv {
     "/System/Library/Frameworks/Security.framework/Versions"
   ];
 
-  patches = [ ./0001-Use-modern-API_AVAILABLE-DEPRECATED.patch ];
+  patches = [ ./0001-Correct-__PHONE_NA-macros-to-__IPHONE_NA.patch ];
 
   installPhase = ''
     mkdir -p $out/Library/Frameworks/Security.framework
