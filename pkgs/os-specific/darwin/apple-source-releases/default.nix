@@ -17,7 +17,7 @@ let
       "Libc-10.9.2" = versions."osx-10.9.2".Libc;
       inherit (versions."osx-10.9.4") launchd;
       inherit (versions."osx-10.10") Csu;
-      inherit (versions."osx-10.11") architecture;
+      inherit (versions."osx-10.11") architecture Librpcsvc;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport libclosure;
       inherit (versions."osx-10.13") bootstrap_cmds file_cmds IOAudioFamily
@@ -38,7 +38,6 @@ let
       IOHIDFamily     = "1035.70.7";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
-      Librpcsvc       = "26";
       Libsystem       = "1252.50.4";
       libutil         = "51.20.1";
       mDNSResponder   = "878.70.2";
@@ -113,7 +112,6 @@ let
       IOKit         = "";
 
       libutil       = "43";
-      Librpcsvc     = "26";
       network_cmds  = "481.20.1";
       adv_cmds      = "163";
       system_cmds   = "550.6";
@@ -122,6 +120,7 @@ let
     };
     "osx-10.11" = {
       architecture = "268";
+      Librpcsvc    = "26";
     };
     "osx-10.10.5" = {
       adv_cmds      = "158";
@@ -333,7 +332,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
       applePackage "xnu"                               "osx-10.13.6"     "1k4hyh0fn7zaggsalk9sykznachkpyvglzg3vax1alrlyk5j3ikx" {}
     else macosPackages_11_0_1.xnu;
     hfs             = applePackage "hfs"               "osx-10.13.2"     "sha256-OXuwJt3FibFpqwJ+SKD1u9OiuRFNLt9AEZWrg/u72XY=" {}; # Old but current version does not contain the headers we need
-    Librpcsvc       = applePackage "Librpcsvc"         "osx-10.11.6"     "1zwfwcl9irxl1dlnf2b4v30vdybp0p0r6n6g1pd14zbdci1jcg2k" {};
+    Librpcsvc       = applePackage "Librpcsvc"         "osx-10.13.6"     "sha256-UzwmQ2RtfRLaDc9Yk8EFd/m2wdhkCWdpC7TnmCjjjv8=" {};
     adv_cmds        = applePackage "adv_cmds"          "osx-10.11.6"    "12gbv35i09aij9g90p6b3x2f3ramw43qcb2gjrg8lzkzmwvcyw9q" {};
     basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
     developer_cmds  = applePackage "developer_cmds"    "osx-10.13.6"     "sha256-mdbE708yWT35N6QtUEAMFwVCR+h1q4z7O/Dy3hmpCGA=" {};
