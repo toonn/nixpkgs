@@ -1,0 +1,33 @@
+From dd956387da128c50664bda2066ea09141b83ab3a Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Mon, 18 Jul 2022 16:24:55 +0200
+Subject: [PATCH 7/7] val_secalgo: EVP_MD_CTX_free shouldn't fail as opposed to
+ _cleanup
+
+---
+ unbound/validator/val_secalgo.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/unbound/validator/val_secalgo.c b/unbound/validator/val_secalgo.c
+index 0f9433c..1bbf69c 100644
+--- a/unbound/validator/val_secalgo.c
++++ b/unbound/validator/val_secalgo.c
+@@ -536,12 +536,9 @@ verify_canonrrset(sldns_buffer* buf, int algo, unsigned char* sigblock,
+ 	}
+ 
+ 	res = EVP_VerifyFinal(ctx, sigblock, sigblock_len, evp_key);
+-	if(EVP_MD_CTX_free(ctx) == 0) {
+-		verbose(VERB_QUERY, "verify: EVP_MD_CTX_cleanup failed");
+-		EVP_PKEY_free(evp_key);
+-		if(dofree) free(sigblock);
+-		return sec_status_unchecked;
+-	}
++        /* -- EVP_MD_CTX_free should never fail like _cleanup could. */
++	EVP_MD_CTX_free(ctx);
++        /* -- */
+ 	EVP_PKEY_free(evp_key);
+ 
+ 	if(dofree)
+-- 
+2.17.2 (Apple Git-113)
+

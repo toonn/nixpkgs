@@ -1,0 +1,71 @@
+From 9a8b0e6871f2bee5f54c3b8abbeb7fe02dcf352c Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Mon, 18 Jul 2022 14:34:25 +0200
+Subject: [PATCH 3/7] keyraw: Use setter for opaque structs
+
+---
+ unbound/ldns/keyraw.c | 41 +++++++++++++++++++++++++++++++----------
+ 1 file changed, 31 insertions(+), 10 deletions(-)
+
+diff --git a/unbound/ldns/keyraw.c b/unbound/ldns/keyraw.c
+index 1ff0774..34c68b1 100644
+--- a/unbound/ldns/keyraw.c
++++ b/unbound/ldns/keyraw.c
+@@ -216,12 +216,27 @@ sldns_key_buf2dsa_raw(unsigned char* key, size_t len)
+ 		BN_free(Y);
+ 		return NULL;
+ 	}
+-#ifndef S_SPLINT_S
+-	dsa->p = P;
+-	dsa->q = Q;
+-	dsa->g = G;
+-	dsa->pub_key = Y;
+-#endif /* splint */
++
++        /* -- Use setters for opaque DSA struct. Taken from NLnetLabs/unbound
++         * at commit d242bfb.
++         */
++        if (!DSA_set0_pqg(dsa, P, Q, G)) {
++		/* QPG not yet attached, need to free */
++		BN_free(Q);
++		BN_free(P);
++		BN_free(G);
++
++		DSA_free(dsa);
++		BN_free(Y);
++		return NULL;
++	}
++	if (!DSA_set0_key(dsa, Y, NULL)) {
++		/* QPG attached, cleaned up by DSA_fre() */
++		DSA_free(dsa);
++		BN_free(Y);
++		return NULL;
++	}
++        /* -- */
+ 
+ 	return dsa;
+ }
+@@ -274,10 +289,16 @@ sldns_key_buf2rsa_raw(unsigned char* key, size_t len)
+ 		BN_free(modulus);
+ 		return NULL;
+ 	}
+-#ifndef S_SPLINT_S
+-	rsa->n = modulus;
+-	rsa->e = exponent;
+-#endif /* splint */
++        /* -- Use setters for opaque RSA struct. Taken from NLnetLabs/unbound
++         * at commit d242bfb.
++         */
++        if (!RSA_set0_key(rsa, modulus, exponent, NULL)) {
++		BN_free(exponent);
++		BN_free(modulus);
++		RSA_free(rsa);
++		return NULL;
++	}
++        /* -- */
+ 
+ 	return rsa;
+ }
+-- 
+2.17.2 (Apple Git-113)
+

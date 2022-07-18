@@ -1,0 +1,59 @@
+From c8278f71f2c9d928eae3a71fa189044a68eaea0d Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Mon, 18 Jul 2022 16:00:15 +0200
+Subject: [PATCH 6/7] val_secalgo: Define ctx as a pointer
+
+---
+ unbound/validator/val_secalgo.c | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
+
+diff --git a/unbound/validator/val_secalgo.c b/unbound/validator/val_secalgo.c
+index 06c8f10..0f9433c 100644
+--- a/unbound/validator/val_secalgo.c
++++ b/unbound/validator/val_secalgo.c
+@@ -480,7 +480,7 @@ verify_canonrrset(sldns_buffer* buf, int algo, unsigned char* sigblock,
+ 	char** reason)
+ {
+ 	const EVP_MD *digest_type;
+-	EVP_MD_CTX ctx;
++	EVP_MD_CTX *ctx;
+ 	int res, dofree = 0;
+ 	EVP_PKEY *evp_key = NULL;
+ 	
+@@ -515,14 +515,19 @@ verify_canonrrset(sldns_buffer* buf, int algo, unsigned char* sigblock,
+ #endif /* USE_ECDSA */
+ 
+ 	/* do the signature cryptography work */
+-	EVP_MD_CTX_init(&ctx);
+-	if(EVP_VerifyInit(&ctx, digest_type) == 0) {
++        /* -- EVP_MD_CTX_init resets an initialized ctx and we need a newly
++         * -- allocated one. This is gleaned from evp.h in OpenSSL 1.1.1n,
++         * -- which is current in Nixpkgs as of writing.
++         */
++	ctx = EVP_MD_CTX_new();
++        /* -- */
++	if(EVP_VerifyInit(ctx, digest_type) == 0) {
+ 		verbose(VERB_QUERY, "verify: EVP_VerifyInit failed");
+ 		EVP_PKEY_free(evp_key);
+ 		if(dofree) free(sigblock);
+ 		return sec_status_unchecked;
+ 	}
+-	if(EVP_VerifyUpdate(&ctx, (unsigned char*)sldns_buffer_begin(buf), 
++	if(EVP_VerifyUpdate(ctx, (unsigned char*)sldns_buffer_begin(buf), 
+ 		(unsigned int)sldns_buffer_limit(buf)) == 0) {
+ 		verbose(VERB_QUERY, "verify: EVP_VerifyUpdate failed");
+ 		EVP_PKEY_free(evp_key);
+@@ -530,8 +535,8 @@ verify_canonrrset(sldns_buffer* buf, int algo, unsigned char* sigblock,
+ 		return sec_status_unchecked;
+ 	}
+ 
+-	res = EVP_VerifyFinal(&ctx, sigblock, sigblock_len, evp_key);
+-	if(EVP_MD_CTX_free(&ctx) == 0) {
++	res = EVP_VerifyFinal(ctx, sigblock, sigblock_len, evp_key);
++	if(EVP_MD_CTX_free(ctx) == 0) {
+ 		verbose(VERB_QUERY, "verify: EVP_MD_CTX_cleanup failed");
+ 		EVP_PKEY_free(evp_key);
+ 		if(dofree) free(sigblock);
+-- 
+2.17.2 (Apple Git-113)
+

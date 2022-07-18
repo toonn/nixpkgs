@@ -1,0 +1,26 @@
+From d23b6a1a85b1e3b8ad7a1daee44d51e4229d20a1 Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Mon, 18 Jul 2022 15:46:23 +0200
+Subject: [PATCH 5/7] val_secalgo: EVP_dss1 was dropped in 1.0 in favor of
+ EVP_sha1
+
+---
+ unbound/validator/val_secalgo.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/unbound/validator/val_secalgo.c b/unbound/validator/val_secalgo.c
+index 4c9d329..06c8f10 100644
+--- a/unbound/validator/val_secalgo.c
++++ b/unbound/validator/val_secalgo.c
+@@ -319,7 +319,7 @@ setup_key_digest(int algo, EVP_PKEY** evp_key, const EVP_MD** digest_type,
+ 					"EVP_PKEY_assign_DSA failed");
+ 				return 0;
+ 			}
+-			*digest_type = EVP_dss1();
++			*digest_type = EVP_sha1();
+ 
+ 			break;
+ 		case LDNS_RSASHA1:
+-- 
+2.17.2 (Apple Git-113)
+

@@ -1,0 +1,29 @@
+From d181218261c4da27f132227ff2a492f4bca44994 Mon Sep 17 00:00:00 2001
+From: toonn <toonn@toonn.io>
+Date: Mon, 18 Jul 2022 14:09:29 +0200
+Subject: [PATCH 2/7] val_secalgo: Use setter because DSA_SIG is now opaque
+
+---
+ unbound/validator/val_secalgo.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/unbound/validator/val_secalgo.c b/unbound/validator/val_secalgo.c
+index d89675f..584e082 100644
+--- a/unbound/validator/val_secalgo.c
++++ b/unbound/validator/val_secalgo.c
+@@ -225,8 +225,10 @@ setup_dsa_sig(unsigned char** sig, unsigned int* len)
+ 	dsasig = DSA_SIG_new();
+ 	if(!dsasig) return 0;
+ 
+-	dsasig->r = R;
+-	dsasig->s = S;
++        /* Taken from the upstream unbound codebase. At commit 309b1d3 */
++        /* -- Use setter because OpenSSL made DSA_SIG an opaque struct. */
++        if(!DSA_SIG_set0(dsasig, R, S)) return 0;
++        /* -- */
+ 	*sig = NULL;
+ 	newlen = i2d_DSA_SIG(dsasig, sig);
+ 	if(newlen < 0) {
+-- 
+2.17.2 (Apple Git-113)
+

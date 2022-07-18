@@ -26,7 +26,7 @@ let
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
-        libmalloc libplatform libpthread;
+        libmalloc libplatform libpthread network_cmds;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
       adv_cmds        = "172";
@@ -41,7 +41,6 @@ let
       Libsystem       = "1252.50.4";
       libutil         = "51.20.1";
       mDNSResponder   = "878.70.2";
-      network_cmds    = "543.50.4";
       PowerManagement = "703.71.1";
       removefile      = "45";
       Security        = "58286.70.7";
@@ -69,6 +68,7 @@ let
       libmalloc          = "140.50.6";
       libplatform        = "161.50.1";
       libpthread         = "301.50.1";
+      network_cmds       = "543.50.4";
     };
     "osx-10.13.2" = {
       hfs     = "407.30.1"; # Old but current version is missing hfs_mount.h
@@ -112,7 +112,6 @@ let
       IOKit         = "";
 
       libutil       = "43";
-      network_cmds  = "481.20.1";
       adv_cmds      = "163";
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
@@ -340,7 +339,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
       macosPackages_11_0_1 = macosPackages_11_0_1;
     };
     network_cmds    = if stdenv.isx86_64 then
-      applePackage "network_cmds"                      "osx-10.11.6"     "0lhi9wz84qr1r2ab3fb4nvmdg9gxn817n5ldg7zw9gnf3wwn42kw" {}
+      applePackage "network_cmds"                      "osx-10.13.6"     "sha256-HyAId1QNnlx++K403VugmfMLRW33uj3nSkhbZ+GHfzw=" {}
     else macosPackages_11_0_1.network_cmds;
     file_cmds       = applePackage "file_cmds"         "osx-10.13.6"     "sha256-Wy78Slobyt8UQNx5rFTfl6mRa94pJs+JFyroNPvkD6k=" {};
     shell_cmds      = applePackage "shell_cmds"        "osx-10.13.6"     "sha256-lx5lWvjfS34+m56sE3Y5ptJXlPc5JJhZkajGcRC+UHk=" {};
