@@ -23,6 +23,7 @@ let
       inherit (versions."osx-10.13") bootstrap_cmds file_cmds IOAudioFamily
         IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
         libedit Libnotify libresolv objc4 ppp shell_cmds text_cmds;
+      inherit (versions."osx-10.13.1") libutil;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
@@ -39,7 +40,6 @@ let
       IOKitUser       = "1445.71.1";
       libauto         = "187";
       Libsystem       = "1252.50.4";
-      libutil         = "51.20.1";
       mDNSResponder   = "878.70.2";
       PowerManagement = "703.71.1";
       removefile      = "45";
@@ -74,6 +74,9 @@ let
       hfs     = "407.30.1"; # Old but current version is missing hfs_mount.h
       Libinfo = "517.30.1";
     };
+    "osx-10.13.1" = {
+      libutil = "51.20.1";
+    };
     "osx-10.13" = {
       bootstrap_cmds     = "98";
       file_cmds          = "272";
@@ -94,7 +97,6 @@ let
       xnu           = "3789.70.16";
       Libsystem     = "1238.60.2";
       removefile    = "45";
-      libutil       = "47.30.1";
       dtrace        = "209.50.12";
     };
     "osx-10.12" = {
@@ -111,7 +113,6 @@ let
       # IOKit contains a set of packages with different versions, so we don't have a general version
       IOKit         = "";
 
-      libutil       = "43";
       adv_cmds      = "163";
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
@@ -321,7 +322,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libpthread      = applePackage "libpthread"        "osx-10.13.6"     "sha256-Fk19cVEGaXp8Ghof9RLeBDMAEkIpgsQQa0dTMH07Cug=" {};
     libresolv       = applePackage "libresolv"         "osx-10.13.6"     "sha256-Mu5mRmmcG1oapTqgwzx7l7/Oh90nRX6/VmfDeNpJdz0=" {};
     Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
-    libutil         = applePackage "libutil"           "osx-10.12.6"     "0lqdxaj82h8yjbjm856jjz9k2d96k0viimi881akfng08xk1246y" {};
+    libutil         = applePackage "libutil"           "osx-10.13.6"     "sha256-VhwMYOVlC7ZR9V4dRvf+L+pIlBHPCLGm58PvoH1npGg=" {};
     libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
     mDNSResponder   = applePackage "mDNSResponder"     "osx-10.13.6"     "sha256-zdAxccoF8W6ph7uh+LDEhH0wNSg+oPX6Ct519k7IPtU=" {};
     objc4           = applePackage "objc4"             "osx-10.13.6"     "1zj2wmbilx4b29kc26a06cifasl6la5vl210bz6wy21f38xx8miz" {};
@@ -355,7 +356,6 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
       headersOnly = true;
       Security    = null;
     };
-    libutilHeaders  = pkgs.darwin.libutil.override { headersOnly = true; };
     hfsHeaders      = pkgs.darwin.hfs.override { headersOnly = true; };
     libresolvHeaders= pkgs.darwin.libresolv.override { headersOnly = true; };
 

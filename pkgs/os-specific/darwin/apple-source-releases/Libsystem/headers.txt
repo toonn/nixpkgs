@@ -31,7 +31,6 @@ CommonCrypto/aes.h
 CommonCrypto/lionCompat.h
 ConditionalMacros.h
 CrashReporterClient.h
-ExtentManager.h
 MacTypes.h
 NSSystemDirectories.h
 TargetConditionals.h
@@ -743,7 +742,6 @@ libkern/os/overflow.h
 libkern/os/reason_private.h
 libkern/os/trace.h
 libproc.h
-libutil.h
 limits.h
 locale.h
 mach-o/arch.h
@@ -950,7 +948,6 @@ menu.h
 miscfs/devfs/devfs.h
 miscfs/specfs/specdev.h
 miscfs/union/union.h
-mntopts.h
 monetary.h
 monitor.h
 mpool.h
@@ -1701,8 +1698,6 @@ time.h
 timeconv.h
 ttyent.h
 tzfile.h
-tzlink.h
-tzlink_internal.h
 ucontext.h
 ulimit.h
 unctrl.h
@@ -1720,7 +1715,6 @@ vproc_internal.h
 vproc_priv.h
 wchar.h
 wctype.h
-wipefs.h
 wordexp.h
 xlocale.h
 xlocale/__wctype.h
