@@ -37,6 +37,8 @@ let
       dyld            = "551.4";
       IOGraphics      = "519.20";
       IOHIDFamily     = "1035.70.7";
+      # IOKit contains a set of packages with different versions, so we don't have a general version
+      IOKit           = "osx-10.13.6";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
       Libsystem       = "1252.50.4";
@@ -109,9 +111,6 @@ let
       xnu           = "3248.60.10";
       Libsystem     = "1226.10.1";
       removefile    = "41";
-
-      # IOKit contains a set of packages with different versions, so we don't have a general version
-      IOKit         = "";
 
       adv_cmds      = "163";
       system_cmds   = "550.6";
@@ -300,7 +299,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     dyld            = applePackage "dyld"              "osx-10.13.6"     "sha256-FfhrYvuRx1/N/t/uLvh1lYXUue+e0XV8ro9PE71Y5Rw=" {};
     eap8021x        = applePackage "eap8021x"          "osx-10.13.6"     "0iw0qdib59hihyx2275rwq507bq2a06gaj8db4a8z1rkaj1frskh" {};
     ICU             = applePackage "ICU"               "osx-10.13.6"     "02p9h2jq20g305nrz6n5530m1dk3vqv53lh6yyl1hgayzyjd3f07" {};
-    IOKit           = applePackage "IOKit"             "osx-10.11.6"     "0kcbrlyxcyirvg5p95hjd9k8a01k161zg0bsfgfhkb90kh2s8x00" { inherit IOKitSrcs; };
+    IOKit           = applePackage "IOKit"             "osx-10.13.6"     "No hash, metapackage" { inherit IOKitSrcs; };
     launchd         = applePackage "launchd"           "osx-10.13.6"     "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
     libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
     Libc            = applePackage "Libc"              "osx-10.13.6"     "sha256-SPG2oC5zJrqIVw8q22QiZtJcUDyILfZsCiTUxN/ZcZA=" {
