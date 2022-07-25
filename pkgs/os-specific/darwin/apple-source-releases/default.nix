@@ -20,9 +20,10 @@ let
       inherit (versions."osx-10.11") architecture Librpcsvc;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport libclosure;
-      inherit (versions."osx-10.13") bootstrap_cmds file_cmds IOAudioFamily
-        IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily IOSerialFamily
-        libedit Libnotify libresolv objc4 ppp shell_cmds text_cmds;
+      inherit (versions."osx-10.13") adv_cmds bootstrap_cmds file_cmds
+        IOAudioFamily IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily
+        IOSerialFamily libedit Libnotify libresolv objc4 ppp shell_cmds
+        text_cmds;
       inherit (versions."osx-10.13.1") libutil;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
@@ -30,7 +31,6 @@ let
         libmalloc libplatform libpthread network_cmds;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
-      adv_cmds        = "172";
       configd         = "963.50.8";
       diskdev_cmds    = "593";
       dtrace          = "262.50.12";
@@ -80,6 +80,7 @@ let
       libutil = "51.20.1";
     };
     "osx-10.13" = {
+      adv_cmds           = "172";
       bootstrap_cmds     = "98";
       file_cmds          = "272";
       IOAudioFamily      = "206.5";
@@ -111,8 +112,6 @@ let
       xnu           = "3248.60.10";
       Libsystem     = "1226.10.1";
       removefile    = "41";
-
-      adv_cmds      = "163";
       system_cmds   = "550.6";
       diskdev_cmds   = "593";
       top           = "108";
@@ -122,7 +121,6 @@ let
       Librpcsvc    = "26";
     };
     "osx-10.10.5" = {
-      adv_cmds      = "158";
       CF            = "1153.18";
       Security      = "57031.40.6";
     };
@@ -332,7 +330,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     else macosPackages_11_0_1.xnu;
     hfs             = applePackage "hfs"               "osx-10.13.2"     "sha256-OXuwJt3FibFpqwJ+SKD1u9OiuRFNLt9AEZWrg/u72XY=" {}; # Old but current version does not contain the headers we need
     Librpcsvc       = applePackage "Librpcsvc"         "osx-10.13.6"     "sha256-UzwmQ2RtfRLaDc9Yk8EFd/m2wdhkCWdpC7TnmCjjjv8=" {};
-    adv_cmds        = applePackage "adv_cmds"          "osx-10.11.6"    "12gbv35i09aij9g90p6b3x2f3ramw43qcb2gjrg8lzkzmwvcyw9q" {};
+    adv_cmds        = applePackage "adv_cmds"          "osx-10.13.6"     "sha256-aL5uJUHhPuoh3R2dz3wHDE/5+wxjM7NDzeBMotsOgIM=" {};
     basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
     developer_cmds  = applePackage "developer_cmds"    "osx-10.13.6"     "sha256-mdbE708yWT35N6QtUEAMFwVCR+h1q4z7O/Dy3hmpCGA=" {};
     diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.11.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {
