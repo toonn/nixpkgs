@@ -20,10 +20,10 @@ let
       inherit (versions."osx-10.11") architecture Librpcsvc;
       inherit (versions."osx-10.12") IOFWDVComponents
         IOFireWireSerialBusProtocolTransport libclosure;
-      inherit (versions."osx-10.13") adv_cmds bootstrap_cmds file_cmds
-        IOAudioFamily IOBDStorageFamily IOCDStorageFamily IODVDStorageFamily
-        IOSerialFamily libedit Libnotify libresolv objc4 ppp shell_cmds
-        text_cmds;
+      inherit (versions."osx-10.13") adv_cmds bootstrap_cmds diskdev_cmds
+        file_cmds IOAudioFamily IOBDStorageFamily IOCDStorageFamily
+        IODVDStorageFamily IOSerialFamily libedit Libnotify libresolv objc4 ppp
+        shell_cmds text_cmds;
       inherit (versions."osx-10.13.1") libutil;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
@@ -32,7 +32,6 @@ let
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
       configd         = "963.50.8";
-      diskdev_cmds    = "593";
       dtrace          = "262.50.12";
       dyld            = "551.4";
       IOGraphics      = "519.20";
@@ -82,6 +81,7 @@ let
     "osx-10.13" = {
       adv_cmds           = "172";
       bootstrap_cmds     = "98";
+      diskdev_cmds       = "593";
       file_cmds          = "272";
       IOAudioFamily      = "206.5";
       IOBDStorageFamily  = "19";
@@ -113,7 +113,6 @@ let
       Libsystem     = "1226.10.1";
       removefile    = "41";
       system_cmds   = "550.6";
-      diskdev_cmds   = "593";
       top           = "108";
     };
     "osx-10.11" = {
@@ -333,7 +332,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     adv_cmds        = applePackage "adv_cmds"          "osx-10.13.6"     "sha256-aL5uJUHhPuoh3R2dz3wHDE/5+wxjM7NDzeBMotsOgIM=" {};
     basic_cmds      = applePackage "basic_cmds"        "osx-10.13.6"     "0hvab4b1v5q2x134hdkal0rmz5gsdqyki1vb0dbw4py1bqf0yaw9" {};
     developer_cmds  = applePackage "developer_cmds"    "osx-10.13.6"     "sha256-mdbE708yWT35N6QtUEAMFwVCR+h1q4z7O/Dy3hmpCGA=" {};
-    diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.11.6"     "1ssdyiaq5m1zfy96yy38yyknp682ki6bvabdqd5z18fa0rv3m2ar" {
+    diskdev_cmds    = applePackage "diskdev_cmds"      "osx-10.13.6"     "sha256-WYk6dgbKofBLw22pvUycAplrp/doeG+Sdz/UglX0Tes=" {
       macosPackages_11_0_1 = macosPackages_11_0_1;
     };
     network_cmds    = if stdenv.isx86_64 then
