@@ -1,5 +1,6 @@
 { stdenv, appleDerivation, lib
-, libutil, Librpcsvc, apple_sdk, pam, CF, openbsm }:
+, apple_sdk, CF, IOKit, Librpcsvc, libutil, openbsm, pam, xnu
+}:
 
 appleDerivation {
   # xcbuild fails with:
@@ -7,8 +8,12 @@ appleDerivation {
   # see issue facebook/xcbuild#188
   # buildInputs = [ xcbuild ];
 
-  buildInputs = [ libutil Librpcsvc apple_sdk.frameworks.OpenDirectory pam CF
-                  apple_sdk.frameworks.IOKit openbsm ];
+  buildInputs = [ CF Librpcsvc libutil openbsm pam xnu IOKit
+                ] ++ ( with apple_sdk.frameworks;
+                       [ OpenDirectory ]
+                ) ++ ( with apple_sdk.libs;
+                       [ compression ]
+                     );
   # NIX_CFLAGS_COMPILE = lib.optionalString hostPlatform.isi686 "-D__i386__"
   #                    + lib.optionalString hostPlatform.isx86_64 "-D__x86_64__"
   #                    + lib.optionalString hostPlatform.isAarch32 "-D__arm__";
@@ -31,15 +36,29 @@ appleDerivation {
                        ] ++ lib.optional (!stdenv.isLinux) " -D__FreeBSD__ ";
 
   patchPhase = ''
+    substituteInPlace kpgo.tproj/kpgo.c \
+      --replace "sys/pgo.h" "bsd/sys/pgo.h"
     substituteInPlace login.tproj/login.c \
       --replace bsm/audit_session.h bsm/audit.h
     substituteInPlace login.tproj/login_audit.c \
       --replace bsm/audit_session.h bsm/audit.h
+    substituteInPlace memory_pressure.tproj/memory_pressure.c \
+      --replace sys/kern_memorystatus.h bsd/sys/kern_memorystatus.h
+    substituteInPlace nvram.tproj/nvram.c \
+      --replace IOKit/IOKitKeysPrivate.h iokit/IOKit/IOKitKeysPrivate.h
+    substituteInPlace stackshot.tproj/stackshot.c \
+      --replace kern/debug.h osfmk/kern/debug.h \
+      --replace sys/stackshot.h bsd/sys/stackshot.h
+    substituteInPlace taskpolicy.tproj/taskpolicy.c \
+      --replace sys/spawn_internal.h bsd/sys/spawn_internal.h
+    sed -i 's/#include <stdlib.h>/#define PRIVATE 1\n#include <bsd\/sys\/resource.h>\n#undef PRIVATE\n\0/' \
+      taskpolicy.tproj/taskpolicy.c
   '' + lib.optionalString stdenv.isAarch64 ''
     substituteInPlace sysctl.tproj/sysctl.c \
       --replace "GPROF_STATE" "0"
     substituteInPlace login.tproj/login.c \
       --replace "defined(__arm__)" "defined(__arm__) || defined(__arm64__)"
+    
   '';
 
   buildPhase = ''
@@ -49,10 +68,10 @@ appleDerivation {
 
       CFLAGS=""
       case $name in
-           arch) CFLAGS="-framework CoreFoundation";;
            atrun) CFLAGS="-Iat.tproj";;
            chkpasswd)
              CFLAGS="-framework OpenDirectory -framework CoreFoundation -lpam";;
+           dmesg) CFLAGS="-I${xnu}/include/bsd -I${xnu}/include/osfmk";;
            getconf)
                for f in getconf.tproj/*.gperf; do
                    cfile=''${f%.gperf}.c
@@ -61,30 +80,39 @@ appleDerivation {
            ;;
            iostat) CFLAGS="-framework IOKit -framework CoreFoundation";;
            login) CFLAGS="-lbsm -lpam";;
+           ltop) CFLAGS="-I${xnu}/include/bsd -I${xnu}/include/osfmk -I${xnu}/include/san";;
            nvram) CFLAGS="-framework CoreFoundation -framework IOKit";;
+           proc_uuid_policy) CFLAGS="-I${xnu}/include/bsd -I${xnu}/include/osfmk -I${xnu}/include/san";;
            sadc) CFLAGS="-framework IOKit -framework CoreFoundation";;
            sar) CFLAGS="-Isadc.tproj";;
+           taskpolicy) CFLAGS="-I${xnu.privateHeaders} -I${xnu}/include/osfmk -I${xnu}/include/san";;
+           vm_purgeable_stat) CFLAGS="-I${xnu}/include/bsd -I${xnu}/include/osfmk -I${xnu}/include/san";;
+      esac
+
+      case $name in
+           # These are all broken currently.
+           arch | \
+           chpass | \
+           fs_usage | \
+           gcore | \
+           latency | \
+           lskq | \
+           lsmp | \
+           passwd | \
+           reboot | \
+           sc_usage | \
+           shutdown | \
+           trace | \
+           zprint)
+             echo "Skipping $name"
+             continue;;
       esac
 
       echo "Building $name"
 
       case $name in
-
-           # These are all broken currently.
-           arch) continue;;
-           chpass) continue;;
-           dirhelper) continue;;
-           dynamic_pager) continue;;
-           fs_usage) continue;;
-           latency) continue;;
-           pagesize) continue;;
-           passwd) continue;;
-           reboot) continue;;
-           sc_usage) continue;;
-           shutdown) continue;;
-           trace) continue;;
-
-           *) cc $dir/*.c -I''${dir} $CFLAGS -o $name ;;
+        pagesize) install $dir/pagesize.sh pagesize;;
+        *) cc $dir/*.c -I''${dir} $CFLAGS -o $name;;
       esac
     done
   '';
