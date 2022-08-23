@@ -198,6 +198,17 @@ let
   };
 in rec {
   libs = {
+    compression = stdenv.mkDerivation {
+      name   = "apple-framework-missing-compression";
+      dontUnpack = true;
+
+      installPhase = ''
+        mkdir -p $out/include $out/lib
+        cp "${lib.getDev sdk}/include/compression.h" $out/include
+        cp "${darwin-stubs}/usr/lib/libcompression.tbd" $out/lib
+      '';
+    };
+
     xpc = stdenv.mkDerivation {
       name   = "apple-lib-xpc";
       dontUnpack = true;
