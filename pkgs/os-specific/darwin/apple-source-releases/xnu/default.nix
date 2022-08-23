@@ -12,6 +12,8 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
 
   nativeBuildInputs = [ bootstrap_cmds bison flex gnum4 unifdef perl python3 ];
 
+  outputs = [ "out" "privateHeaders" ];
+
   patches = lib.optional stdenv.isx86_64 [
     ./python3.patch
     ./0001-Implement-missing-availability-platform.patch
@@ -151,6 +153,10 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
     # so let's not make it visible from here...
     mkdir $out/Library/PrivateFrameworks
     mv $out/Library/Frameworks/IOKit.framework $out/Library/PrivateFrameworks
+
+    # Private header needed by system_cmds
+    mkdir $privateHeaders
+    mv libsyscall/wrappers/spawn/spawn_private.h $privateHeaders
   '';
 
   appleHeaders = builtins.readFile (./. + "/headers-${arch}.txt");
