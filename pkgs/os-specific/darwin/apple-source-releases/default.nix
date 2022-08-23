@@ -28,7 +28,7 @@ let
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
-        libmalloc libplatform libpthread network_cmds;
+        libmalloc libplatform libpthread network_cmds system_cmds;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
       configd         = "963.50.8";
@@ -46,7 +46,6 @@ let
       removefile      = "45";
       Security        = "58286.70.7";
       syslog          = "356.70.1";
-      system_cmds     = "790.50.6";
       top             = "111.20.1";
       xnu             = "4570.71.2";
     };
@@ -70,6 +69,7 @@ let
       libplatform        = "161.50.1";
       libpthread         = "301.50.1";
       network_cmds       = "543.50.4";
+      system_cmds        = "790.50.6";
     };
     "osx-10.13.2" = {
       hfs     = "407.30.1"; # Old but current version is missing hfs_mount.h
@@ -112,7 +112,6 @@ let
       xnu           = "3248.60.10";
       Libsystem     = "1226.10.1";
       removefile    = "41";
-      system_cmds   = "550.6";
       top           = "108";
     };
     "osx-10.11" = {
@@ -341,7 +340,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     file_cmds       = applePackage "file_cmds"         "osx-10.13.6"     "sha256-Wy78Slobyt8UQNx5rFTfl6mRa94pJs+JFyroNPvkD6k=" {};
     shell_cmds      = applePackage "shell_cmds"        "osx-10.13.6"     "sha256-lx5lWvjfS34+m56sE3Y5ptJXlPc5JJhZkajGcRC+UHk=" {};
     syslog          = applePackage "syslog"            "osx-10.13.6"     "sha256-EwFTtTDMtiTtiR6Aht0igbMcu5SioiC56i8JRljYyZ0=" {};
-    system_cmds     = applePackage "system_cmds"       "osx-10.11.6"     "1h46j2c5v02pkv5d9fyv6cpgyg0lczvwicrx6r9s210cl03l77jl" {};
+    system_cmds     = applePackage "system_cmds"       "osx-10.13.6"     "sha256-FLl2fhbD8I6yp8RBgnMpX3SpzGR/ICYr85O68ddwzSk=" {};
     text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
     top             = applePackage "top"               "osx-10.11.6"     "0i9120rfwapgwdvjbfg0ya143i29s1m8zbddsxh39pdc59xnsg5l" {};
     PowerManagement = applePackage "PowerManagement"   "osx-10.13.6"     "sha256-6WBIKuwBYVg6oFwx+AiZXujfh7FVXsCVM+Fa5CvWCWA=" {};
