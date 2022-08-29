@@ -24,7 +24,7 @@ let
         file_cmds IOAudioFamily IOBDStorageFamily IOCDStorageFamily
         IODVDStorageFamily IOSerialFamily libedit Libnotify libresolv objc4 ppp
         shell_cmds text_cmds;
-      inherit (versions."osx-10.13.1") libutil;
+      inherit (versions."osx-10.13.1") libutil top;
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
@@ -46,7 +46,6 @@ let
       removefile      = "45";
       Security        = "58286.70.7";
       syslog          = "356.70.1";
-      top             = "111.20.1";
       xnu             = "4570.71.2";
     };
     "osx-10.13.5" = {
@@ -77,6 +76,7 @@ let
     };
     "osx-10.13.1" = {
       libutil = "51.20.1";
+      top     = "111.20.1";
     };
     "osx-10.13" = {
       adv_cmds           = "172";
@@ -112,7 +112,6 @@ let
       xnu           = "3248.60.10";
       Libsystem     = "1226.10.1";
       removefile    = "41";
-      top           = "108";
     };
     "osx-10.11" = {
       architecture = "268";
@@ -342,7 +341,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     syslog          = applePackage "syslog"            "osx-10.13.6"     "sha256-EwFTtTDMtiTtiR6Aht0igbMcu5SioiC56i8JRljYyZ0=" {};
     system_cmds     = applePackage "system_cmds"       "osx-10.13.6"     "sha256-FLl2fhbD8I6yp8RBgnMpX3SpzGR/ICYr85O68ddwzSk=" {};
     text_cmds       = applePackage "text_cmds"         "osx-10.13.6"     "1f93m7dd0ghqb2hwh905mjhzblyfr7dwffw98xhgmv1mfdnigxg0" {};
-    top             = applePackage "top"               "osx-10.11.6"     "0i9120rfwapgwdvjbfg0ya143i29s1m8zbddsxh39pdc59xnsg5l" {};
+    top             = applePackage "top"               "osx-10.13.6"     "sha256-0k7qxSbdKVluy4YjfBUorj/vY6GiMIf3zqtjuW6n3Rs=" {};
     PowerManagement = applePackage "PowerManagement"   "osx-10.13.6"     "sha256-6WBIKuwBYVg6oFwx+AiZXujfh7FVXsCVM+Fa5CvWCWA=" {};
 
     # `configdHeaders` can’t use an override because `pkgs.darwin.configd` on aarch64-darwin will
