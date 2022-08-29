@@ -28,7 +28,7 @@ let
       inherit (versions."osx-10.13.2") Libinfo;
       inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
-        libmalloc libplatform libpthread network_cmds system_cmds;
+        libmalloc libplatform libpthread Libsystem network_cmds system_cmds;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
       configd         = "963.50.8";
@@ -40,7 +40,6 @@ let
       IOKit           = "osx-10.13.6";
       IOKitUser       = "1445.71.1";
       libauto         = "187";
-      Libsystem       = "1252.50.4";
       mDNSResponder   = "878.70.2";
       PowerManagement = "703.71.1";
       Security        = "58286.70.7";
@@ -66,6 +65,7 @@ let
       libmalloc          = "140.50.6";
       libplatform        = "161.50.1";
       libpthread         = "301.50.1";
+      Libsystem          = "1252.50.4";
       network_cmds       = "543.50.4";
       system_cmds        = "790.50.6";
     };
@@ -97,7 +97,6 @@ let
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
-      Libsystem     = "1238.60.2";
       dtrace        = "209.50.12";
     };
     "osx-10.12" = {
@@ -109,7 +108,6 @@ let
     "osx-10.11.6" = {
       dtrace        = "168";
       xnu           = "3248.60.10";
-      Libsystem     = "1226.10.1";
     };
     "osx-10.11" = {
       architecture = "268";
@@ -124,7 +122,6 @@ let
     };
     "osx-10.9.5" = {
       libauto            = "185.5";
-      Libsystem          = "1197.1.1";
       Security           = "55471.14.18";
       security_dotmac_tp = "55107.1";
     };
@@ -313,7 +310,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     libplatform     = applePackage "libplatform"       "osx-10.13.6"     "sha256-x5IWwXM7E35wQz5ATTVxG+Kn1A9/tXmgBnWtnpubzfg=" {};
     libpthread      = applePackage "libpthread"        "osx-10.13.6"     "sha256-Fk19cVEGaXp8Ghof9RLeBDMAEkIpgsQQa0dTMH07Cug=" {};
     libresolv       = applePackage "libresolv"         "osx-10.13.6"     "sha256-Mu5mRmmcG1oapTqgwzx7l7/Oh90nRX6/VmfDeNpJdz0=" {};
-    Libsystem       = applePackage "Libsystem"         "osx-10.12.6"     "1082ircc1ggaq3wha218vmfa75jqdaqidsy1bmrc4ckfkbr3bwx2" {};
+    Libsystem       = applePackage "Libsystem"         "osx-10.13.6"     "sha256-2s1bjdYsyup4LDqD2ATWpTGoRuszIR8HRAZAQC7AzX4=" {};
     libutil         = applePackage "libutil"           "osx-10.13.6"     "sha256-VhwMYOVlC7ZR9V4dRvf+L+pIlBHPCLGm58PvoH1npGg=" {};
     libunwind       = applePackage "libunwind"         "osx-10.13.6"     "0miffaa41cv0lzf8az5k1j1ng8jvqvxcr4qrlkf3xyj479arbk1b" {};
     mDNSResponder   = applePackage "mDNSResponder"     "osx-10.13.6"     "sha256-zdAxccoF8W6ph7uh+LDEhH0wNSg+oPX6Ct519k7IPtU=" {};
