@@ -19,7 +19,7 @@ let
       inherit (versions."osx-10.10") Csu;
       inherit (versions."osx-10.11") architecture Librpcsvc;
       inherit (versions."osx-10.12") IOFWDVComponents
-        IOFireWireSerialBusProtocolTransport libclosure;
+        IOFireWireSerialBusProtocolTransport libclosure removefile;
       inherit (versions."osx-10.13") adv_cmds bootstrap_cmds diskdev_cmds
         file_cmds IOAudioFamily IOBDStorageFamily IOCDStorageFamily
         IODVDStorageFamily IOSerialFamily libedit Libnotify libresolv objc4 ppp
@@ -43,7 +43,6 @@ let
       Libsystem       = "1252.50.4";
       mDNSResponder   = "878.70.2";
       PowerManagement = "703.71.1";
-      removefile      = "45";
       Security        = "58286.70.7";
       syslog          = "356.70.1";
       xnu             = "4570.71.2";
@@ -99,19 +98,18 @@ let
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
       Libsystem     = "1238.60.2";
-      removefile    = "45";
       dtrace        = "209.50.12";
     };
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
       IOFireWireSerialBusProtocolTransport = "252";
       libclosure                           = "67";
+      removefile                           = "45";
     };
     "osx-10.11.6" = {
       dtrace        = "168";
       xnu           = "3248.60.10";
       Libsystem     = "1226.10.1";
-      removefile    = "41";
     };
     "osx-10.11" = {
       architecture = "268";
@@ -321,7 +319,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     mDNSResponder   = applePackage "mDNSResponder"     "osx-10.13.6"     "sha256-zdAxccoF8W6ph7uh+LDEhH0wNSg+oPX6Ct519k7IPtU=" {};
     objc4           = applePackage "objc4"             "osx-10.13.6"     "1zj2wmbilx4b29kc26a06cifasl6la5vl210bz6wy21f38xx8miz" {};
     ppp             = applePackage "ppp"               "osx-10.13.6"     "1vgiq099hdqi61zhjk43snmjp4hd58fa79xbr3m3s4x8an3fr1ih" {};
-    removefile      = applePackage "removefile"        "osx-10.12.6"     "0jzjxbmxgjzhssqd50z7kq9dlwrv5fsdshh57c0f8mdwcs19bsyx" {};
+    removefile      = applePackage "removefile"        "osx-10.13.6"     "sha256-3euVgma8VeQAOwVC3bQrO3PaEp7ng9Kw1vDL1+vq8ks=" {};
     xnu             = if stdenv.isx86_64 then
       applePackage "xnu"                               "osx-10.13.6"     "1k4hyh0fn7zaggsalk9sykznachkpyvglzg3vax1alrlyk5j3ikx" {}
     else macosPackages_11_0_1.xnu;
