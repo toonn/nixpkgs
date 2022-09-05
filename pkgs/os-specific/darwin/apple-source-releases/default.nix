@@ -19,7 +19,7 @@ let
       inherit (versions."osx-10.10") Csu;
       inherit (versions."osx-10.11") architecture Librpcsvc;
       inherit (versions."osx-10.12") IOFWDVComponents
-        IOFireWireSerialBusProtocolTransport libclosure removefile;
+        IOFireWireSerialBusProtocolTransport libauto libclosure removefile;
       inherit (versions."osx-10.13") adv_cmds bootstrap_cmds diskdev_cmds
         file_cmds IOAudioFamily IOBDStorageFamily IOCDStorageFamily
         IODVDStorageFamily IOSerialFamily libedit Libnotify libresolv objc4 ppp
@@ -38,7 +38,6 @@ let
       # IOKit contains a set of packages with different versions, so we don't have a general version
       IOKit           = "osx-10.13.6";
       IOKitUser       = "1445.71.1";
-      libauto         = "187";
       mDNSResponder   = "878.70.2";
       PowerManagement = "703.71.1";
       Security        = "58286.70.7";
@@ -101,6 +100,7 @@ let
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
       IOFireWireSerialBusProtocolTransport = "252";
+      libauto                              = "187";
       libclosure                           = "67";
       removefile                           = "45";
     };
@@ -289,7 +289,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     ICU             = applePackage "ICU"               "osx-10.13.6"     "02p9h2jq20g305nrz6n5530m1dk3vqv53lh6yyl1hgayzyjd3f07" {};
     IOKit           = applePackage "IOKit"             "osx-10.13.6"     "No hash, metapackage" { inherit IOKitSrcs; };
     launchd         = applePackage "launchd"           "osx-10.13.6"     "0w30hvwqq8j5n90s3qyp0fccxflvrmmjnicjri4i1vd2g196jdgj" {};
-    libauto         = applePackage "libauto"           "osx-10.9.5"      "17z27yq5d7zfkwr49r7f0vn9pxvj95884sd2k6lq6rfaz9gxqhy3" {};
+    libauto         = applePackage "libauto"           "osx-10.13.6"     "sha256-DmRzzv3c18AqzhGeX0Q87NDh9RT7UkHPTFU/6hTNDew=" {};
     Libc            = applePackage "Libc"              "osx-10.13.6"     "sha256-SPG2oC5zJrqIVw8q22QiZtJcUDyILfZsCiTUxN/ZcZA=" {
       # Most recent version to include the `NSSystemDirectories.h` header
       Libc-10_9_2 = fetchzip {
