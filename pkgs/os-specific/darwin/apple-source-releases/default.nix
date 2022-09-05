@@ -26,12 +26,12 @@ let
         shell_cmds text_cmds;
       inherit (versions."osx-10.13.1") libutil top;
       inherit (versions."osx-10.13.2") Libinfo;
-      inherit (versions."osx-10.13.4") CommonCrypto copyfile dtrace eap8021x hfs
-        IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
-        libmalloc libplatform libpthread Libsystem network_cmds system_cmds;
+      inherit (versions."osx-10.13.4") CommonCrypto configd copyfile dtrace
+        eap8021x hfs IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc
+        libiconv libmalloc libplatform libpthread Libsystem network_cmds
+        system_cmds;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
-      configd         = "963.50.8";
       dyld            = "551.4";
       IOGraphics      = "519.20";
       IOHIDFamily     = "1035.70.7";
@@ -52,6 +52,7 @@ let
     };
     "osx-10.13.4" = {
       CommonCrypto       = "60118.50.1";
+      configd            = "963.50.8";
       copyfile           = "146.50.5";
       dtrace             = "262.50.12";
       eap8021x           = "264.50.5";
