@@ -95,9 +95,6 @@ let
       shell_cmds         = "203";
       text_cmds          = "99";
     };
-    "osx-10.12.6" = {
-      xnu           = "3789.70.16";
-    };
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
       IOFireWireSerialBusProtocolTransport = "252";
@@ -105,24 +102,12 @@ let
       libclosure                           = "67";
       removefile                           = "45";
     };
-    "osx-10.11.6" = {
-      xnu           = "3248.60.10";
-    };
     "osx-10.11" = {
       architecture = "268";
       Librpcsvc    = "26";
     };
-    "osx-10.10.5" = {
-      CF            = "1153.18";
-      Security      = "57031.40.6";
-    };
     "osx-10.10" = {
       Csu = "85";
-    };
-    "osx-10.9.5" = {
-      libauto            = "185.5";
-      Security           = "55471.14.18";
-      security_dotmac_tp = "55107.1";
     };
     "osx-10.9.4" = {
       launchd = "842.92.1";
