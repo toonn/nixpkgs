@@ -1,9 +1,9 @@
 { appleDerivation, xcbuildHook, CoreSymbolication
-, xnu, bison, flex, darling, stdenv, fixDarwinDylibNames }:
+, xnu, bison, flex, darling, IOKit, stdenv, fixDarwinDylibNames }:
 
 appleDerivation {
   nativeBuildInputs = [ xcbuildHook flex bison fixDarwinDylibNames ];
-  buildInputs = [ CoreSymbolication darling xnu ];
+  buildInputs = [ CoreSymbolication darling IOKit xnu ];
   # -fcommon: workaround build failure on -fno-common toolchains:
   #   duplicate symbol '_kCSRegionMachHeaderName' in: libproc.o dt_module_apple.o
   NIX_CFLAGS_COMPILE = "-DCTF_OLD_VERSIONS -DPRIVATE -DYYDEBUG=1 -I${xnu}/Library/Frameworks/System.framework/Headers -Wno-error=implicit-function-declaration -fcommon";

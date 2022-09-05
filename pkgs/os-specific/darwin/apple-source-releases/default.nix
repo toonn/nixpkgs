@@ -26,13 +26,12 @@ let
         shell_cmds text_cmds;
       inherit (versions."osx-10.13.1") libutil top;
       inherit (versions."osx-10.13.2") Libinfo;
-      inherit (versions."osx-10.13.4") CommonCrypto copyfile eap8021x hfs
+      inherit (versions."osx-10.13.4") CommonCrypto copyfile dtrace eap8021x hfs
         IOFireWireSBP2 IONetworkingFamily IOStorageFamily Libc libiconv
         libmalloc libplatform libpthread Libsystem network_cmds system_cmds;
       inherit (versions."osx-10.13.5") ICU IOFireWireAVC IOFireWireFamily
         libdispatch;
       configd         = "963.50.8";
-      dtrace          = "262.50.12";
       dyld            = "551.4";
       IOGraphics      = "519.20";
       IOHIDFamily     = "1035.70.7";
@@ -55,6 +54,7 @@ let
     "osx-10.13.4" = {
       CommonCrypto       = "60118.50.1";
       copyfile           = "146.50.5";
+      dtrace             = "262.50.12";
       eap8021x           = "264.50.5";
       hfs                = "407.50.6";
       IOFireWireSBP2     = "428";
@@ -97,7 +97,6 @@ let
     };
     "osx-10.12.6" = {
       xnu           = "3789.70.16";
-      dtrace        = "209.50.12";
     };
     "osx-10.12" = {
       IOFWDVComponents                     = "208";
@@ -106,7 +105,6 @@ let
       removefile                           = "45";
     };
     "osx-10.11.6" = {
-      dtrace        = "168";
       xnu           = "3248.60.10";
     };
     "osx-10.11" = {
@@ -285,7 +283,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     };
     copyfile        = applePackage "copyfile"          "osx-10.13.6"     "sha256-AALgvHYEWs8uJjBG2Se8umVznY2MU2BigSjXe0WesAs=" {};
     Csu             = applePackage "Csu"               "osx-10.13.6"     "0yh5mslyx28xzpv8qww14infkylvc1ssi57imhi471fs91sisagj" {};
-    dtrace          = applePackage "dtrace"            "osx-10.12.6"     "0hpd6348av463yqf70n3xkygwmf1i5zza8kps4zys52sviqz3a0l" {};
+    dtrace          = applePackage "dtrace"            "osx-10.13.6"     "sha256-HTSzAODUnkJx11VSz4OGOuOMW6JzRIvLFjDMZA37POo=" {};
     dyld            = applePackage "dyld"              "osx-10.13.6"     "sha256-FfhrYvuRx1/N/t/uLvh1lYXUue+e0XV8ro9PE71Y5Rw=" {};
     eap8021x        = applePackage "eap8021x"          "osx-10.13.6"     "0iw0qdib59hihyx2275rwq507bq2a06gaj8db4a8z1rkaj1frskh" {};
     ICU             = applePackage "ICU"               "osx-10.13.6"     "02p9h2jq20g305nrz6n5530m1dk3vqv53lh6yyl1hgayzyjd3f07" {};
