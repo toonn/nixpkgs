@@ -144,7 +144,7 @@ let
     "osx-10.7.4" = {
       Libm = "2026";
     };
-    "osx-10.6.2" = {
+    "osx-10.6" = {
       CarbonHeaders = "18.1";
     };
     "osx-10.5.8" = {
@@ -277,7 +277,7 @@ developerToolsPackages_11_3_1 // macosPackages_11_0_1 // {
     architecture    = applePackage "architecture"      "osx-10.13.6"     "1pbpjcd7is69hn8y29i98ci0byik826if8gnp824ha92h90w0fq3" {};
     bootstrap_cmds  = applePackage "bootstrap_cmds"    "osx-10.13.6"     "14xp48h9fij749mn9jdxb41swk24hk9r2f6v3qyqs6s7z2jwlyxi" {};
     bsdmake         = applePackage "bsdmake"           "dev-tools-3.1.3" "11a9kkhz5bfgi1i8kpdkis78lhc6b5vxmhd598fcdgra1jw4iac2" {};
-    CarbonHeaders   = applePackage "CarbonHeaders"     "osx-10.6.2"      "1zam29847cxr6y9rnl76zqmkbac53nx0szmqm9w5p469a6wzjqar" {};
+    CarbonHeaders   = applePackage "CarbonHeaders"     "osx-10.6"        "1zam29847cxr6y9rnl76zqmkbac53nx0szmqm9w5p469a6wzjqar" {}; # CarbonHeaders was only ever shipped with macOS 10.6.*
     CommonCrypto    = applePackage "CommonCrypto"      "osx-10.13.6"     "sha256-1wqgLyk6Pm3Vu8VJ+Z5Cfh7LB5nvhGRMgbPAgR8AUWc=" {};
     configd         = applePackage "configd"           "osx-10.8.5"      "1gxakahk8gallf16xmhxhprdxkh3prrmzxnmxfvj0slr0939mmr2" {
       Security      = applePackage "Security/boot.nix" "osx-10.9.5"      "1nv0dczf67dhk17hscx52izgdcyacgyy12ag0jh6nl5hmfzsn8yy" {};
