@@ -23,16 +23,16 @@
   else
     let
       fetch = { file, sha256, executable ? true }: import <nix/fetchurl.nix> {
-        url = "http://tarballs.nixos.org/stdenv-darwin/x86_64/c253216595572930316f2be737dc288a1da22558/${file}";
+        url = "https://github.com/toonn/nixpkgs/releases/download/bootstrap-tools-only-copy/${file}";
         inherit (localSystem) system;
         inherit sha256 executable;
       }; in
     {
-      sh = fetch { file = "sh"; sha256 = "sha256-igMAVEfumFv/LUNTGfNi2nSehgTNIP4Sg+f3L7u6SMA="; };
-      bzip2 = fetch { file = "bzip2"; sha256 = "sha256-K3rhkJZipudT1Jgh+l41Y/fNsMkrPtiAsNRDha/lpZI="; };
-      mkdir = fetch { file = "mkdir"; sha256 = "sha256-VddFELwLDJGNADKB1fWwWPBtIAlEUgJv2hXRmC4NEeM="; };
-      cpio = fetch { file = "cpio"; sha256 = "sha256-SWkwvLaFyV44kLKL2nx720SvcL4ej/p2V/bX3uqAGO0="; };
-      tarball = fetch { file = "bootstrap-tools.cpio.bz2"; sha256 = "sha256-kRC/bhCmlD4L7KAvJQgcukk7AinkMz4IwmG1rqlh5tA="; executable = false; };
+      sh = fetch { file = "sh"; sha256 = "sha256-apbS8c9oGE+ZU48edc78Jps+svZQz94CTiMtvY7wT8k="; };
+      bzip2 = fetch { file = "bzip2"; sha256 = "sha256-gQaMF2YuTh4e1wRsQAkNXH+bZFZSMOIWzmqjdWgOcPo="; };
+      mkdir = fetch { file = "mkdir"; sha256 = "sha256-NflGhoVW58zW1YnFPuydr9kk0f9O19w5SCqrsslfvl8="; };
+      cpio = fetch { file = "cpio"; sha256 = "sha256-2DBl7Rqwra/8tOoGlwUcA+wSnEq4/7xFESVbVlT/Xzw="; };
+      tarball = fetch { file = "bootstrap-tools.cpio.bz2"; sha256 = "sha256-A0IsLSzuNwbzKuJ7ODpRQ67vCWK/xW1vWeD5Pjxd+Qk="; executable = false; };
     }
 }:
 
