@@ -2477,6 +2477,8 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
+  gb-studio = callPackage ../development/tools/gb-studio { };
+
   genann = callPackage ../development/libraries/genann { };
 
   genpass = callPackage ../tools/security/genpass {
