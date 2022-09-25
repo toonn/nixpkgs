@@ -1,6 +1,6 @@
 { stdenv, lib
 , fetchFromGitHub , fetchYarnDeps , fixup_yarn_lock
-, electron , nodejs , yarn , zip
+, nodejs , yarn , zip
 }:
 
 stdenv.mkDerivation rec {
@@ -71,9 +71,11 @@ stdenv.mkDerivation rec {
       --non-interactive
 
     # The `electron` module needs to be able to use the electron executable
-    echo ${lib.getBin electron}/bin/electron >node_modules/electron/path.txt
+    echo ../.bin/electron >node_modules/electron/path.txt
 
-    # patchShebangs node_modules/
+    patchShebangs node_modules/
+
+    export PATH="$PWD/node_modules/.bin''${PATH:+:$PATH}";
 
     ###
     # Build into `./out/`, suppress formatting.
