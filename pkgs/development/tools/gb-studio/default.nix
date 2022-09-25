@@ -81,7 +81,7 @@ stdenv.mkDerivation rec {
     yarn --offline make:cli | cat
 
   '' + lib.optionalString stdenv.isDarwin ''
-    yarn --offline make:mac | cat
+    yarn --offline package | cat
   '' + ''
 
     runHook postBuild
