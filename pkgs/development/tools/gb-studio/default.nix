@@ -1,6 +1,23 @@
 { stdenv, lib
-, fetchFromGitHub , fetchYarnDeps , fixup_yarn_lock
-, nodejs , yarn , zip
+, fetchFromGitHub , fetchurl, fetchYarnDeps , fixup_yarn_lock
+, nodejs , yarn
+, autoPatchelfHook
+, alsa-lib
+, libuv
+, ffmpeg
+, gobject-introspection
+, glib
+, xorg
+, nss
+, nspr
+, dbus
+, gdk-pixbuf
+, gtk3
+, pango
+, atk
+, cairo
+, expat
+, cups
 }:
 
 stdenv.mkDerivation rec {
@@ -11,7 +28,7 @@ stdenv.mkDerivation rec {
     owner = "chrismaltby";
     repo = "gb-studio";
     rev = "v${version}";
-    sha256 = "sha256-QqGTUXVlV42Xyiq4wEqgyIWWlcM1JY/L+9k5YcOfomA=";
+    hash = "sha256-QqGTUXVlV42Xyiq4wEqgyIWWlcM1JY/L+9k5YcOfomA=";
   };
 
   yarnDeps = fetchYarnDeps {
@@ -19,11 +36,40 @@ stdenv.mkDerivation rec {
     hash = "sha256-5IGYDcp6+tcU2rIGFLr9bIMSRsxFFm9FqFPzjvZWMV0=";
   };
 
-  nativeBuildInputs = [ yarn zip ];
-  buildInputs = [ nodejs ];
+  electron-zip = fetchurl {
+    url = "https://github.com/electron/electron/releases/download/v8.5.5/electron-v8.5.5-linux-x64.zip";
+    hash = "sha256:08hz3xl13462fl1dndvyphv3fk1p3q06yjjdck5773d1nhm48n40";
+  };
+
+  electronCache = "../electron_cache";
+
+  nativeBuildInputs = [ autoPatchelfHook yarn ];
+  buildInputs = [ nodejs ]
+    ++ lib.optionals stdenv.isLinux [
+      alsa-lib
+      libuv
+      atk
+      cairo
+      cups
+      expat
+      gtk3
+      nspr
+      nss
+      pango
+      xorg.libX11
+      xorg.libXcomposite
+      xorg.libXdamage
+      xorg.libXScrnSaver
+      xorg.libXtst
+    ];
 
   patchPhase = ''
     runHook prePatch
+
+    # We need to set up the cacheRoot to provide Electron
+    substituteInPlace forge.config.js --replace \
+      'name: "GB Studio",' \
+      'name: "GB Studio", download : { cacheRoot: "${electronCache}" },'
 
     substituteInPlace webpack.cli.config.js --replace \
       'mode: "development"' 'mode: "production"'
@@ -31,7 +77,12 @@ stdenv.mkDerivation rec {
     runHook postPatch
   '';
 
-  buildPhase = ''
+  buildPhase = let
+    electronZip = lib.last (lib.splitString "/" electron-zip.url);
+    electronZipURL = builtins.replaceStrings [":" "/"]
+                                             [""  ""]
+                                             electron-zip.url;
+  in ''
     runHook preBuild
 
     ###
@@ -58,6 +109,11 @@ stdenv.mkDerivation rec {
     # Set up the environment to use Yarn
     ###
 
+    # Electron Forge wants a specific version of Electron, we provide it in the
+    # cache, otherwise it tries to reach out to the network.
+    mkdir -p ${electronCache}/${electronZipURL}
+    cp ${electron-zip} ${electronCache}/${electronZipURL}/${electronZip}
+
     # Yarn writes temporary files to $HOME. Copied from mkYarnModules.
     export HOME=$NIX_BUILD_TOP/yarn_home
 
@@ -71,7 +127,9 @@ stdenv.mkDerivation rec {
       --non-interactive
 
     # The `electron` module needs to be able to use the electron executable
-    echo ../.bin/electron >node_modules/electron/path.txt
+    # echo ''${electron}/bin/electron >node_modules/electron/path.txt
+    # echo ../.bin/electron >node_modules/electron/path.txt # Not really an
+    #                                                       # electron binary?
 
     patchShebangs node_modules/
 
@@ -80,11 +138,9 @@ stdenv.mkDerivation rec {
     ###
     # Build into `./out/`, suppress formatting.
     ###
-    yarn --offline make:cli | cat
 
-  '' + lib.optionalString stdenv.isDarwin ''
+    #yarn --offline make:cli | cat
     yarn --offline package | cat
-  '' + ''
 
     runHook postBuild
   '';
@@ -99,14 +155,21 @@ stdenv.mkDerivation rec {
     #   --non-interactive --production \
     #   --modules-folder=$out/libexec/node_modules
     # Install run-time dependencies alongside the CLI
-    cp --parents -pnPR node_modules/{electron,vm2} $out/libexec
-    cp --parents -pnPR out/cli/gb-studio-cli.js $out/libexec
-    chmod +x $out/libexec/out/cli/gb-studio-cli.js
-    ln -s ../libexec/out/cli/gb-studio-cli.js $out/bin/gb-studio-cli
+    #cp --parents -pnPR node_modules/{electron,vm2} $out/libexec
+    #cp --parents -pnPR out/cli/gb-studio-cli.js $out/libexec
+    #chmod +x $out/libexec/out/cli/gb-studio-cli.js
+    #ln -s ../libexec/out/cli/gb-studio-cli.js $out/bin/gb-studio-cli
 
   '' + lib.optionalString stdenv.isDarwin ''
     mkdir -p $out/Applications
     mv out/'GB Studio-darwin-x64/GB Studio.app' $out/Applications
+  '' + lib.optionalString stdenv.isLinux ''
+    # mkdir -p $out/libexec/gui/
+    mv out/'GB Studio-linux-x64' $out/libexec/gui/
+    ln -s ../libexec/gui/gb-studio $out/bin/gb-studio
+    ls $out/libexec/gui
+    # addAutoPatchelfSearchPath $out/libexec/gui
+    # autoPatchelf $out/libexec/gui
   '' + ''
 
     runHook postInstall
@@ -136,6 +199,6 @@ stdenv.mkDerivation rec {
     downloadPage = "https://chrismaltby.itch.io/gb-studio";
     license = licenses.mit;
     maintainers = with maintainers; [ toonn ];
-    platforms = [ "x86_64-darwin" ];
+    platforms = [ "x86_64-darwin" "x86_64-linux" ];
   };
 }
