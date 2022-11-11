@@ -45,7 +45,321 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
       --replace 'MIG=`' "# " \
       --replace 'MIGCC=`' "# " \
       --replace '$SRC/$mig' '-I$DSTROOT/include $SRC/$mig' \
-      --replace '$SRC/servers/netname.defs' '-I$DSTROOT/include $SRC/servers/netname.defs'
+      --replace '$SRC/servers/netname.defs' '-I$DSTROOT/include $SRC/servers/netname.defs' \
+      --replace '$BUILT_PRODUCTS_DIR/mig_hdr' '$BUILT_PRODUCTS_DIR'
+
+    # Going forward we need to patch the Availability headers for all the
+    # missing versions that are no longer included but can be used throughout
+    # the source releases. On a macOS system or in the SDK the Availability
+    # headers do include all the necessary versions.
+    underscored() {
+      printf '%s' "''${1//./_}"
+    }
+
+    compareVersions() {
+      # Versions are expected to not have more than three components separated
+      # by dots, i.e. X[.Y[.Z]], each of which comprises no more than three
+      # digits and elided components are considered equal to zero.
+      lhs="0$1.0.0"
+      rhs="0$2.0.0"
+      l_major=$(printf '%03s' "''${lhs%%.*}")
+      l_minor_patch=''${lhs#*.}
+      l_minor=$(printf '%03s' "''${l_minor_patch%%.*}")
+      l_rest=''${l_minor_patch#*.}
+      l_patch=$(printf '%03s' "''${l_rest%%.*}")
+      r_major=$(printf '%03s' "''${rhs%%.*}")
+      r_minor_patch=''${rhs#*.}
+      r_minor=$(printf '%03s' "''${r_minor_patch%%.*}")
+      r_rest=''${r_minor_patch#*.}
+      r_patch=$(printf '%03s' "''${r_rest%%.*}")
+      if [ "$l_major" '<' "$r_major" ]; then
+        printf 'LT'
+      elif [ "$l_major" '>' "$r_major" ]; then
+        printf 'GT'
+      elif [ "$l_minor" '<' "$r_minor" ]; then
+        printf 'LT'
+      elif [ "$l_minor" '>' "$r_minor" ]; then
+        printf 'GT'
+      elif [ "$l_patch" '<' "$r_patch" ]; then
+        printf 'LT'
+      elif [ "$l_patch" '>' "$r_patch" ]; then
+        printf 'GT'
+      else
+        printf 'EQ'
+      fi
+    }
+
+    ALL_VERSIONS='10.0 10.1 10.2 10.3 10.4 10.5 10.6 10.7 10.8 10.9 10.10 10.10.2 10.10.3 10.11 10.11.2 10.11.3 10.11.4 10.12 10.12.1 10.12.2 10.12.4 10.13 10.13.1 10.13.2 10.13.4 10.14 10.14.1'
+    versions() {
+      start=$1
+      end=$2
+      format_string='%s'
+      for v in $ALL_VERSIONS; do
+        if [ $(compareVersions "$start" "$v") = GT ]; then
+          continue
+        elif [ $(compareVersions "$v" "$end") = GT ]; then
+          break
+        else
+          printf "$format_string" "$v"
+          format_string=' %s'
+        fi
+      done
+    }
+
+    version_defines() {
+      version_prefix=$1
+      infix_space=$2
+      for missing_version in $(versions 10.13 10.14.1); do
+        major=''${missing_version%%.*}
+        minor_patch=''${missing_version#*.}
+        minor=''${minor_patch%%.*}
+        minor_patch_default="$minor_patch.0"
+        patch_default=''${minor_patch_default#*.}
+        patch=''${patch_default%%.*}
+        decimal=$(printf '%02s%02s%02s' "$major" "$minor" "$patch")
+        printf "#define %s_%-7s%s%s\n" \
+          "$version_prefix" "$(underscored "$missing_version")" \
+          "$infix_space" "$decimal"
+      done
+    }
+
+    MAC_NA_COMMENT='/* __MAC_NA is not defined to a value but is uses as a token by macros to indicate that the API is unavailable */'
+    VERSION_DEFINES_A_H=$(
+      version_defines '__MAC' '       '
+      printf '%s\n' "$MAC_NA_COMMENT"
+    )
+    substituteInPlace EXTERNAL_HEADERS/Availability.h \
+      --replace "$MAC_NA_COMMENT" "$VERSION_DEFINES_A_H"
+
+    MAC_10_12_4='#define MAC_OS_X_VERSION_10_12_4    101204';
+    VERSION_DEFINES_AM_H=$(
+      printf '%s\n' "$MAC_10_12_4"
+      version_defines 'MAC_OS_X_VERSION' '    '
+    )
+
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityMacros.h \
+      --replace "$MAC_10_12_4" "$VERSION_DEFINES_AM_H" \
+      --replace \
+        ' * if max OS not specified, assume larger of (10.12.4, min)' \
+        ' * if max OS not specified, assume larger of (10.14.1, min)' \
+      --replace \
+        '    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_12_4' \
+        '    #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_14_1' \
+      --replace \
+        '        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_12_4' \
+        '        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_14_1'
+
+    # As of macOS 10.13 the __MAC_NA macro was introduced to symbolize a lack
+    # of introduction version for example, instead of providing an old version
+    # as a harmless default.
+    sed -i -e \
+      '/__OSX_AVAILABLE_/s/4_0/NA/g' \
+      EXTERNAL_HEADERS/AvailabilityMacros.h
+
+    availability_block() {
+      version=$1
+      deprecation_version=$2
+      if [ -z "$deprecation_version" ]; then
+        availability_var="AVAILABLE_MAC_OS_X_VERSION_$(underscored "$version")_AND_LATER"
+        availability_macro="__OSX_AVAILABLE_STARTING(__MAC_$(underscored "$version"), __IPHONE_NA)"
+      else
+        if [ -z "$3" ] && [ "$version" = "$deprecation_version" ]; then
+          availability_var="DEPRECATED_IN_MAC_OS_X_VERSION_$(underscored "$version")_AND_LATER"
+          availability_macro="__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_$(underscored "$deprecation_version"), __IPHONE_NA, __IPHONE_NA)"
+        else
+          if [ -n "$3" ]; then
+            availability_var="AVAILABLE_MAC_OS_X_VERSION_$(underscored "$version")_AND_LATER_BUT_DEPRECATED"
+          else
+            availability_var="AVAILABLE_MAC_OS_X_VERSION_$(underscored "$version")_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_$(underscored "$deprecation_version")"
+          fi
+          availability_macro="__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_$(underscored "$version"), __MAC_$(underscored "$deprecation_version"), __IPHONE_NA, __IPHONE_NA)"
+        fi
+        availability_var_def="AVAILABLE_MAC_OS_X_VERSION_$(underscored "$version")_AND_LATER"
+      fi
+      printf '/*\n'
+      printf ' * %s\n' "$availability_var"
+      printf ' *\n'
+      if [ -z "$3" ] && [ "$version" = "$deprecation_version" ]; then
+        printf ' * Used on types deprecated in Mac OS X %s\n' "$version"
+      else
+        printf ' * Used on declarations introduced in Mac OS X %s' "$version"
+        if [ -z "$deprecation_version" ]; then
+          printf ' \n'
+        elif [ "$version" = "$deprecation_version" ]; then
+          printf ',\n * and deprecated in Mac OS X %s\n' "$deprecation_version"
+        else
+          printf ',\n * but later deprecated in Mac OS X %s\n' \
+            "$deprecation_version"
+        fi
+      fi
+      printf ' */\n'
+      printf '#if __AVAILABILITY_MACROS_USES_AVAILABILITY\n'
+      printf '    #define %s    %s\n' "$availability_var" "$availability_macro"
+      if [ -z "$deprecation_version" ]; then
+        printf '#elif MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_%s\n' \
+          "$(underscored "$version")"
+        printf '    #define %s     UNAVAILABLE_ATTRIBUTE\n' "$availability_var"
+        printf '#elif MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_%s\n' \
+          "$(underscored "$version")"
+        printf '    #define %s     WEAK_IMPORT_ATTRIBUTE\n' "$availability_var"
+      else
+        printf '#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_%s\n' \
+          "$(underscored "$deprecation_version")"
+        printf '    #define %s    DEPRECATED_ATTRIBUTE\n' "$availability_var"
+      fi
+      printf '#else\n'
+      if [ -z "$deprecation_version" ] \
+         || {
+              [ -z "$3" ] && [ "$version" = "$deprecation_version" ]
+            }; then
+        printf '    #define %s\n' "$availability_var"
+      else
+        printf '    #define %s    %s\n' \
+          "$availability_var" "$availability_var_def"
+      fi
+      printf '#endif\n\n'
+    }
+
+    MACRO_END='#endif  /* __AVAILABILITYMACROS__ */'
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityMacros.h \
+      --replace "$MACRO_END" \
+        "$( for d_v in $(versions 10.13 10.14.1); do
+              availability_block "$d_v"
+              availability_block "$d_v" "$d_v" '10.0'
+              for a_v in $(versions "$d_v" 10.14.1); do
+                if [ "$a_v" = "$d_v" ]; then
+                  continue
+                fi
+                availability_block "$a_v" "$d_v"
+              done
+            done
+            printf '%s' "$MACRO_END"
+        )"
+
+    internal_av_dep_block() {
+      version=$1
+      deprecation_version=$2
+      printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s    __attribute__((availability(macosx,introduced=%s,deprecated=%s)))\n' \
+        "$(underscored "$version")" "$(underscored "$deprecation_version")" \
+        "$version" "$deprecation_version"
+      printf '            #if __has_feature(attribute_availability_with_message)\n'
+      printf '                #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s_MSG(_msg)    __attribute__((availability(macosx,introduced=%s,deprecated=%s,message=_msg)))\n' \
+        "$(underscored "$version")" "$(underscored "$deprecation_version")" \
+        "$version" "$deprecation_version"
+      printf '            #else\n'
+      printf '                #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s_MSG(_msg)    __attribute__((availability(macosx,introduced=%s,deprecated=%s)))\n' \
+        "$(underscored "$version")" "$(underscored "$deprecation_version")" \
+        "$version" "$deprecation_version"
+      printf '            #endif\n'
+    }
+
+    internal_av_NA_block() {
+      version=$1
+      printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_NA_MSG(_msg)    __attribute__((availability(macosx,introduced=%s)))\n' \
+        "$(underscored "$version")" "$version"
+      printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_NA    __attribute__((availability(macosx,introduced=%s)))\n' \
+        "$(underscored "$version")" "$version"
+    }
+
+    av_int_X_dep_10_12_4() {
+      version=$1
+      printf '                #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_10_12_4_MSG(_msg)    __attribute__((availability(macosx,introduced=%s,deprecated=10.12.4)))' \
+        "$(underscored "$version")" "$version"
+    }
+
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityInternal.h \
+      --replace '        #define __MAC_OS_X_VERSION_MAX_ALLOWED __MAC_10_12_4' \
+                '        #define __MAC_OS_X_VERSION_MAX_ALLOWED __MAC_10_14_1'
+
+    for a_v in $(versions 10.0 10.12.4); do
+      version_anchor=$(av_int_X_dep_10_12_4 "$a_v")
+      substituteInPlace EXTERNAL_HEADERS/AvailabilityInternal.h \
+        --replace "$version_anchor" \
+          "$( printf '%s\n' "$version_anchor"
+              printf '            #endif\n'
+              for d_v in $(versions 10.13 10.14.1); do
+                internal_av_dep_block "$a_v" "$d_v"
+              done | sed '$d'
+          )"
+    done
+
+    AV_INT_10_12_4_DEP_NA='            #define __AVAILABILITY_INTERNAL__MAC_10_12_4_DEP__MAC_NA                __attribute__((availability(macosx,introduced=10.12.4)))'
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityInternal.h \
+      --replace "$AV_INT_10_12_4_DEP_NA" \
+        "$( printf '%s\n' "$AV_INT_10_12_4_DEP_NA"
+            for a_v in $(versions 10.13 10.14.1); do
+              printf '            #define __AVAILABILITY_INTERNAL__MAC_%s    __attribute__((availability(macosx,introduced=%s)))\n' \
+                "$(underscored "$a_v")" "$a_v"
+              for d_v in $(versions "$a_v" 10.14.1); do
+                internal_av_dep_block "$a_v" "$d_v"
+              done
+              internal_av_NA_block "$a_v"
+            done
+        )"
+
+    max_allowed_block() {
+      v=$(underscored "$1")
+      printf '        #if __MAC_OS_X_VERSION_MAX_ALLOWED < __MAC_%s\n' "$v"
+      printf '            #define __AVAILABILITY_INTERNAL__MAC_%s        __AVAILABILITY_INTERNAL_UNAVAILABLE\n' "$v"
+      printf '        #elif __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_%s\n' "$v"
+      printf '            #define __AVAILABILITY_INTERNAL__MAC_%s        __AVAILABILITY_INTERNAL_WEAK_IMPORT\n' "$v"
+      printf '        #else\n'
+      printf '            #define __AVAILABILITY_INTERNAL__MAC_%s        __AVAILABILITY_INTERNAL_REGULAR\n' "$v"
+      printf '        #endif\n'
+    }
+
+    REVERSE_VERSIONS='10.14.1 10.14 10.13.4 10.13.2 10.13.1 10.13'
+    MAX_ALLOWED_10_12_4='        #if __MAC_OS_X_VERSION_MAX_ALLOWED < __MAC_10_12_4'
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityInternal.h \
+      --replace "$MAX_ALLOWED_10_12_4" \
+        "$( for max_allowed_version in $REVERSE_VERSIONS; do
+              max_allowed_block "$max_allowed_version"
+            done
+            printf '%s\n' "$MAX_ALLOWED_10_12_4"
+        )"
+
+    conditional_int_av_dep_block() {
+      d_v=$1
+      printf '        #if __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_%s\n' \
+        "$(underscored "$d_v")"
+      for a_v in $(versions 10.0 "$d_v"); do
+        printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s              __AVAILABILITY_INTERNAL_DEPRECATED\n' \
+          "$(underscored "$a_v")" "$(underscored "$d_v")"
+        printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s_MSG(_msg)    __AVAILABILITY_INTERNAL_DEPRECATED_MSG(_msg)\n' \
+          "$(underscored "$a_v")" "$(underscored "$d_v")"
+      done
+      printf '        #else\n'
+      for a_v in $(versions 10.0 "$d_v"); do
+        printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s              __AVAILABILITY_INTERNAL__MAC_%s\n' \
+          "$(underscored "$a_v")" "$(underscored "$d_v")" \
+          "$(underscored "$a_v")"
+        printf '            #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_%s_MSG(_msg)    __AVAILABILITY_INTERNAL__MAC_%s\n' \
+          "$(underscored "$a_v")" "$(underscored "$d_v")" \
+          "$(underscored "$a_v")"
+      done
+      printf '        #endif\n'
+    }
+
+    AV_INT_10_0_DEP_NA='        #define __AVAILABILITY_INTERNAL__MAC_10_0_DEP__MAC_NA             __AVAILABILITY_INTERNAL__MAC_10_0'
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityInternal.h \
+      --replace "$AV_INT_10_0_DEP_NA" \
+        "$( for v in $(versions 10.13 10.14.1); do
+              conditional_int_av_dep_block "$v"
+            done
+            printf '%s\n' "$AV_INT_10_0_DEP_NA"
+        )"
+
+    AV_INT_NA_DEP_NA='        #define __AVAILABILITY_INTERNAL__MAC_NA_DEP__MAC_NA               __AVAILABILITY_INTERNAL_UNAVAILABLE'
+    substituteInPlace EXTERNAL_HEADERS/AvailabilityInternal.h \
+      --replace "$AV_INT_NA_DEP_NA" \
+        "$( for v in $(versions 10.13 10.14.1); do
+              printf '        #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_NA             __AVAILABILITY_INTERNAL__MAC_%s\n' \
+                "$(underscored "$v")" "$(underscored "$v")"
+              printf '        #define __AVAILABILITY_INTERNAL__MAC_%s_DEP__MAC_NA_MSG(_msg)   __AVAILABILITY_INTERNAL__MAC_%s\n' \
+                "$(underscored "$v")" "$(underscored "$v")"
+            done
+            printf '%s\n' "$AV_INT_NA_DEP_NA"
+        )"
 
     patchShebangs .
   '' + lib.optionalString stdenv.isAarch64 ''
