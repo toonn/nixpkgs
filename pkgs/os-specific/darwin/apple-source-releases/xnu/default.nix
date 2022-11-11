@@ -17,7 +17,6 @@ appleDerivation' (if headersOnly then stdenvNoCC else stdenv) (
   patches = lib.optional stdenv.isx86_64 [
     ./python3.patch
     ./0001-Implement-missing-availability-platform.patch
-    ./0002-Intercept-old-availability-macros-to-use-modern-appr.patch
   ];
 
   postPatch = ''
