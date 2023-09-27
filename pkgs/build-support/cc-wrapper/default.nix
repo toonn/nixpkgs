@@ -459,19 +459,32 @@ stdenv.mkDerivation {
     # already knows how to find its own libstdc++, and adding
     # additional -isystem flags will confuse gfortran (see
     # https://github.com/NixOS/nixpkgs/pull/209870#issuecomment-1500550903)
-    + optionalString (libcxx == null && isClang && (useGccForLibs && gccForLibs.langCC or false)) ''
-      for dir in ${gccForLibs}${lib.optionalString (hostPlatform != targetPlatform) "/${targetPlatform.config}"}/include/c++/*; do
-        echo "-isystem $dir" >> $out/nix-support/libcxx-cxxflags
-      done
-      for dir in ${gccForLibs}${lib.optionalString (hostPlatform != targetPlatform) "/${targetPlatform.config}"}/include/c++/*/${targetPlatform.config}; do
-        echo "-isystem $dir" >> $out/nix-support/libcxx-cxxflags
-      done
-    ''
-    + optionalString (libcxx.isLLVM or false) ''
-      echo "-isystem ${lib.getDev libcxx}/include/c++/v1" >> $out/nix-support/libcxx-cxxflags
-      echo "-stdlib=libc++" >> $out/nix-support/libcxx-ldflags
-      echo "-l${libcxx.cxxabi.libName}" >> $out/nix-support/libcxx-ldflags
-    ''
+    + ( let isystemOption = if isClang
+                          then if versionAtLeast ccVersion "10.0"
+                               then "-stdlib++-isystem"
+                               else "-cxx-isystem"
+                          else "-isystem";
+         in ( optionalString (libcxx == null && isClang && (useGccForLibs && gccForLibs.langCC or false))
+                ( let targetSub = optionalString
+                                    (hostPlatform != targetPlatform)
+                                    "/${targetPlatform.config}";
+                     gccStdlib = "${gccForLibs}${targetSub}/include/c++/*";
+                   in ''
+                     for dir in ${gccStdlib}; do
+                       echo "${isystemOption} $dir" >> $out/nix-support/libcxx-cxxflags
+                     done
+                     for dir in ${gccStdlib}${targetSub}; do
+                       echo "${isystemOption} $dir" >> $out/nix-support/libcxx-cxxflags
+                     done
+                  ''
+                )
+            + optionalString (libcxx.isLLVM or false) ''
+                echo "${isystemOption} ${lib.getDev libcxx}/include/c++/v1" >> $out/nix-support/libcxx-cxxflags
+                echo "-stdlib=libc++" >> $out/nix-support/libcxx-ldflags
+                echo "-l${libcxx.cxxabi.libName}" >> $out/nix-support/libcxx-ldflags
+              ''
+         )
+      )
 
     ##
     ## Initial CFLAGS
