@@ -459,32 +459,63 @@ stdenv.mkDerivation {
     # already knows how to find its own libstdc++, and adding
     # additional -isystem flags will confuse gfortran (see
     # https://github.com/NixOS/nixpkgs/pull/209870#issuecomment-1500550903)
-    + optionalString (libcxx == null && isClang && (useGccForLibs && gccForLibs.langCC or false))
-    let targetSub = optionalString
-                      (hostPlatform != targetPlatform)
-                      "/${targetPlatform.config}";
-       gccStdlib = "${gccForLibs}${targetSub}/include/c++/*";
-     in ''
-       cat << CXXFLAGS > $out/nix-support/libcxx-cxxflags
-       $( for dir in ${gccStdlib}; do
-            echo "-isystem $dir"
-          done
-          for dir in ${gccStdlib}${targetSub}; do
-            echo "-isystem $dir"
-          done
-       )
-       CXXFLAGS
-    ''
-    + optionalString (libcxx.isLLVM or false) ''
-      cat << CXXFLAGS > $out/nix-support/libcxx-cxxflags
-      -isystem ${lib.getDev libcxx}/include/c++/v1
-      CXXFLAGS
+    + ( let cxxflagsStrings = {
+              cxxflagsHeader = "";
+              cxxflagsFooter = "";
+            } // if isClang
+                 then # Clang emits an unused argument warning about the
+                      # -stdlib++-isystem option when running as a C compiler.
+                      # Some `configure` scripts check stderr is empty when
+                      # detecting header presence and the warning breaks the
+                      # implicit (erroneous) assumption.
+                      if versionAtLeast ccVersion "14.0"
+                      then { cxxflagsHeader = "--start-no-unused-arguments";
+                             isystemOption = "-stdlib++-isystem";
+                             cxxflagsFooter = "--end-no-unused-arguments";
+                           }
+                      else if versionAtLeast ccVersion "10.0"
+                           then # Before LLVM 14 there's no way to silence the
+                                # warning for specific arguments so we have to
+                                # resort to a hammer.
+                                { cxxflagsHeader = "-Qunused-arguments";
+                                  isystemOption = "-stdlib++-isystem";
+                                }
+                           else { isystemOption = "-cxx-isystem"; }
+                 else { isystemOption = "-isystem"; };
+            inherit (cxxflagsStrings) cxxflagsHeader isystemOption cxxflagsFooter;
+         in ( optionalString (libcxx == null && isClang && (useGccForLibs && gccForLibs.langCC or false))
+                ( let targetSub = optionalString
+                                    (hostPlatform != targetPlatform)
+                                    "/${targetPlatform.config}";
+                     gccStdlib = "${gccForLibs}${targetSub}/include/c++/*";
+                   in ''
+                     cat << CXXFLAGS > $out/nix-support/libcxx-cxxflags
+                   '' + cxxflagsHeader + ''
+                     $( for dir in ${gccStdlib}; do
+                          echo "${isystemOption} $dir"
+                        done
+                        for dir in ${gccStdlib}${targetSub}; do
+                          echo "${isystemOption} $dir"
+                        done
+                     )
+                   '' + cxxflagsFooter + ''
+                     CXXFLAGS
+                  ''
+                )
+            + optionalString (libcxx.isLLVM or false) ''
+                cat << CXXFLAGS > $out/nix-support/libcxx-cxxflags
+              '' + cxxflagsHeader + ''
+                ${isystemOption} ${lib.getDev libcxx}/include/c++/v1
+              '' + cxxflagsFooter + ''
+                CXXFLAGS
 
-      cat << LDFLAGS > $out/nix-support/libcxx-ldflags
-      -stdlib=libc++
-      -l${libcxx.cxxabi.libName}
-      LDFLAGS
-    ''
+                cat << LDFLAGS > $out/nix-support/libcxx-ldflags
+                -stdlib=libc++
+                -l${libcxx.cxxabi.libName}
+                LDFLAGS
+              ''
+         )
+      )
 
     ##
     ## Initial CFLAGS

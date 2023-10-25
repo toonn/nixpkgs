@@ -143,9 +143,10 @@ if [[ "$cxxInclude" = 1 ]]; then
     #   https://github.com/NixOS/nixpkgs/pull/185569#issuecomment-1234959249
     #
     # NIX_CFLAGS_COMPILE contains dependencies added using "-isystem", and
-    # NIX_CXXSTDLIB_COMPILE adds the C++ stdlib using "-isystem". Appending
-    # NIX_CXXSTDLIB_COMPILE to NIX_CLAGS_COMPILE emulates this part of the
-    # include lookup order from GCC/Clang:
+    # NIX_CXXSTDLIB_COMPILE adds the C++ stdlib using "-isystem",
+    # "-cxx-isystem" or "-stdlib++-isystem", depending on compiler support.
+    # Appending NIX_CXXSTDLIB_COMPILE to NIX_CLAGS_COMPILE emulates this
+    # part of the include lookup order from GCC/Clang:
     #
     # > 4. Directories specified with -isystem options are scanned in
     # >    left-to-right order.
