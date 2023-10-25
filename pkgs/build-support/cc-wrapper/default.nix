@@ -465,17 +465,25 @@ stdenv.mkDerivation {
                       "/${targetPlatform.config}";
        gccStdlib = "${gccForLibs}${targetSub}/include/c++/*";
      in ''
-       for dir in ${gccStdlib}; do
-         echo "-isystem $dir" >> $out/nix-support/libcxx-cxxflags
-       done
-       for dir in ${gccStdlib}${targetSub}; do
-         echo "-isystem $dir" >> $out/nix-support/libcxx-cxxflags
-       done
+       cat << CXXFLAGS > $out/nix-support/libcxx-cxxflags
+       $( for dir in ${gccStdlib}; do
+            echo "-isystem $dir"
+          done
+          for dir in ${gccStdlib}${targetSub}; do
+            echo "-isystem $dir"
+          done
+       )
+       CXXFLAGS
     ''
     + optionalString (libcxx.isLLVM or false) ''
-      echo "-isystem ${lib.getDev libcxx}/include/c++/v1" >> $out/nix-support/libcxx-cxxflags
-      echo "-stdlib=libc++" >> $out/nix-support/libcxx-ldflags
-      echo "-l${libcxx.cxxabi.libName}" >> $out/nix-support/libcxx-ldflags
+      cat << CXXFLAGS > $out/nix-support/libcxx-cxxflags
+      -isystem ${lib.getDev libcxx}/include/c++/v1
+      CXXFLAGS
+
+      cat << LDFLAGS > $out/nix-support/libcxx-ldflags
+      -stdlib=libc++
+      -l${libcxx.cxxabi.libName}
+      LDFLAGS
     ''
 
     ##
